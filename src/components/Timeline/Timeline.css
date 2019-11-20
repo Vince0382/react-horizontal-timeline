@@ -1,0 +1,11 @@
+.TimelineDefaultClass {
+    width: 90%;
+    min-height: 300px;
+    height: auto;
+    border: 1px solid #ccc;
+}
+
+.DragDefaultClass {
+    box-shadow: 0 0 7px 0 #5292d6;
+    transition: all .3s ease-in;
+}

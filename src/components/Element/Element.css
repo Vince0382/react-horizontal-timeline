@@ -1,0 +1,15 @@
+.ItemDefaultClass {
+    width: auto;
+    padding: 20px;
+    height: 60px;
+    border-radius: 4px;
+    box-shadow: 0 2px 2px 3px #ccc;
+}
+
+.ItemFlex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
