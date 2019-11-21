@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import classes from './Element.css';
+import classes from './Element.module.css';
 
 const Element = props => {
 
@@ -12,7 +12,7 @@ const Element = props => {
 
     return (
         <div 
-            className={props.className} 
+            className={props.className}
             draggable="true"
             onDragStart={( event ) => dragStartHandler( event, props.item )}
             onDragEnd={( event ) => event.target.style.cursor = 'grab'}
@@ -33,6 +33,7 @@ const Element = props => {
 Element.defaultProps = {
     className : classes.ItemDefaultClass,
     item: {
+        id: null,
         logo: '',
         description: '',
         startDate: '',
@@ -42,9 +43,9 @@ Element.defaultProps = {
 }
 
 Element.propTypes = {
-    className: PropTypes.object,
-    itemClass: PropTypes.object,
-    item: propTypes.object.isRequired
+    className: PropTypes.string,
+    itemClass: PropTypes.string,
+    item: PropTypes.object.isRequired
 }
 
 export default Element;
