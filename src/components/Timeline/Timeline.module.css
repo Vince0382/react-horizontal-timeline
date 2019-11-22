@@ -5,24 +5,9 @@
     border: 1px solid #ccc;
     margin: auto;
     position: relative;
-}
-
-.DragDefaultClass {
-    box-shadow: 0 0 7px 0 #5292d6;
+    display: flex;
+    flex-wrap: wrap;
     transition: all .3s ease-in;
 }
 
-.OuterWrapper {
-    position: relative;
-    width: fit-content;
-}
-
-.RemoveButton {
-    position: absolute;
-    top: 5px;
-    right: 15px;
-    color: red;
-    font-size: 14px;
-    cursor: pointer;
-}
 
