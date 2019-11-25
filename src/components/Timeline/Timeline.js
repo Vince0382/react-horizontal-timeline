@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import Element from '../Element/Element';
-import ElementWrapper from '../ElementWrapper/ElementWrapper';
 
 import classes from './Timeline.module.css';
 

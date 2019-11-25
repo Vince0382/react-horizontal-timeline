@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 import PropTypes from 'prop-types';
 
@@ -8,11 +8,11 @@ import { ELEMENT } from '../Constants';
 
 const ElementWrapper = props => {
 
-    const [{isDragging}, drag] = useDrag({
+    const [{isDragging}, drag, preview] = useDrag({
         item: { type: ELEMENT, ...props.item },
-            collect: monitor => ({
-                isDragging: !!monitor.isDragging(),
-            }),
+        collect: monitor => ({
+            isDragging: !!monitor.isDragging(),
+        }),
       })
 
     return (
@@ -24,12 +24,12 @@ const ElementWrapper = props => {
                 cursor: 'grab',
             }}
         >
+            {props.children}
             {
                 props.closeButton
                     ?   <div className={classes.RemoveButton} onClick={props.remove}>X</div>
                     :   null
             }
-            {props.children}
         </div>
     )
 }
@@ -48,7 +48,8 @@ ElementWrapper.defaultProps = {
 }
 
 ElementWrapper.propTypes = {
-    item: PropTypes.object.isRequired
+    item: PropTypes.object.isRequired,
+    width: PropTypes.number
 }
 
 export default ElementWrapper;
