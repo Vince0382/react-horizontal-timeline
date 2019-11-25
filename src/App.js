@@ -15,45 +15,80 @@ const App = () =>  {
             id: 24,
             logo: '',
             description: 'Test element 1',
-            startDate: '',
+            startDate: '2019-10-02',
             endDate: '',
             elementType: 'range',
         },
         {
             logo: '',
             description: 'Test element 2',
-            startDate: '',
+            startDate: '2019-10-15',
             endDate: '',
             elementType: 'range',
         },
         {
             logo: '',
             description: 'Test element 3',
-            startDate: '',
+            startDate: '2019-10-29',
             endDate: '',
             elementType: 'range',
         },
         {
             logo: '',
             description: 'Test element 4',
-            startDate: '',
+            startDate: '2019-11-15',
+            endDate: '',
+            elementType: 'range',
+        },
+        {
+            logo: '',
+            description: 'Test element 5',
+            startDate: '2019-11-20',
+            endDate: '',
+            elementType: 'range',
+        },
+        {
+            logo: '',
+            description: 'Test element 6',
+            startDate: '2019-12-07',
+            endDate: '',
+            elementType: 'range',
+        },
+        {
+            logo: '',
+            description: 'Test element 7',
+            startDate: '2019-12-22',
             endDate: '',
             elementType: 'range',
         }
-    ]
+    ];
+
+    const startDate = '2019-10-01';
+    const endDate = '2019-12-01';
 
     const addHandler = item => {
-        console.log( item );
+        //console.log( item );
     }
 
     const removeHandler = item => {
         console.log( item );
     }
 
-    const callBacks = {
-        onAdd : addHandler,
-        onRemove: removeHandler
+    const updateHandler = item => {
+        //console.log( item );
     }
+
+    const options = {
+        callBacks : {
+            onAdd : addHandler,
+            onRemove: removeHandler,
+            onUpdate: updateHandler
+        },
+        startDate : startDate, 
+        endDate: endDate
+    }
+
+
 //     const [test, setTest] = React.useState([1, 2, 3]);
 
 //     const remove = index => {
@@ -78,7 +113,7 @@ const App = () =>  {
                     }
                 </div>
                 <div className={classes.Timeline}>
-                    <Timeline items={items} callBacks={callBacks}/>
+                    <Timeline items={items} options={options}/>
                 </div>
                 {/* <div>
                     {

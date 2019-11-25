@@ -6,6 +6,7 @@
     border: 1px solid #ccc;
     box-shadow: 0 2px 2px #ccc;
     margin: 10px;
+    background: rgba(70, 130, 180, 0.7);
 }
 
 .ItemFlex {

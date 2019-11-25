@@ -13,6 +13,7 @@ const Element = props => {
     return (
         <div 
             className={props.className}
+            style={props.style}
             // draggable="true"
             // onDragStart={( event ) => dragStartHandler( event, props.item )}
             // onDragEnd={( event ) => event.target.style.cursor = 'grab'}
@@ -45,7 +46,8 @@ Element.defaultProps = {
 Element.propTypes = {
     className: PropTypes.string,
     itemClass: PropTypes.string,
-    item: PropTypes.object.isRequired
+    item: PropTypes.object.isRequired,
+    style: PropTypes.object
 }
 
 export default Element;

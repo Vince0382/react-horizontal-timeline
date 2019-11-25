@@ -1,31 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useDrop } from 'react-dnd'
 
 import Element from '../Element/Element';
 import ElementWrapper from '../ElementWrapper/ElementWrapper';
 
 import classes from './Timeline.module.css';
 
-import { ELEMENT } from '../Constants';
-
-// Wrapping div for the element to add the remove button
-
+import * as helpers from '../Helpers/Functions';
+import DaysGrid from '../DaysGrid/DaysGrid';
+import { MONTHS } from '../Constants';
 
 const Timeline = props => {
 
     const baseIndex = 100000000;
+    const timelineRef = useRef();
 
     const [items, setItems] = useState( [] );
-
-	const [{ isOver }, drop] = useDrop({
-		accept: ELEMENT,
-		drop: ( item ) => onDropHandler( item, props.callBack ),
-		collect: monitor => ({
-			isOver: !!monitor.isOver(),
-		}),
-	})
-
+    const [timelineWidth, setTimelineWidth] = useState( 0 );
+    const [monthList, setMonthList] = useState( [] );
+    const [currentMonth, setCurrentMonth] = useState( 0 );
 
     // Get the higher id and increase
     const getNextId = () => {
@@ -38,12 +31,18 @@ const Timeline = props => {
         const verifiedItems = [];
 
         props.items.forEach(( item, index ) => {
+            const tmpItem = {
+                ...item,
+                startDate: item.startDate ? new Date(item.startDate) : null,
+                endDate: item.endDate ? new Date(item.endDate) : null
+            }
+
             if ( item.id ){
-                verifiedItems.push(item);
+                verifiedItems.push(tmpItem);
             }
             else{
                 verifiedItems.push({
-                    ...item,
+                    ...tmpItem,
                     id: baseIndex + index
                 })
             }
@@ -53,105 +52,148 @@ const Timeline = props => {
 
     }, [props.items])
 
-    // const onDragEnterHandler = event => {
-    //     event.preventDefault();
+console.log(items);
+    // Update boxes size on window resized
+    useEffect(() => {
 
-    //     counter++;
-    //     setDragClass( props.onDragClass )
-    // }
+        const tmpMonths = [];
+        let startDate = new Date( props.options.startDate );
+        const endDate = new Date( props.options.endDate );
 
-    // const onDragLeaveHandler = event => {
-    //     event.preventDefault();
+        const nbreMonth = helpers.monthDiff( startDate, endDate );
 
-    //     counter--;
-    //     if (counter === 0) { 
-    //         setDragClass( '' );
-    //     }
-    // }
+        for (let i = 0; i < nbreMonth; i++){
+            tmpMonths.push({
+                    month: startDate.getMonth() + i + 1 ,
+                    year: startDate.getFullYear()
+                })
+        }
+        setMonthList( tmpMonths );
+        updateScreenSizeHandler();
+
+        window.addEventListener( 'resize', updateScreenSizeHandler );
+        return () => window.removeEventListener( 'resize', updateScreenSizeHandler );
+    }, []);
+
+
+    const updateScreenSizeHandler = () => {
+        // Get the timeline element size 
+        const timelineElement = timelineRef.current.getBoundingClientRect();
+
+        // Update the state with the width of the timneline width
+        setTimelineWidth( timelineElement.width );
+
+    }
 
     const onDropHandler = ( item ) => {
 
         // Parsing data from dropped component
-        // const item = JSON.parse(event.dataTransfer.getData("text"));
-        const newItems = items;
-        let duplicateId = false;
-
-        // Check if the item has an ID and if not add one
-        if ( !item.id )
-        {
-            item.id = getNextId();
+        //const item = JSON.parse(event.dataTransfer.getData("text"));
+        const newItems = [...items];
+        let existingId = -1;
+        let tmpItem = {
+            ...item,
+            id: item.id ? item.id : getNextId(), // Check if the item has an ID and if not add one
         }
-        else
+//console.log(item)
+        //Check if the item is updated or created
+        if ( item.id )
         {
-            //Check if the item is already present in the list to avoid duplicate entry
-            duplicateId = newItems.find( i => i.id === item.id );
+            existingId = newItems.findIndex( i => i.id === item.id );
         }
 
         // Add the new item to the item array only if it is not already present
-        if( !duplicateId )
+        if( existingId === -1 )
         {
-            newItems.push( item );
+            newItems.push( tmpItem );
+            if ( props.options.callBacks.onAdd ) props.options.callBacks.onAdd( tmpItem );
+        }
+        else //Update item
+        {
+            newItems[existingId] = tmpItem;
+            if ( props.options.callBacks.onUpdate ) props.options.callBacks.onUpdate( tmpItem );
         }
 
         // Update state with the new array items
         setItems( newItems );
 
-        if ( props.callBacks.onAdd ) props.callBacks.onAdd( item );
 
     }
 
-    const removeItemHandler = itemIndex => { 
-        const item = items[itemIndex];
+    const onRemoveItemHandler = itemID => {
         const newArray = [...items];
+        let item = null;
 
-        // Remove the item at the 'index' position
-        newArray.splice( itemIndex, 1 );
+        const found = newArray.findIndex(i => i.id === itemID );
 
-        // Update state with the new array items
-        setItems( newArray );
+        // Remove the item at the 'index' position if founded
+        if ( found !== -1 )
+        {
+            item = newArray[found];
+            newArray.splice( found, 1 );
+            // Update state with the new array items
+            setItems( newArray );
+        }
+        else 
+        {
+            console.log(`ID : ${itemID} not found`);
+        }
 
-        if ( props.callBacks.onRemove ) props.callBacks.onRemove( item );
+        if ( props.options.callBacks.onRemove ) props.options.callBacks.onRemove( item );
     }
 
     return (
-        
+        <React.Fragment>
         <div
             className={`${props.className}`}
-            ref={drop}
+            ref={timelineRef}
             // onDragOver={( event ) => {event.preventDefault()}}
             // onDragEnter={onDragEnterHandler}
             // onDragLeave={onDragLeaveHandler}
             // onDrop={onDropHandler}
-            >
-
+        >
             {
-                items.map(( item, index ) => {
-                    console.log( "rendering", items);
-                    return (
-                        <ElementWrapper key={`item_${item.id}_${index}`} item={item} closeButton remove={() => removeItemHandler( index )}>
-                            <props.customElementType className={props.itemClass} item={item} />
-                        </ElementWrapper>
-                    )
-                })
+                monthList.map(( month, index ) => (
+                    <DaysGrid 
+                        key={`daysGrid_${month.month}_${month.year}`}
+                        onDrop={onDropHandler}
+                        onRemove={onRemoveItemHandler}
+                        month={month} 
+                        width={timelineWidth}
+                        customElementType={props.customElementType}
+                        items={items.filter( item => { 
+                                return item.startDate.getMonth() + 1 === month.month && item.startDate.getFullYear() === month.year;
+                            })}
+                        style={{left: `${( 100 * index ) - ( 100 * currentMonth )}%`}}
+                    >
+                        <div className={classes.TimelineWrapper}>
+                        {
+                            // items.map(( item, index ) => {
+                            //     console.log( "rendering", items);
+                            //     return (
+                            //         <ElementWrapper key={`item_${item.id}_${index}`} item={item} closeButton remove={() => removeItemHandler( index )}>
+                            //             <props.customElementType className={props.itemClass} item={item} />
+                            //         </ElementWrapper>
+                            //     )
+                            // })
+                        }
+                        </div>
+                    </DaysGrid>
+                ))
             }
-
-            {isOver && (
-                    <div
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        height: '100%',
-                        width: '100%',
-                        zIndex: 1,
-                        boxShadow: '0 0 3px 0 #5292d6',
-                        transition: 'all .3s ease-in',
-                    }}
-                    />
-                )
-            }
-
+            
         </div>
+        {
+            monthList.length > 0
+                ?   <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                        <p className={classes.Button} onClick={() => setCurrentMonth( currentMonth - 1 <= 0 ? 0 : currentMonth - 1 )}>&#60;</p>
+                        <p>{`${MONTHS[monthList[currentMonth].month]} - ${monthList[currentMonth].year}`}</p>
+                        <p className={classes.Button} onClick={() => setCurrentMonth( currentMonth + 1 >= monthList.length - 1 ? monthList.length - 1 : currentMonth + 1 )}>&#62;</p>
+                    </div>
+                :   null
+        }
+
+        </React.Fragment>
     )
 }
 
@@ -161,10 +203,16 @@ Timeline.defaultProps = {
     onDragClass: classes.DragDefaultClass,
     items: [],
     customElementType: Element,
-    callBacks: {
-        onAdd: null,
-        onRemove: null
+    options: {
+        callBacks: {
+            onAdd: null,
+            onRemove: null,
+            onUpdate: null
+        },
+        startDate: new Date().toISOString(),
+        endDate: new Date().setMonth( new Date().getMonth() + 1)
     }
+
 };
 
 Timeline.propTypes = {
@@ -173,9 +221,14 @@ Timeline.propTypes = {
     itemClass: PropTypes.string,
     items: PropTypes.array,
     customElementType: PropTypes.elementType,
-    callBacks: PropTypes.shape({
-        onAdd: PropTypes.func,
-        onRemove: PropTypes.func
+    options: PropTypes.shape({
+        callBacks: {
+            onAdd: PropTypes.func,
+            onRemove: PropTypes.func,
+            onUpdate: PropTypes.func
+        },
+        startDate: PropTypes.string.isRequired,
+        endDate: PropTypes.string.isRequired
     })
 }
 

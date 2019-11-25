@@ -21,7 +21,7 @@ const ElementWrapper = props => {
             ref={drag}
             style={{
                 opacity: isDragging ? 0.5 : 1,
-                cursor: 'move',
+                cursor: 'grab',
             }}
         >
             {
