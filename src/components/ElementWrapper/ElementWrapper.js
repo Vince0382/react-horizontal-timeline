@@ -15,6 +15,10 @@ const ElementWrapper = props => {
         }),
       })
 
+    if (isDragging && props.innerDrag) {
+        return <div ref={drag} />
+    }
+
     return (
         <div 
             className={classes.ElementWrapper}
@@ -44,12 +48,14 @@ ElementWrapper.defaultProps = {
         startDate: '',
         endDate: '',
         elementType: 'range',
-    } 
+    },
+    innerDrag: true
 }
 
 ElementWrapper.propTypes = {
     item: PropTypes.object.isRequired,
-    width: PropTypes.number
+    width: PropTypes.number,
+    innerDrag: PropTypes.bool
 }
 
 export default ElementWrapper;
