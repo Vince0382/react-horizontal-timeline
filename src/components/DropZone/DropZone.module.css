@@ -4,3 +4,10 @@
     position: relative;
     z-index: 2;
 }
+
+.DropZone .Day {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 0px;
+}

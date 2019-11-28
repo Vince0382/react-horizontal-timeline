@@ -20,3 +20,7 @@ export const dayDiff = (d1, d2) => {
 export const timeDiff = (d1, d2) => {
     return new Date(d1).getTime() - new Date(d2).getTime();
 }
+
+export const getDaysBewteenMonth = ( d1, d2 ) => {
+    
+}

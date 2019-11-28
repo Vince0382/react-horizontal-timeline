@@ -4,9 +4,9 @@
     width: 90%;
     min-height: 300px;
     height: auto;
-    border: 1px solid #ccc;
     margin: auto;
     transition: all .3s ease-in;
+    box-sizing: border-box;
 }
 
 .TimelineWrapper {

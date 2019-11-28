@@ -8,11 +8,13 @@ import classes from './Timeline.module.css';
 import * as helpers from '../Helpers/Functions';
 import DaysGrid from '../DaysGrid/DaysGrid';
 import { MONTHS } from '../Constants';
+import ItemsGrid from '../ItemsGrid/ItemsGrid';
 
 const Timeline = props => {
 
     const baseIndex = 100000000;
     const timelineRef = useRef();
+    const borderSize = 1;
 
     const [items, setItems] = useState( [] );
     const [timelineWidth, setTimelineWidth] = useState( 0 );
@@ -51,7 +53,6 @@ const Timeline = props => {
 
     }, [props.items])
 
-console.log(items);
     // Update boxes size on window resized
     useEffect(() => {
 
@@ -80,7 +81,7 @@ console.log(items);
         const timelineElement = timelineRef.current.getBoundingClientRect();
 
         // Update the state with the width of the timneline width
-        setTimelineWidth( timelineElement.width );
+        setTimelineWidth( timelineElement.width - ( borderSize * 2 ));
 
     }
 
@@ -94,7 +95,7 @@ console.log(items);
             ...item,
             id: item.id ? item.id : getNextId(), // Check if the item has an ID and if not add one
         }
-//console.log(item)
+
         //Check if the item is updated or created
         if ( item.id )
         {
@@ -145,42 +146,33 @@ console.log(items);
         <React.Fragment>
         <div
             className={`${props.className}`}
+            style={{...props.style, border: `${borderSize}px solid #ccc`}}
             ref={timelineRef}
-            // onDragOver={( event ) => {event.preventDefault()}}
-            // onDragEnter={onDragEnterHandler}
-            // onDragLeave={onDragLeaveHandler}
-            // onDrop={onDropHandler}
         >
             {
                 monthList.map(( month, index ) => (
                     <DaysGrid 
                         key={`daysGrid_${month.month}_${month.year}`}
                         onDrop={onDropHandler}
-                        onRemove={onRemoveItemHandler}
                         month={month} 
                         width={timelineWidth}
-                        customElementType={props.customElementType}
-                        items={items.filter( item => { 
-                                return item.startDate.getMonth() + 1 === month.month && item.startDate.getFullYear() === month.year;
-                            })}
+                        // items={items.filter( item => { 
+                        //         return item.startDate.getMonth() + 1 === month.month && item.startDate.getFullYear() === month.year;
+                        //     })}
                         style={{left: `${( 100 * index ) - ( 100 * currentMonth )}%`}}
                     >
-                        <div className={classes.TimelineWrapper}>
-                        {
-                            // items.map(( item, index ) => {
-                            //     console.log( "rendering", items);
-                            //     return (
-                            //         <ElementWrapper key={`item_${item.id}_${index}`} item={item} closeButton remove={() => removeItemHandler( index )}>
-                            //             <props.customElementType className={props.itemClass} item={item} />
-                            //         </ElementWrapper>
-                            //     )
-                            // })
-                        }
-                        </div>
                     </DaysGrid>
                 ))
             }
-            
+            <ItemsGrid 
+                items={items} 
+                width={timelineWidth}
+                monthList={monthList}
+                onRemove={onRemoveItemHandler}
+                customElementType={props.customElementType}
+                startDate ={new Date( props.options.startDate )}
+                style={{left: `-${( 100 * currentMonth )}%`}}
+            />
         </div>
         {
             monthList.length > 0
