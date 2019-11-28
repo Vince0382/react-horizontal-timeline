@@ -23,6 +23,7 @@ const ElementWrapper = props => {
         <div 
             className={classes.ElementWrapper}
             ref={drag}
+            onClick={props.onClick}
             style={{
                 opacity: isDragging ? 0.5 : 1,
                 cursor: 'grab',
@@ -30,8 +31,11 @@ const ElementWrapper = props => {
         >
             {props.children}
             {
-                props.closeButton
-                    ?   <div className={classes.RemoveButton} onClick={props.remove}>X</div>
+                props.overlay
+                    ?   <div className={classes.Overlay}>
+                            <div className={classes.RemoveButton} onClick={props.remove}>X</div>
+                            <div className={classes.Text}>Open</div>
+                        </div>
                     :   null
             }
         </div>
@@ -49,13 +53,15 @@ ElementWrapper.defaultProps = {
         endDate: '',
         elementType: 'range',
     },
-    innerDrag: true
+    innerDrag: true,
+    overlay: false
 }
 
 ElementWrapper.propTypes = {
     item: PropTypes.object.isRequired,
     width: PropTypes.number,
-    innerDrag: PropTypes.bool
+    innerDrag: PropTypes.bool,
+    overlay: PropTypes.bool
 }
 
 export default ElementWrapper;

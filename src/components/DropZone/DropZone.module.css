@@ -1,0 +1,6 @@
+.DropZone {
+    height: 100%;
+    border-right : 1px dashed #ccc;
+    position: relative;
+    z-index: 2;
+}

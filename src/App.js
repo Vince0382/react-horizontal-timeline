@@ -10,61 +10,79 @@ import ElementWrapper from './components/ElementWrapper/ElementWrapper';
 
 const App = () =>  {
 
-    const items = [
+    const fixedItems = [
         {
             id: 24,
             logo: '',
-            description: 'Test element 1',
+            description: 'Test Fixed Element 1',
             startDate: '2019-10-02',
-            endDate: '',
+            endDate: '2019-10-08',
             elementType: 'range',
         },
         {
             logo: '',
-            description: 'Test element 2',
+            description: 'Test Fixed Element 2',
             startDate: '2019-10-15',
-            endDate: '',
+            endDate: '2019-10-17',
             elementType: 'range',
         },
         {
             logo: '',
-            description: 'Test element 3',
-            startDate: '2019-10-29',
-            endDate: '',
+            description: 'Test Fixed Element 3',
+            startDate: '2019-10-25',
+            endDate: '2019-10-29',
             elementType: 'range',
         },
         {
             logo: '',
-            description: 'Test element 4',
+            description: 'Test Fixed Element 4',
             startDate: '2019-11-15',
-            endDate: '',
+            endDate: '2019-11-18',
             elementType: 'range',
         },
         {
             logo: '',
-            description: 'Test element 5',
+            description: 'Test Fixed Element 5',
             startDate: '2019-11-20',
-            endDate: '',
+            endDate: '2019-11-29',
             elementType: 'range',
         },
         {
             logo: '',
-            description: 'Test element 6',
+            description: 'Test Fixed Element 6',
             startDate: '2019-12-07',
-            endDate: '',
+            endDate: '2019-12-17',
             elementType: 'range',
         },
         {
             logo: '',
-            description: 'Test element 7',
+            description: 'Test Fixed Element 7',
             startDate: '2019-12-22',
-            endDate: '',
+            endDate: '2019-12-27',
             elementType: 'range',
         }
     ];
 
+    const items = [
+        {
+            logo: '',
+            description: 'Test Element 1',
+            elementType: 'range',
+        },
+        {
+            logo: '',
+            description: 'Test Element 2',
+            elementType: 'range',
+        },
+        {
+            logo: '',
+            description: 'Test Element 3',
+            elementType: 'range',
+        },
+    ];
+
     const startDate = '2019-10-01';
-    const endDate = '2019-12-01';
+    const endDate = '2019-12-31';
 
     const addHandler = item => {
         //console.log( item );
@@ -113,7 +131,7 @@ const App = () =>  {
                     }
                 </div>
                 <div className={classes.Timeline}>
-                    <Timeline items={items} options={options}/>
+                    <Timeline items={fixedItems} options={options}/>
                 </div>
                 {/* <div>
                     {

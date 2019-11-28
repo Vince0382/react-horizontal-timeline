@@ -221,11 +221,11 @@ Timeline.propTypes = {
     items: PropTypes.array,
     customElementType: PropTypes.elementType,
     options: PropTypes.shape({
-        callBacks: {
+        callBacks: PropTypes.shape({
             onAdd: PropTypes.func,
             onRemove: PropTypes.func,
             onUpdate: PropTypes.func
-        },
+        }),
         startDate: PropTypes.string.isRequired,
         endDate: PropTypes.string.isRequired
     })
