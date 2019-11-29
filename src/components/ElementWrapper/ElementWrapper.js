@@ -47,7 +47,7 @@ const ElementWrapper = props => {
             {props.children}
             {
                 props.overlay
-                    ?   <div className={classes.Overlay}>
+                    ?   <div className={classes.Overlay} style={{borderColor: 'rgb(70, 130, 180)'}}>
                             <div className={classes.RemoveButton} onClick={props.remove}>X</div>
                             <ResizeHandle orientation='right' item={props.item} />
                         </div>
@@ -68,7 +68,7 @@ ElementWrapper.defaultProps = {
         endDate: '',
         elementType: 'range',
     },
-    innerDrag: true,
+    innerDrag: false,
     overlay: false,
     move: false
 }

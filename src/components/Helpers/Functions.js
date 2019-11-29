@@ -21,3 +21,9 @@ export const timeDiff = (d1, d2) => {
     return new Date(d1).getTime() - new Date(d2).getTime();
 }
 
+export const randomRGBAColor = ( alpha, min, max ) => {
+    const minByte = min ? min : 0;
+    const maxByte = max ? max : 255;
+    const randomNumber = () => Math.floor(Math.random() * (maxByte - minByte + 1) + minByte);
+    return `rgba(${[randomNumber(), randomNumber(), randomNumber(), alpha].join(',')})`
+} 

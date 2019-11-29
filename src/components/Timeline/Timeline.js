@@ -144,7 +144,7 @@ const Timeline = props => {
         <React.Fragment>
         <div
             className={`${props.className}`}
-            style={{...props.style, border: `${borderSize}px solid #ccc`}}
+            style={{...props.style, border: `${borderSize}px solid #ccc`, overflowX: props.scroll ? 'scroll' : 'hidden'}}
             ref={timelineRef}
         >
             {
@@ -200,8 +200,8 @@ Timeline.defaultProps = {
         },
         startDate: new Date().toISOString(),
         endDate: new Date().setMonth( new Date().getMonth() + 1)
-    }
-
+    },
+    scroll: false
 };
 
 Timeline.propTypes = {
@@ -218,7 +218,8 @@ Timeline.propTypes = {
         }),
         startDate: PropTypes.string.isRequired,
         endDate: PropTypes.string.isRequired
-    })
+    }),
+    scroll: PropTypes.bool
 }
 
 

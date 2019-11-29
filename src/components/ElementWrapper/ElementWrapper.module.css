@@ -23,7 +23,7 @@
 }
 
 .Overlay:hover {
-    border: 1px solid rgb(70, 130, 180);
+    border: 1px solid;
     opacity: 1;
     transition: all 0.25s ease-in;
 }

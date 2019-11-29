@@ -15,7 +15,7 @@ const ItemsGrid = props => {
     }
     
     const style = {
-        width: props.width * props.monthList.length, 
+        width: props.width * props.monthList.length,
         display: 'grid', 
         gridTemplateColumns: `repeat(${days() + 1}, 1fr)`, 
         position: 'relative',
@@ -24,7 +24,6 @@ const ItemsGrid = props => {
     }
 
     useEffect(() => {
-        console.log('gridItems')
         const newGridItems = props.items.map(( item, index) => {
             // Exctract month and year from the project start date
             const monthStart = props.startDate.getMonth();
@@ -36,7 +35,7 @@ const ItemsGrid = props => {
             // and the first day of the starting month of the project
     
             const position = Math.round(dayDiff( item.startDate, new Date( yearStart, monthStart, 1 ))) + 1;
-    console.log(`Start: ${item.startDate} End: ${item.endDate} PositionStart: ${position} PositionEnd: ${position + dayDiff( item.endDate, item.startDate ) + 1}`)
+    
             return (
                 <div 
                     style={{
@@ -48,10 +47,11 @@ const ItemsGrid = props => {
                         item={item} 
                         overlay
                         move
+                        innerDrag
                         onClick={() => console.log(item)}
                         remove={() => props.onRemove( item.id )}
                     >
-                        <props.customElementType className={props.itemClass} style={{marginLeft: 0}} item={item} />
+                        <props.customElementType className={props.itemClass} innerElement style={{marginLeft: 0}} item={item} />
                     </ElementWrapper>
                 </div>
             )
@@ -60,7 +60,6 @@ const ItemsGrid = props => {
         setGridItems( newGridItems );
     }, [props.items]);
 
-    console.log('ItemsGrid rendering')
     return (
         <div style={{...props.style, ...style}}>
             {gridItems}

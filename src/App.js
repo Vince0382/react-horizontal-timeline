@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
@@ -9,6 +9,8 @@ import Element from './components/Element/Element';
 import ElementWrapper from './components/ElementWrapper/ElementWrapper';
 
 const App = () =>  {
+
+    const [checked, setChecked] = useState( false );
 
     const fixedItems = [
         {
@@ -71,16 +73,19 @@ const App = () =>  {
 
     const items = [
         {
+            itemId: 1,
             logo: '',
             description: 'Test Element 1',
             elementType: 'range',
         },
         {
+            itemId: 2,
             logo: '',
             description: 'Test Element 2',
             elementType: 'range',
         },
         {
+            itemId: 3,
             logo: '',
             description: 'Test Element 3',
             elementType: 'range',
@@ -130,20 +135,25 @@ const App = () =>  {
                 <div className={classes.Elements}>
                     {
                         items.map(( item, index ) => (
-                            <ElementWrapper key={`main_item_${index}`} item={item}>
-                                <Element item={item} />
-                            </ElementWrapper>
+                            <div style={{margin: '10px'}}>
+                                <ElementWrapper key={`main_item_${index}`} item={item}>
+                                    <Element item={item} />
+                                </ElementWrapper>
+                            </div>
                         ))
                     }
                 </div>
-                <div className={classes.Timeline}>
-                    <Timeline items={fixedItems} options={options}/>
+                <div className={classes.ScrollEnabler}>
+                    <span style={{marginRight: '5px'}}>Enable / Disable Scroll</span>
+                    <label className={classes.Switch}>
+                        <input type="checkbox" checked={checked} onChange={() => setChecked( !checked )}/>
+                        <span className={`${classes.Slider} ${classes.Round}`}></span>
+                    </label>
                 </div>
-                {/* <div>
-                    {
-                        test.map(( item, index) => <div style={{width: '100px', heigth: '40px', padding: '20px', background: 'navy', color: 'white'}} onClick={() => remove( index )} key={item}>{item}</div>)
-                    }
-                </div> */}
+                <div className={classes.Timeline}>
+                    <Timeline items={fixedItems} options={options} scroll={checked}/>
+                </div>
+
             </div>
         </DndProvider>
     );
