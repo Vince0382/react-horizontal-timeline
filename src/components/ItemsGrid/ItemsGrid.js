@@ -6,6 +6,8 @@ import { dayDiff, getDaysInMonth } from '../Helpers/Functions';
 
 const ItemsGrid = props => {
 
+    const [gridItems, setGridItems] = useState();
+
     const days = () =>{
         let nbreDays = 0;
         props.monthList.forEach( month => nbreDays += getDaysInMonth( month.month, month.year ));
@@ -20,38 +22,44 @@ const ItemsGrid = props => {
         transition: 'all 0.3s ease-in-out'
     }
 
-    const gridItems = props.items.map(( item, index) => {
-        // Exctract month and year from the project start date
-        const monthStart = props.startDate.getMonth();
-        const yearStart = props.startDate.getFullYear();
-
-        // The gris start at day 1 for each month in the project
-        // In order to place the item correctly inside the common grid (shared between all the months)
-        // I have to calculate the exact position by calculate the number of days between the item start date
-        // and the first day of the starting month of the project
-
-        const position = Math.round(dayDiff( item.startDate, new Date( yearStart, monthStart, 1 ))) + 1;
-
-        return (
-            <div 
-                style={{
-                    gridColumn: `${position} / ${position + dayDiff( item.endDate, item.startDate ) + 1}`
-                }} 
-                key={`item_${item.id}_${index}`}
-            >
-                <ElementWrapper
-                    item={item} 
-                    overlay
-                    move
-                    onClick={() => console.log(item)}
-                    remove={() => props.onRemove( item.id )}
+    useEffect(() => {
+        console.log('gridItems')
+        const newGridItems = props.items.map(( item, index) => {
+            // Exctract month and year from the project start date
+            const monthStart = props.startDate.getMonth();
+            const yearStart = props.startDate.getFullYear();
+    
+            // The gris start at day 1 for each month in the project
+            // In order to place the item correctly inside the common grid (shared between all the months)
+            // I have to calculate the exact position by calculate the number of days between the item start date
+            // and the first day of the starting month of the project
+    
+            const position = Math.round(dayDiff( item.startDate, new Date( yearStart, monthStart, 1 ))) + 1;
+    console.log(`Start: ${item.startDate} End: ${item.endDate} PositionStart: ${position} PositionEnd: ${position + dayDiff( item.endDate, item.startDate ) + 1}`)
+            return (
+                <div 
+                    style={{
+                        gridColumn: `${position} / ${position + dayDiff( item.endDate, item.startDate ) + 1}`
+                    }} 
+                    key={`item_${item.id}_${index}`}
                 >
-                    <props.customElementType className={props.itemClass} style={{marginLeft: 0}} item={item} />
-                </ElementWrapper>
-            </div>
-        )
-    })
+                    <ElementWrapper
+                        item={item} 
+                        overlay
+                        move
+                        onClick={() => console.log(item)}
+                        remove={() => props.onRemove( item.id )}
+                    >
+                        <props.customElementType className={props.itemClass} style={{marginLeft: 0}} item={item} />
+                    </ElementWrapper>
+                </div>
+            )
+        });
 
+        setGridItems( newGridItems );
+    }, [props.items]);
+
+    console.log('ItemsGrid rendering')
     return (
         <div style={{...props.style, ...style}}>
             {gridItems}

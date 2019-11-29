@@ -2,9 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import Element from '../Element/Element';
-
 import classes from './Timeline.module.css';
-
 import * as helpers from '../Helpers/Functions';
 import DaysGrid from '../DaysGrid/DaysGrid';
 import { MONTHS } from '../Constants';
