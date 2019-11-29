@@ -12,7 +12,7 @@ const App = () =>  {
 
     const fixedItems = [
         {
-            id: 24,
+            id: 1,
             logo: '',
             description: 'Test Fixed Element 1',
             startDate: '2019-10-02',
@@ -20,6 +20,7 @@ const App = () =>  {
             elementType: 'range',
         },
         {
+            id: 2,
             logo: '',
             description: 'Test Fixed Element 2',
             startDate: '2019-10-15',
@@ -27,6 +28,7 @@ const App = () =>  {
             elementType: 'range',
         },
         {
+            id: 3,
             logo: '',
             description: 'Test Fixed Element 3',
             startDate: '2019-10-25',
@@ -34,6 +36,7 @@ const App = () =>  {
             elementType: 'range',
         },
         {
+            id: 4,
             logo: '',
             description: 'Test Fixed Element 4',
             startDate: '2019-11-15',
@@ -41,6 +44,7 @@ const App = () =>  {
             elementType: 'range',
         },
         {
+            id: 5,
             logo: '',
             description: 'Test Fixed Element 5',
             startDate: '2019-11-20',
@@ -48,6 +52,7 @@ const App = () =>  {
             elementType: 'range',
         },
         {
+            id: 6,
             logo: '',
             description: 'Test Fixed Element 6',
             startDate: '2019-12-07',
@@ -55,6 +60,7 @@ const App = () =>  {
             elementType: 'range',
         },
         {
+            id: 7,
             logo: '',
             description: 'Test Fixed Element 7',
             startDate: '2019-12-22',

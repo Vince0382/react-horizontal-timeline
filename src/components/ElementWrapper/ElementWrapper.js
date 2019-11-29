@@ -24,7 +24,7 @@ const ResizeHandle = props => {
 const ElementWrapper = props => {
 
     const [{isDragging}, drag ] = useDrag({
-        item: { type: ELEMENT, ...props.item },
+        item: { type: ELEMENT, ...props.item, resizing: false },
         collect: monitor => ({
             isDragging: !!monitor.isDragging(),
         }),

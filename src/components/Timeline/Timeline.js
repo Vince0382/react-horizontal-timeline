@@ -93,7 +93,7 @@ const Timeline = props => {
         let existingId = -1;
         let tmpItem = {
             ...item,
-            id: item.id ? item.id : getNextId(), // Check if the item has an ID and if not add one
+            id: item.id ? item.id : getNextId(), // Check if the item has an ID and if not assign one
         }
 
         //Check if the item is updated or created
@@ -114,7 +114,7 @@ const Timeline = props => {
             if ( props.options.callBacks.onUpdate ) props.options.callBacks.onUpdate( tmpItem );
         }
 
-        // Update state with the new array items
+        // Update state with the updated items array
         setItems( newItems );
 
 
