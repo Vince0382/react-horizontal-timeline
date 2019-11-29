@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { ELEMENT } from '../Constants';
 import classes from './DropZone.module.css';
-import { timeDiff } from '../Helpers/Functions';
+import { timeDiff, day } from '../Helpers/Functions';
 
 const DropZone = props => {
 
@@ -19,13 +19,22 @@ const DropZone = props => {
             else
             {
                 // Get the time difference between  previously set startDate and the new one
-                const diff = item.startDate ? timeDiff( props.dropDate, item.startDate ) : 0;
+                let diff = item.startDate ? timeDiff( props.dropDate, item.startDate ) : 0;
 
                 // Set the updated date
-                item.startDate = props.dropDate;
+                item.startDate = new Date( props.dropDate );
 
-                // Set the new end date by adding the difference
-                item.endDate = item.endDate ? new Date( item.endDate) : props.dropDate;
+                // Set the new end date by adding the difference or 0 minimum of 1 day if not set
+                if ( !item.endDate )
+                {
+                    item.endDate = new Date( props.dropDate );
+                    diff = day;
+                }
+                else
+                {
+                    item.endDate = new Date( item.endDate );
+                }
+
                 item.endDate.setTime( item.endDate.getTime() + diff );
             }
 

@@ -16,7 +16,7 @@ const ResizeHandle = props => {
         <div 
             className={classes.ResizeArea}
             style={props.orientation === 'left' ? {left: 0} : {right: 0}}
-            ref={resize} 
+            ref={resize}
         />
     )
 }

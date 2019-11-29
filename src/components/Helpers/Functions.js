@@ -1,5 +1,5 @@
 
-export const day = 1000 * 60 * 60 * 24 * 1;
+export const day = 1000 * 60 * 60 * 24;
 
 export const getDaysInMonth = ( month, year ) => {
    return new Date(year, month, 0).getDate();

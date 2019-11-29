@@ -18,8 +18,9 @@ const ItemsGrid = props => {
         width: props.width * props.monthList.length, 
         display: 'grid', 
         gridTemplateColumns: `repeat(${days() + 1}, 1fr)`, 
-        position: 'absolute',
-        transition: 'all 0.3s ease-in-out'
+        position: 'relative',
+        transition: 'all 0.3s ease-in-out',
+        marginBottom: '20px'
     }
 
     useEffect(() => {
