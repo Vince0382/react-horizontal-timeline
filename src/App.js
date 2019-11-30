@@ -12,7 +12,7 @@ const App = () =>  {
 
     const [checked, setChecked] = useState( false );
 
-    const fixedItems = [
+    const [fixedItems, setFixedItems] = useState([
         {
             id: 1,
             logo: '',
@@ -69,7 +69,7 @@ const App = () =>  {
             endDate: '2019-12-27',
             elementType: 'range',
         }
-    ];
+    ]);
 
     const items = [
         {
@@ -95,16 +95,19 @@ const App = () =>  {
     const startDate = '2019-10-01';
     const endDate = '2019-12-31';
 
-    const addHandler = item => {
-        //console.log( item );
+    const addHandler = ( {item, items} ) => {
+        console.log( `Added : ${item}` );
+        setFixedItems( items );
     }
 
-    const removeHandler = item => {
-        console.log( item );
+    const removeHandler = ( {item, items} ) => {
+        console.log( `Removed : ${item}` );
+        setFixedItems( items );
     }
 
-    const updateHandler = item => {
-        //console.log( item );
+    const updateHandler = ( {item, items} ) => {
+        console.log( `Updated : ${item}` );
+        setFixedItems( items );
     }
 
     const options = {
@@ -144,7 +147,7 @@ const App = () =>  {
                     }
                 </div>
                 <div className={classes.ScrollEnabler}>
-                    <span style={{marginRight: '5px'}}>Enable / Disable Scroll</span>
+                    <span style={{marginRight: '10px', fontSize: '14px'}}>Enable / Disable Scroll</span>
                     <label className={classes.Switch}>
                         <input type="checkbox" checked={checked} onChange={() => setChecked( !checked )}/>
                         <span className={`${classes.Slider} ${classes.Round}`}></span>

@@ -2,11 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import Element from '../Element/Element';
-import classes from './Timeline.module.css';
 import * as helpers from '../Helpers/Functions';
 import DaysGrid from '../DaysGrid/DaysGrid';
-import { MONTHS } from '../Constants';
 import ItemsGrid from '../ItemsGrid/ItemsGrid';
+import MonthSelector from '../MonthSelector/MonthSelector';
 
 const Timeline = props => {
 
@@ -104,12 +103,12 @@ const Timeline = props => {
         if( existingId === -1 )
         {
             newItems.push( tmpItem );
-            if ( props.options.callBacks.onAdd ) props.options.callBacks.onAdd( tmpItem );
+            if ( props.options.callBacks.onAdd ) props.options.callBacks.onAdd({item: {...tmpItem}, items: [...newItems]});
         }
         else //Update item
         {
             newItems[existingId] = tmpItem;
-            if ( props.options.callBacks.onUpdate ) props.options.callBacks.onUpdate( tmpItem );
+            if ( props.options.callBacks.onUpdate ) props.options.callBacks.onUpdate({item: {...tmpItem}, items: [...newItems]});
         }
 
         // Update state with the updated items array
@@ -119,32 +118,42 @@ const Timeline = props => {
     }
 
     const onRemoveItemHandler = itemID => {
-        const newArray = [...items];
+        const newItems = [...items];
         let item = null;
 
-        const found = newArray.findIndex(i => i.id === itemID );
+        const found = newItems.findIndex(i => i.id === itemID );
 
         // Remove the item at the 'index' position if founded
         if ( found !== -1 )
         {
-            item = newArray[found];
-            newArray.splice( found, 1 );
+            item = newItems[found];
+            newItems.splice( found, 1 );
             // Update state with the new array items
-            setItems( newArray );
+            setItems( newItems );
         }
         else 
         {
             console.log(`ID : ${itemID} not found`);
         }
 
-        if ( props.options.callBacks.onRemove ) props.options.callBacks.onRemove( item );
+        if ( props.options.callBacks.onRemove ) props.options.callBacks.onRemove({item: {...item}, items: [...newItems]});
     }
+
+    // Creattin style object
+    
+    let style = {
+        ...props.style,
+        border: `${borderSize}px solid #ccc`, 
+        overflowX: props.scroll ? 'scroll' : 'hidden'
+    }
+
+    if (!props.className) style= {...style, ...styles.timelineDefault}
 
     return (
         <React.Fragment>
         <div
             className={`${props.className}`}
-            style={{...props.style, border: `${borderSize}px solid #ccc`, overflowX: props.scroll ? 'scroll' : 'hidden'}}
+            style={style}
             ref={timelineRef}
         >
             {
@@ -172,15 +181,13 @@ const Timeline = props => {
                 style={{left: `-${( 100 * currentMonth )}%`}}
             />
         </div>
-        {
-            monthList.length > 0
-                ?   <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                        <p className={classes.Button} onClick={() => setCurrentMonth( currentMonth - 1 <= 0 ? 0 : currentMonth - 1 )}>&#60;</p>
-                        <p>{`${MONTHS[monthList[currentMonth].month]} - ${monthList[currentMonth].year}`}</p>
-                        <p className={classes.Button} onClick={() => setCurrentMonth( currentMonth + 1 >= monthList.length - 1 ? monthList.length - 1 : currentMonth + 1 )}>&#62;</p>
-                    </div>
-                :   null
-        }
+        
+        <MonthSelector 
+            monthList={monthList}
+            currentMonth={currentMonth}
+            previousMonthHandler={() => setCurrentMonth( currentMonth - 1 <= 0 ? 0 : currentMonth - 1 )}
+            nextMonthHandler={() => setCurrentMonth( currentMonth + 1 >= monthList.length - 1 ? monthList.length - 1 : currentMonth + 1 )}
+        />
 
         </React.Fragment>
     )
@@ -188,8 +195,6 @@ const Timeline = props => {
 
 
 Timeline.defaultProps = {
-    className: classes.TimelineDefaultClass,
-    onDragClass: classes.DragDefaultClass,
     items: [],
     customElementType: Element,
     options: {
@@ -222,6 +227,18 @@ Timeline.propTypes = {
     scroll: PropTypes.bool
 }
 
-
-
 export default Timeline;
+
+// Static styles section
+
+const styles = {
+    timelineDefault : {
+        position: 'relative',
+        width: '90%',
+        minHeight: '300px',
+        height: 'auto',
+        margin: 'auto',
+        transition: 'all .3s ease-in',
+        boxSizing: 'border-box',
+    },
+}

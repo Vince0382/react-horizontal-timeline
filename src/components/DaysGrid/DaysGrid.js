@@ -2,10 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import * as helpers from '../Helpers/Functions';
-import classes from './DaysGrid.module.css';
 import DropZone from '../DropZone/DropZone';
 
 export const MARGIN = 20;
+
+
+// Static Styles Section
+
+const styles ={
+    daysGrid : {
+        position: 'absolute',
+        top: '0',
+        left: '0',
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'stretch',
+        flexWrap: 'nowrap',
+        transition: 'all 0.3s ease-in-out',
+    }
+    
+    
+}
 
 const DaysGrid = props => {
 
@@ -31,7 +50,7 @@ const DaysGrid = props => {
     }
     
     return (
-        <div className={classes.DaysGrid} style={{...props.style}}>
+        <div style={{...styles.daysGrid, ...props.style}}>
             {daysDropGrid}
         </div>
     )

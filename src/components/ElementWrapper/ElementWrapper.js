@@ -1,26 +1,75 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDrag } from 'react-dnd';
 import PropTypes from 'prop-types';
 
-import classes from './ElementWrapper.module.css';
-
 import { ELEMENT } from '../Constants';
 
+// Static style section 
+
+const styles = {
+    elementWrapper : {
+        position: 'relative',
+        width: '100%',
+        zIndex: 3,
+        fontSize: '12px',
+        height: 'fit-content',
+        display: 'flex',
+        margin: '10px 0',
+        overflow: 'hidden',
+    },
+    overlay : {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        opacity: 0,
+        border: '1px solid transparent',
+        transition: 'all 0.2s ease-in',
+        borderRadius: '4px',
+        boxSizing: 'border-box',
+    },
+    overlayHover : {
+        borderColor: 'rgb(70, 130, 180)',
+        opacity: 1,
+    },
+    removeButton : {
+        position: 'absolute',
+        top: '5px',
+        right: '5px',
+        color: 'red',
+        fontSize: '14px',
+        cursor: 'pointer',
+    },
+    resizeArea : {
+        position: 'absolute',
+        top: 0,
+        height: '100%',
+        width: '2px',
+        cursor: 'ew-resize',
+        resize: 'horizontal',
+    }
+}
+
+
+// Internal Component
 const ResizeHandle = props => {
 
     const [{isDragging}, resize ] = useDrag({
         item: { type: ELEMENT, ...props.item, resizing: true },
     })
 
+    const innerStyle = props.orientation === 'left' ? {left: 0} : {right: 0};
+
     return (
         <div 
-            className={classes.ResizeArea}
-            style={props.orientation === 'left' ? {left: 0} : {right: 0}}
+            style={{...styles.resizeArea, ...innerStyle}}
             ref={resize}
         />
     )
 }
 
+// Main component
 const ElementWrapper = props => {
 
     const [{isDragging}, drag ] = useDrag({
@@ -30,16 +79,18 @@ const ElementWrapper = props => {
         }),
     })
 
+    const [hoverStyle, setHoverStyle] = useState( null );
+
     if (isDragging && props.innerDrag) {
         return <div ref={drag} />
     }
 
     return (
         <div 
-            className={classes.ElementWrapper}
             onClick={props.onClick}
             ref={drag}
             style={{
+                ...styles.elementWrapper,
                 opacity: isDragging ? 0.5 : 1,
                 cursor: props.move ? 'move' : 'grab',
             }}
@@ -47,8 +98,12 @@ const ElementWrapper = props => {
             {props.children}
             {
                 props.overlay
-                    ?   <div className={classes.Overlay} style={{borderColor: 'rgb(70, 130, 180)'}}>
-                            <div className={classes.RemoveButton} onClick={props.remove}>X</div>
+                    ?   <div 
+                            style={{...styles.overlay, ...hoverStyle}}
+                            onMouseOver={() => setHoverStyle( styles.overlayHover )}
+                            onMouseLeave={() => setHoverStyle( null )}
+                        >
+                            <div style={styles.removeButton} onClick={props.remove}>X</div>
                             <ResizeHandle orientation='right' item={props.item} />
                         </div>
                     :   null

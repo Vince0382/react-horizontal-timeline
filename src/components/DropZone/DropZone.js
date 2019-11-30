@@ -3,8 +3,26 @@ import { useDrop } from 'react-dnd';
 import PropTypes from 'prop-types';
 
 import { ELEMENT } from '../Constants';
-import classes from './DropZone.module.css';
 import { timeDiff, day } from '../Helpers/Functions';
+
+
+// Static styles section
+const styles = {
+    dropZone : {
+        height: '100%',
+        borderRight : '1px dashed #ccc',
+        position: 'relative',
+        zIndex: '2',
+    },
+    day : {
+        width: '100%',
+        textAlign: 'center',
+        position: 'absolute',
+        bottom: '0px',
+        margin: '2px 0',
+        fontSize: '12px',
+    }
+}
 
 const DropZone = props => {
 
@@ -57,11 +75,8 @@ const DropZone = props => {
     const dropActivated = !isWeekEnd || props.includeWeekend;
 
     return (
-        <div ref={dropActivated ? drop : null} className={classes.DropZone} style={{...props.style, ...overStyle, ...weekendStyle}} >
-            <p 
-                style={{color: isWeekEnd ? 'white' : '#ccc'}}
-                className={classes.Day}
-            >
+        <div ref={dropActivated ? drop : null} style={{...styles.dropZone, ...props.style, ...overStyle, ...weekendStyle}} >
+            <p style={{...styles.day, color: isWeekEnd ? 'white' : '#ccc'}}>
                 {props.dropDate.getDate()}
             </p>
 

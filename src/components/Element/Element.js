@@ -1,19 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import classes from './Element.module.css';
-import { randomRGBAColor } from '../Helpers/Functions';
+
+// Static styles section 
+
+const styles = {
+    itemDefault : {
+        width: '100%',
+        padding: '5px',
+        height: '40px',
+        borderRadius: '4px',
+        border: '1px solid #ccc',
+        boxShadow: '0 2px 2px #ccc',
+    },
+    itemFlex : {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    description : {
+
+    },   
+}
+
 
 const Element = props => {
 
     return (
         <div 
-            className={props.className}
-            style={{...props.style, background: props.innerElement ? 'rgba(70, 130, 180, 0.8)' : 'rgba(204, 204, 204, 0.8)'}}
+            style={{...styles.itemDefault, ...props.style, background: props.innerElement ? 'rgba(70, 130, 180, 0.8)' : 'rgba(204, 204, 204, 0.8)'}}
         >
-            <div className={classes.ItemFlex}>
+            <div style={styles.itemFlex}>
                 <img src={props.item.logo} alt='Logo' />
-                <div className={classes.Description}>
+                <div style={styles.description}>
                     {
                         props.item.description
                     }
@@ -25,7 +45,6 @@ const Element = props => {
 }
 
 Element.defaultProps = {
-    className: classes.ItemDefaultClass,
     item: {
         id: null,
         logo: '',
@@ -35,12 +54,10 @@ Element.defaultProps = {
         type: 'range',
     },
     randomColor: false,
-    innerElement: false
+    innerElement: false,
 }
 
 Element.propTypes = {
-    className: PropTypes.string,
-    itemClass: PropTypes.string,
     item: PropTypes.object.isRequired,
     style: PropTypes.object,
     innerElement: PropTypes.bool
