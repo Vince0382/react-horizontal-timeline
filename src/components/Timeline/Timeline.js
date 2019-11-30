@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import Element from '../Element/Element';
 import * as helpers from '../Helpers/Functions';
 import DaysGrid from '../DaysGrid/DaysGrid';
 import ItemsGrid from '../ItemsGrid/ItemsGrid';
@@ -177,7 +176,8 @@ const Timeline = props => {
                 monthList={monthList}
                 onRemove={onRemoveItemHandler}
                 customElementType={props.customElementType}
-                startDate ={new Date( props.options.startDate )}
+                elementClassName={props.elementClassName}
+                startDate = {new Date( props.options.startDate )}
                 style={{left: `-${( 100 * currentMonth )}%`}}
             />
         </div>
@@ -196,7 +196,6 @@ const Timeline = props => {
 
 Timeline.defaultProps = {
     items: [],
-    customElementType: Element,
     options: {
         callBacks: {
             onAdd: null,
@@ -212,7 +211,7 @@ Timeline.defaultProps = {
 Timeline.propTypes = {
     className: PropTypes.string,
     onDragClass: PropTypes.string,
-    itemClass: PropTypes.string,
+    elementClassName: PropTypes.string,
     items: PropTypes.array,
     customElementType: PropTypes.elementType,
     options: PropTypes.shape({
@@ -234,10 +233,9 @@ export default Timeline;
 const styles = {
     timelineDefault : {
         position: 'relative',
-        width: '90%',
+        width: '100%',
         minHeight: '300px',
         height: 'auto',
-        margin: 'auto',
         transition: 'all .3s ease-in',
         boxSizing: 'border-box',
     },

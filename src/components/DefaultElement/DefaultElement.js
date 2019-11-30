@@ -25,7 +25,7 @@ const styles = {
 }
 
 
-const Element = props => {
+const DefaultElement = props => {
 
     return (
         <div 
@@ -63,4 +63,4 @@ Element.propTypes = {
     innerElement: PropTypes.bool
 }
 
-export default Element;
+export default DefaultElement;

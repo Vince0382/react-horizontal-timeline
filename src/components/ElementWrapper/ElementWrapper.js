@@ -3,6 +3,7 @@ import { useDrag } from 'react-dnd';
 import PropTypes from 'prop-types';
 
 import { ELEMENT } from '../Constants';
+import DefaultElement from '../DefaultElement/DefaultElement';
 
 // Static style section 
 
@@ -57,6 +58,9 @@ const ResizeHandle = props => {
 
     const [{isDragging}, resize ] = useDrag({
         item: { type: ELEMENT, ...props.item, resizing: true },
+        collect: monitor => ({
+            isDragging: !!monitor.isDragging(),
+        }),
     })
 
     const innerStyle = props.orientation === 'left' ? {left: 0} : {right: 0};
@@ -77,11 +81,11 @@ const ElementWrapper = props => {
         collect: monitor => ({
             isDragging: !!monitor.isDragging(),
         }),
-    })
+    });
 
     const [hoverStyle, setHoverStyle] = useState( null );
 
-    if (isDragging && props.innerDrag) {
+    if (isDragging && props.innerElement) {
         return <div ref={drag} />
     }
 
@@ -95,7 +99,11 @@ const ElementWrapper = props => {
                 cursor: props.move ? 'move' : 'grab',
             }}
         >
-            {props.children}
+            <props.customElementType 
+                className={props.elementClassName}
+                item={props.item} 
+                innerElement={props.innerElement}
+            />
             {
                 props.overlay
                     ?   <div 
@@ -123,17 +131,22 @@ ElementWrapper.defaultProps = {
         endDate: '',
         elementType: 'range',
     },
-    innerDrag: false,
+    innerElement: false,
     overlay: false,
-    move: false
+    move: false,
+    customElementType: DefaultElement,
 }
 
 ElementWrapper.propTypes = {
     item: PropTypes.object.isRequired,
     width: PropTypes.number,
-    innerDrag: PropTypes.bool,
+    innerElement: PropTypes.bool,
     overlay: PropTypes.bool,
-    move: PropTypes.bool
+    move: PropTypes.bool,
+    onClick: PropTypes.func,
+    remove: PropTypes.func,
+    customElementType: PropTypes.elementType,
+    elementClassName: PropTypes.string
 }
 
 export default ElementWrapper;

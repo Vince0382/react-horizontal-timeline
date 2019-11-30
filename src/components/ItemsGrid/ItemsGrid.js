@@ -47,12 +47,13 @@ const ItemsGrid = props => {
                         item={item} 
                         overlay
                         move
-                        innerDrag
+                        elementClassName={props.elementClassName} 
+                        innerElement
+                        customElementType={props.customElementType}
+                        style={{marginLeft: 0}}
                         onClick={() => console.log(item)}
                         remove={() => props.onRemove( item.id )}
-                    >
-                        <props.customElementType className={props.itemClass} innerElement style={{marginLeft: 0}} item={item} />
-                    </ElementWrapper>
+                    />
                 </div>
             )
         });
@@ -76,7 +77,7 @@ ItemsGrid.propTypes = {
     items: PropTypes.array,
     width: PropTypes.number,
     onRemove: PropTypes.func,
-    itemClass: PropTypes.string,
+    elementClassName: PropTypes.string,
     customElementType: PropTypes.elementType,
     style: PropTypes.object,
     monthList: PropTypes.array,

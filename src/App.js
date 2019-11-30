@@ -5,7 +5,6 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import classes from './App.module.css';
 
 import Timeline from './components/Timeline/Timeline';
-import Element from './components/Element/Element';
 import ElementWrapper from './components/ElementWrapper/ElementWrapper';
 
 const App = () =>  {
@@ -134,24 +133,24 @@ const App = () =>  {
 // console.log(test);
     return (
         <DndProvider backend={HTML5Backend}>
-            <div>
-                <div className={classes.Elements}>
-                    {
-                        items.map(( item, index ) => (
-                            <div style={{margin: '10px'}}>
-                                <ElementWrapper key={`main_item_${index}`} item={item}>
-                                    <Element item={item} />
-                                </ElementWrapper>
-                            </div>
-                        ))
-                    }
-                </div>
+            <div className={classes.Content}>
+                <p>Options</p>
                 <div className={classes.ScrollEnabler}>
                     <span style={{marginRight: '10px', fontSize: '14px'}}>Enable / Disable Scroll</span>
                     <label className={classes.Switch}>
                         <input type="checkbox" checked={checked} onChange={() => setChecked( !checked )}/>
                         <span className={`${classes.Slider} ${classes.Round}`}></span>
                     </label>
+                </div>
+                <p>Droppable Items</p>
+                <div className={classes.Elements}>
+                    {
+                        items.map(( item, index ) => (
+                            <div style={{marginRight: '10px'}}>
+                                <ElementWrapper key={`main_item_${index}`} item={item} />
+                            </div>
+                        ))
+                    }
                 </div>
                 <div className={classes.Timeline}>
                     <Timeline items={fixedItems} options={options} scroll={checked}/>
