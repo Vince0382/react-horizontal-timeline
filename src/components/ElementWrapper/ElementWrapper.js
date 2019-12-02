@@ -76,16 +76,15 @@ const styles = {
 // Internal Component
 const ResizeHandle = props => {
 
-    const [{isDragging, delta}, resize ] = useDrag({
+    const [{isResizing}, resize ] = useDrag({
         item: { type: ELEMENT, ...props.item, resizing: props.orientation , },
         collect: monitor => ({
-            isDragging: !!monitor.isDragging(),
-            delta: monitor.getClientOffset(),
+            isResizing: !!monitor.isDragging(),
         }),
     })
 
     const innerStyle = props.orientation === 'left' ? {left: 0} : {right: 0};
-    console.log(delta)
+
     return (
         <div 
             style={{...styles.resizeArea, ...innerStyle}}
@@ -104,6 +103,8 @@ const ElementWrapper = props => {
         }),
     });
 
+    const [isResizing, setIsResizing] = useState( false );
+
     const hoverStyle = {
         opacity: 1,
         border: `2px solid ${rgbaFromArray( props.bgColor )}`,
@@ -111,29 +112,11 @@ const ElementWrapper = props => {
     }
 
     const [hoverStyleActive, setHoverStyleActive] = useState( null );
-    const [resizeEnabled, setResizeEnabled] = useState ( false );
 
-    if (isDragging && props.innerElement) {
+    if (isDragging && props.innerElement || isResizing) {
         return <div ref={drag} />
     }
 
-    // const onResizeStartHandler = () => {
-    //     window.addEventListener('mousemove', onMouseMoveHandler);
-    //     setResizeEnabled( true );
-    // }
-
-    // const onResizeEndHandler = () => {
-    //     window.removeEventListener('mousemove', onMouseMoveHandler);
-    //     setResizeEnabled( false );
-    // }
-
-    // const onMouseMoveHandler = event => {
-    //     if( resizeEnabled )
-    //     {
-    //         console.log(event);
-    //     }
-    // }
-//console.log(resizeEnabled)
     return (
         <div 
             onClick={props.onClick}
@@ -164,10 +147,12 @@ const ElementWrapper = props => {
                             <ResizeHandle 
                                 orientation='left' 
                                 item={props.item}
+                                onResizing={setIsResizing}
                             />
                             <ResizeHandle 
                                 orientation='right' 
                                 item={props.item}
+                                onResizing={setIsResizing}
                             />
                         </div>
                     :   null

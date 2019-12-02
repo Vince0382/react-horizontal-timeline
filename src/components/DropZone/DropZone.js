@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDrop } from 'react-dnd';
 import PropTypes from 'prop-types';
 
@@ -34,44 +34,68 @@ const styles = {
 const DropZone = props => {
 
     const [{ isOver }, drop] = useDrop({
-		accept: ELEMENT,
-		drop: ( item ) => {
-
-            if ( item.resizing )
-            {
-                if (item.resizing === 'right')
-                    item.endDate = props.dropDate;
-                else
-                    item.startDate = props.dropDate;
+        accept: ELEMENT,
+        drop: item => {
+            if( !item.resizing ) dropItem( item );
+        },
+        hover: item => {
+            if ( !hovered && item.resizing ) {
+                resizeItem( item );
+                setHovered( true );
             }
-            else
-            {
-                // Get the time difference between  previously set startDate and the new one
-                let diff = item.startDate ? timeDiff( props.dropDate, item.startDate ) : 0;
-
-                // Set the updated date
-                item.startDate = new Date( props.dropDate );
-
-                // Set the new end date by adding the difference or 0 minimum of 1 day if not set
-                if ( !item.endDate )
-                {
-                    item.endDate = new Date( props.dropDate );
-                    diff = day;
-                }
-                else
-                {
-                    item.endDate = new Date( item.endDate );
-                }
-
-                item.endDate.setTime( item.endDate.getTime() + diff );
-            }
-
-            props.onDrop( item )
         },
 		collect: monitor => ({
 			isOver: !!monitor.isOver(),
 		}),
     });
+
+    const[hovered, setHovered] = useState( false );
+
+
+    useEffect(() => {
+        setHovered( false );
+    }, [isOver]);
+
+
+    // Resize the item on over
+    const resizeItem = item => {
+
+        if (item.resizing === 'right')
+        {
+            item.endDate = props.dropDate;
+            return props.onDrop( item );
+        }
+        if (item.resizing === 'left')
+        {
+            item.startDate = props.dropDate;
+            return props.onDrop( item );
+        }
+        return null // If the value of resizing is not left or right
+    }
+
+    // Update the item on drop
+    const dropItem = item => {
+        
+        // Get the time difference between  previously set startDate and the new one
+        let diff = item.startDate ? timeDiff( props.dropDate, item.startDate ) : 0;
+
+        // Set the updated date
+        item.startDate = new Date( props.dropDate );
+
+        // Set the new end date by adding the difference or 0 minimum of 1 day if not set
+        if ( !item.endDate )
+        {
+            item.endDate = new Date( props.dropDate );
+            diff = day;
+        }
+        else
+        {
+            item.endDate = new Date( item.endDate );
+        }
+
+        item.endDate.setTime( item.endDate.getTime() + diff );
+        return props.onDrop( item ); 
+    }
 
     // Get the day of the week
     const dayOfWeek = props.dropDate.getDay();
