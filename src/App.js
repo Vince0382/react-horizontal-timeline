@@ -146,8 +146,8 @@ const App = () =>  {
                 <div className={classes.Elements}>
                     {
                         items.map(( item, index ) => (
-                            <div style={{marginRight: '10px'}}>
-                                <ElementWrapper key={`main_item_${index}`} item={item} />
+                            <div style={{marginRight: '10px'}} key={`main_item_${index}`}>
+                                <ElementWrapper item={item} />
                             </div>
                         ))
                     }

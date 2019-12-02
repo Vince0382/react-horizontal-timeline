@@ -36,19 +36,42 @@ const styles = {
     },
     removeButton : {
         position: 'absolute',
-        top: '5px',
-        right: '5px',
-        color: 'red',
+        top: '50%',
+        right: '7px',
+        transform: 'translateY(-50%)',
+        background: 'rgba(204,204,204, 0.8)',
         fontSize: '14px',
         cursor: 'pointer',
+        width: '30px',
+        height: '30px',
+        borderRadius: '50%',
+    },
+    removeButtonLines: {
+        shared: {
+            position: 'absolute',
+            right: '14px',
+            top: '7.5px',
+            height: '15px',
+            width: '2px',
+            backgroundColor: '#E76E54',
+          },
+          first : {
+            transform: 'rotate(45deg)',
+          },
+          second : {
+            transform: 'rotate(-45deg)',
+          }
     },
     resizeArea : {
         position: 'absolute',
         top: 0,
-        height: '100%',
+        zIndex: 4,
+        height: 'calc(100% - 2px)',
         width: '2px',
         cursor: 'ew-resize',
         resize: 'horizontal',
+        border: '1px solid #ccc',
+        borderRadius: '4px'
     }
 }
 
@@ -56,15 +79,16 @@ const styles = {
 // Internal Component
 const ResizeHandle = props => {
 
-    const [{isDragging}, resize ] = useDrag({
+    const [{isDragging, delta}, resize ] = useDrag({
         item: { type: ELEMENT, ...props.item, resizing: true },
         collect: monitor => ({
             isDragging: !!monitor.isDragging(),
+            delta: monitor.getClientOffset(),
         }),
     })
 
     const innerStyle = props.orientation === 'left' ? {left: 0} : {right: 0};
-
+console.log(delta)
     return (
         <div 
             style={{...styles.resizeArea, ...innerStyle}}
@@ -84,11 +108,29 @@ const ElementWrapper = props => {
     });
 
     const [hoverStyle, setHoverStyle] = useState( null );
+    const [resizeEnabled, setResizeEnabled] = useState ( false );
 
     if (isDragging && props.innerElement) {
         return <div ref={drag} />
     }
 
+    const onResizeStartHandler = () => {
+        window.addEventListener('mousemove', onMouseMoveHandler);
+        setResizeEnabled( true );
+    }
+
+    const onResizeEndHandler = () => {
+        window.removeEventListener('mousemove', onMouseMoveHandler);
+        setResizeEnabled( false );
+    }
+
+    const onMouseMoveHandler = event => {
+        if( resizeEnabled )
+        {
+            console.log(event);
+        }
+    }
+//console.log(resizeEnabled)
     return (
         <div 
             onClick={props.onClick}
@@ -107,12 +149,20 @@ const ElementWrapper = props => {
             {
                 props.overlay
                     ?   <div 
-                            style={{...styles.overlay, ...hoverStyle}}
+                            style={{...styles.overlay, ...hoverStyle, resize: 'horizontal'}}
                             onMouseOver={() => setHoverStyle( styles.overlayHover )}
                             onMouseLeave={() => setHoverStyle( null )}
                         >
-                            <div style={styles.removeButton} onClick={props.remove}>X</div>
-                            <ResizeHandle orientation='right' item={props.item} />
+                            <div style={styles.removeButton} onClick={props.remove}>
+                                <div style={{...styles.removeButtonLines.shared, ...styles.removeButtonLines.first}}/>
+                                <div style={{...styles.removeButtonLines.shared, ...styles.removeButtonLines.second}}/>
+                            </div>
+                            <ResizeHandle 
+                                orientation='right' 
+                                item={props.item}
+                                onResizeStart={onResizeStartHandler}
+                                onResizeEnd={onResizeEndHandler}
+                            />
                         </div>
                     :   null
             }
