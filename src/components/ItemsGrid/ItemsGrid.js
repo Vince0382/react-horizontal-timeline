@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import ElementWrapper from '../ElementWrapper/ElementWrapper';
 import { dayDiff, getDaysInMonth } from '../Helpers/Functions';
+import { COLORS } from '../Constants';
 
 const ItemsGrid = props => {
 
@@ -24,6 +25,8 @@ const ItemsGrid = props => {
     }
 
     useEffect(() => {
+        const gridColors = [];
+
         const newGridItems = props.items.map(( item, index) => {
             // Exctract month and year from the project start date
             const monthStart = props.startDate.getMonth();
@@ -35,6 +38,25 @@ const ItemsGrid = props => {
             // and the first day of the starting month of the project
     
             const position = Math.round(dayDiff( item.startDate, new Date( yearStart, monthStart, 1 ))) + 1;
+
+            // Select color for the item. If itemId has already a color assigned pick it else create one
+            
+            let searchItemId = gridColors.find(i => i.itemId === item.itemId);
+            let color = null;
+
+            if ( searchItemId )
+            {
+                color = searchItemId.color
+            }
+            else
+            {
+                color = COLORS[gridColors.length]
+
+                gridColors.push({
+                    itemId: item.itemId,
+                    color: color
+                });
+            }
     
             return (
                 <div 
@@ -47,6 +69,7 @@ const ItemsGrid = props => {
                         item={item} 
                         overlay
                         move
+                        bgColor={color}
                         elementClassName={props.elementClassName} 
                         innerElement
                         customElementType={props.customElementType}

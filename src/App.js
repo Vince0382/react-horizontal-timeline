@@ -7,89 +7,81 @@ import classes from './App.module.css';
 import Timeline from './components/Timeline/Timeline';
 import ElementWrapper from './components/ElementWrapper/ElementWrapper';
 
+//import logo
+import logo1 from './assets/images/logo1.png';
+import logo2 from './assets/images/logo2.png';
+import logo3 from './assets/images/logo3.png';
+
 const App = () =>  {
 
     const [checked, setChecked] = useState( false );
 
+    const items = [
+        {
+            itemId: 1,
+            logo: logo1,
+            description: 'Test Element 1',
+            elementType: 'range',
+        },
+        {
+            itemId: 2,
+            logo: logo2,
+            description: 'Test Element 2',
+            elementType: 'range',
+        },
+        {
+            itemId: 3,
+            logo: logo3,
+            description: 'Test Element 3',
+            elementType: 'range',
+        },
+    ];
+
     const [fixedItems, setFixedItems] = useState([
         {
-            id: 1,
-            logo: '',
-            description: 'Test Fixed Element 1',
+            ...items[0],
             startDate: '2019-10-02',
             endDate: '2019-10-08',
             elementType: 'range',
         },
         {
-            id: 2,
-            logo: '',
-            description: 'Test Fixed Element 2',
+            ...items[0],
             startDate: '2019-10-15',
             endDate: '2019-10-17',
             elementType: 'range',
         },
         {
-            id: 3,
-            logo: '',
-            description: 'Test Fixed Element 3',
+            ...items[1],
             startDate: '2019-10-25',
             endDate: '2019-10-29',
             elementType: 'range',
         },
         {
-            id: 4,
-            logo: '',
-            description: 'Test Fixed Element 4',
+            ...items[2],
             startDate: '2019-11-15',
             endDate: '2019-11-18',
             elementType: 'range',
         },
         {
-            id: 5,
-            logo: '',
-            description: 'Test Fixed Element 5',
+            ...items[1],
             startDate: '2019-11-20',
             endDate: '2019-11-29',
             elementType: 'range',
         },
         {
-            id: 6,
-            logo: '',
-            description: 'Test Fixed Element 6',
+            ...items[0],
             startDate: '2019-12-07',
             endDate: '2019-12-17',
             elementType: 'range',
         },
         {
-            id: 7,
-            logo: '',
-            description: 'Test Fixed Element 7',
+            ...items[2],
             startDate: '2019-12-22',
             endDate: '2019-12-27',
             elementType: 'range',
         }
     ]);
 
-    const items = [
-        {
-            itemId: 1,
-            logo: '',
-            description: 'Test Element 1',
-            elementType: 'range',
-        },
-        {
-            itemId: 2,
-            logo: '',
-            description: 'Test Element 2',
-            elementType: 'range',
-        },
-        {
-            itemId: 3,
-            logo: '',
-            description: 'Test Element 3',
-            elementType: 'range',
-        },
-    ];
 
     const startDate = '2019-10-01';
     const endDate = '2019-12-31';

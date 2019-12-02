@@ -14,6 +14,9 @@ const styles = {
         position: 'relative',
         zIndex: '2',
     },
+    dropZoneOver : {
+        background: 'rgba(176,196,222,1)'
+    },
     day : {
         width: '100%',
         textAlign: 'center',
@@ -21,6 +24,10 @@ const styles = {
         bottom: '0px',
         margin: '2px 0',
         fontSize: '12px',
+    },
+    weekendStyle : {
+        background : '#ccc', 
+        borderColor: 'white'
     }
 }
 
@@ -32,7 +39,10 @@ const DropZone = props => {
 
             if ( item.resizing )
             {
-                item.endDate = props.dropDate;
+                if (item.resizing === 'right')
+                    item.endDate = props.dropDate;
+                else
+                    item.startDate = props.dropDate;
             }
             else
             {
@@ -69,14 +79,14 @@ const DropZone = props => {
     // Detect if the day is a day off (weekend)
     const isWeekEnd = (dayOfWeek === 6) || (dayOfWeek === 0);
 
-    const overStyle = isOver ? {background: 'rgba(176,196,222,1)'} : null
-    const weekendStyle = isWeekEnd && !props.includeWeekend ? {background : '#ccc', borderColor: 'white'} : null
+    const overStyle = isOver ? styles.dropZoneOver : null
+    const weekendStyle = isWeekEnd && !props.includeWeekend ? styles.weekendStyle : null
 
     const dropActivated = !isWeekEnd || props.includeWeekend;
 
     return (
         <div ref={dropActivated ? drop : null} style={{...styles.dropZone, ...props.style, ...overStyle, ...weekendStyle}} >
-            <p style={{...styles.day, color: isWeekEnd ? 'white' : '#ccc'}}>
+            <p style={{...styles.day, color: isWeekEnd || isOver ? 'white' : '#ccc'}}>
                 {props.dropDate.getDate()}
             </p>
 

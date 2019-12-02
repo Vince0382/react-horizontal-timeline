@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { rgbaFromArray } from '../Helpers/Functions';
 
 // Static styles section 
 
@@ -10,8 +11,6 @@ const styles = {
         padding: '5px',
         height: '40px',
         borderRadius: '4px',
-        border: '1px solid #ccc',
-        boxShadow: '0 2px 2px #ccc',
     },
     itemFlex : {
         display: 'flex',
@@ -20,19 +19,37 @@ const styles = {
         alignItems: 'center',
     },
     description : {
-
-    },   
+        paddingLeft: '5px'
+    },
+    imagesWrapper : {
+        height: '40px',
+        borderRadius: '4px',
+        overflow : 'hidden'
+    },
+    images : {
+        height: '100%'
+    }
 }
 
+const alpha = 0.7;
+const defaultColors = {
+    outerElement : [204, 204, 204],
+    innerElement : [70, 130, 180]
+}
 
 const DefaultElement = props => {
 
     return (
         <div 
-            style={{...styles.itemDefault, ...props.style, background: props.innerElement ? 'rgba(70, 130, 180, 0.8)' : 'rgba(204, 204, 204, 0.8)'}}
+            style={{
+                ...styles.itemDefault, 
+                ...props.style, 
+                background: props.innerElement ? rgbaFromArray( props.bgColor, alpha ): rgbaFromArray(defaultColors.outerElement, alpha)}}
         >
             <div style={styles.itemFlex}>
-                <img src={props.item.logo} alt='Logo' />
+                <div style={styles.imagesWrapper}>
+                    <img style={styles.images} src={props.item.logo} alt='Logo' />
+                </div>
                 <div style={styles.description}>
                     {
                         props.item.description
@@ -55,12 +72,14 @@ Element.defaultProps = {
     },
     randomColor: false,
     innerElement: false,
+    bgColor: defaultColors.innerElement
 }
 
 Element.propTypes = {
     item: PropTypes.object.isRequired,
     style: PropTypes.object,
-    innerElement: PropTypes.bool
+    innerElement: PropTypes.bool,
+    bgColor: PropTypes.array
 }
 
 export default DefaultElement;

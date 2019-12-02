@@ -3,6 +3,7 @@ import { useDrag } from 'react-dnd';
 import PropTypes from 'prop-types';
 
 import { ELEMENT } from '../Constants';
+import { rgbaFromArray } from '../Helpers/Functions';
 import DefaultElement from '../DefaultElement/DefaultElement';
 
 // Static style section 
@@ -25,14 +26,10 @@ const styles = {
         width: '100%',
         height: '100%',
         opacity: 0,
-        border: '1px solid transparent',
-        transition: 'all 0.2s ease-in',
+        border: '2px solid transparent',
+        transition: 'opacity 0.2s ease-in',
         borderRadius: '4px',
         boxSizing: 'border-box',
-    },
-    overlayHover : {
-        borderColor: 'rgb(70, 130, 180)',
-        opacity: 1,
     },
     removeButton : {
         position: 'absolute',
@@ -68,8 +65,8 @@ const styles = {
         zIndex: 4,
         height: 'calc(100% - 2px)',
         width: '2px',
+        background: 'rgba(204, 204, 204, 0.5)',
         cursor: 'ew-resize',
-        resize: 'horizontal',
         border: '1px solid #ccc',
         borderRadius: '4px'
     }
@@ -80,7 +77,7 @@ const styles = {
 const ResizeHandle = props => {
 
     const [{isDragging, delta}, resize ] = useDrag({
-        item: { type: ELEMENT, ...props.item, resizing: true },
+        item: { type: ELEMENT, ...props.item, resizing: props.orientation , },
         collect: monitor => ({
             isDragging: !!monitor.isDragging(),
             delta: monitor.getClientOffset(),
@@ -88,7 +85,7 @@ const ResizeHandle = props => {
     })
 
     const innerStyle = props.orientation === 'left' ? {left: 0} : {right: 0};
-console.log(delta)
+    console.log(delta)
     return (
         <div 
             style={{...styles.resizeArea, ...innerStyle}}
@@ -101,35 +98,41 @@ console.log(delta)
 const ElementWrapper = props => {
 
     const [{isDragging}, drag ] = useDrag({
-        item: { type: ELEMENT, ...props.item, resizing: false },
+        item: { type: ELEMENT, ...props.item, resizing: null },
         collect: monitor => ({
             isDragging: !!monitor.isDragging(),
         }),
     });
 
-    const [hoverStyle, setHoverStyle] = useState( null );
+    const hoverStyle = {
+        opacity: 1,
+        border: `2px solid ${rgbaFromArray( props.bgColor )}`,
+        transition: 'opacity 0.2s ease-in',
+    }
+
+    const [hoverStyleActive, setHoverStyleActive] = useState( null );
     const [resizeEnabled, setResizeEnabled] = useState ( false );
 
     if (isDragging && props.innerElement) {
         return <div ref={drag} />
     }
 
-    const onResizeStartHandler = () => {
-        window.addEventListener('mousemove', onMouseMoveHandler);
-        setResizeEnabled( true );
-    }
+    // const onResizeStartHandler = () => {
+    //     window.addEventListener('mousemove', onMouseMoveHandler);
+    //     setResizeEnabled( true );
+    // }
 
-    const onResizeEndHandler = () => {
-        window.removeEventListener('mousemove', onMouseMoveHandler);
-        setResizeEnabled( false );
-    }
+    // const onResizeEndHandler = () => {
+    //     window.removeEventListener('mousemove', onMouseMoveHandler);
+    //     setResizeEnabled( false );
+    // }
 
-    const onMouseMoveHandler = event => {
-        if( resizeEnabled )
-        {
-            console.log(event);
-        }
-    }
+    // const onMouseMoveHandler = event => {
+    //     if( resizeEnabled )
+    //     {
+    //         console.log(event);
+    //     }
+    // }
 //console.log(resizeEnabled)
     return (
         <div 
@@ -143,25 +146,28 @@ const ElementWrapper = props => {
         >
             <props.customElementType 
                 className={props.elementClassName}
-                item={props.item} 
+                item={props.item}
+                bgColor={props.bgColor}
                 innerElement={props.innerElement}
             />
             {
                 props.overlay
                     ?   <div 
-                            style={{...styles.overlay, ...hoverStyle, resize: 'horizontal'}}
-                            onMouseOver={() => setHoverStyle( styles.overlayHover )}
-                            onMouseLeave={() => setHoverStyle( null )}
+                            style={{...styles.overlay, ...hoverStyleActive}}
+                            onMouseOver={() => setHoverStyleActive( hoverStyle )}
+                            onMouseLeave={() => setHoverStyleActive( null )}
                         >
                             <div style={styles.removeButton} onClick={props.remove}>
                                 <div style={{...styles.removeButtonLines.shared, ...styles.removeButtonLines.first}}/>
                                 <div style={{...styles.removeButtonLines.shared, ...styles.removeButtonLines.second}}/>
                             </div>
                             <ResizeHandle 
+                                orientation='left' 
+                                item={props.item}
+                            />
+                            <ResizeHandle 
                                 orientation='right' 
                                 item={props.item}
-                                onResizeStart={onResizeStartHandler}
-                                onResizeEnd={onResizeEndHandler}
                             />
                         </div>
                     :   null
@@ -196,7 +202,8 @@ ElementWrapper.propTypes = {
     onClick: PropTypes.func,
     remove: PropTypes.func,
     customElementType: PropTypes.elementType,
-    elementClassName: PropTypes.string
+    elementClassName: PropTypes.string,
+    bgColor: PropTypes.array
 }
 
 export default ElementWrapper;

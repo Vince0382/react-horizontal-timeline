@@ -171,7 +171,7 @@ const Timeline = props => {
                 ))
             }
             <ItemsGrid 
-                items={items} 
+                items={items}
                 width={timelineWidth}
                 monthList={monthList}
                 onRemove={onRemoveItemHandler}

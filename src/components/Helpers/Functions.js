@@ -26,4 +26,9 @@ export const randomRGBAColor = ( alpha, min, max ) => {
     const maxByte = max ? max : 255;
     const randomNumber = () => Math.floor(Math.random() * (maxByte - minByte + 1) + minByte);
     return `rgba(${[randomNumber(), randomNumber(), randomNumber(), alpha].join(',')})`
-} 
+}
+
+export const rgbaFromArray = (arr, alpha) => {
+    if ( !arr || arr.length !== 3 ) return null;
+    return `rgba(${arr.join(',')}, ${alpha ? alpha : 1})`;
+}
