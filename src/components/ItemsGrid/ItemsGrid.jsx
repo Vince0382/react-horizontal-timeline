@@ -82,7 +82,7 @@ const ItemsGrid = props => {
         });
 
         setGridItems( newGridItems );
-    }, [props.items]);
+    }, [props.items, props.startDate]);
 
     return (
         <div style={{...props.style, ...style}}>

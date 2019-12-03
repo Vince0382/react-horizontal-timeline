@@ -76,12 +76,8 @@ const styles = {
 // Internal Component
 const ResizeHandle = props => {
 
-    const [{isResizing, position}, resize ] = useDrag({
-        item: { type: ELEMENT, ...props.item, resizing: props.orientation , },
-        collect: monitor => ({
-            isResizing: !!monitor.isDragging(),
-            position: monitor.getSourceClientOffset()
-        }),
+    const [, resize ] = useDrag({
+        item: { type: ELEMENT, ...props.item, resizing: props.orientation, moving: false },
     })
 
     const innerStyle = props.orientation === 'left' ? {left: 0} : {right: 0};
@@ -98,7 +94,7 @@ const ResizeHandle = props => {
 const ElementWrapper = props => {
 
     const [{isDragging}, drag ] = useDrag({
-        item: { type: ELEMENT, ...props.item, resizing: null },
+        item: { type: ELEMENT, ...props.item, resizing: null, moving: props.innerElement },
         collect: monitor => ({
             isDragging: !!monitor.isDragging(),
         }),

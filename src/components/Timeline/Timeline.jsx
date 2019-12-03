@@ -6,6 +6,20 @@ import DaysGrid from '../DaysGrid/DaysGrid';
 import ItemsGrid from '../ItemsGrid/ItemsGrid';
 import MonthSelector from '../MonthSelector/MonthSelector';
 
+// Static styles section
+
+const styles = {
+    timelineDefault : {
+        position: 'relative',
+        width: '100%',
+        minHeight: '300px',
+        height: 'auto',
+        transition: 'all .3s ease-in',
+        boxSizing: 'border-box',
+    },
+}
+
+// Component
 const Timeline = props => {
 
     const baseIndex = 100000000;
@@ -47,7 +61,7 @@ const Timeline = props => {
 
         setItems( verifiedItems );
 
-    }, [props.items])
+    }, [props.items]);
 
     // Update boxes size on window resized
     useEffect(() => {
@@ -69,7 +83,7 @@ const Timeline = props => {
 
         window.addEventListener( 'resize', updateScreenSizeHandler );
         return () => window.removeEventListener( 'resize', updateScreenSizeHandler );
-    }, []);
+    }, [props.options.startDate, props.options.endDate]);
 
 
     const updateScreenSizeHandler = () => {
@@ -227,16 +241,3 @@ Timeline.propTypes = {
 }
 
 export default Timeline;
-
-// Static styles section
-
-const styles = {
-    timelineDefault : {
-        position: 'relative',
-        width: '100%',
-        minHeight: '300px',
-        height: 'auto',
-        transition: 'all .3s ease-in',
-        boxSizing: 'border-box',
-    },
-}

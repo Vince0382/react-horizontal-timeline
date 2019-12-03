@@ -36,15 +36,26 @@ const DropZone = props => {
     const [{ isOver }, drop] = useDrop({
         accept: ELEMENT,
         drop: item => {
-            let updatedItem = item
-            if ( !item.resizing )
-                updatedItem = dropItem( item );
+            let updatedItem = item;
+            if ( !item.resizing && !item.moving )
+            {
+                updatedItem = initItem( item );
+            }
+            
             props.onDrop( updatedItem, true );
         },
         hover: ( item, monitor ) => {
-            if ( !hovered && item.resizing ) {
-                const updatedItem = resizeItem( item );
-                if( item ) props.onDrop( updatedItem );
+            if ( !hovered && ( item.resizing || item.moving ) ) {
+                let updatedItem = item;
+                if ( item.resizing )
+                {
+                    updatedItem = resizeItem( item );
+                }
+                else if ( item.moving ){
+                    updatedItem = moveItem( item );
+                }
+                
+                props.onDrop( updatedItem );
                 setHovered( true );
             }
         },
@@ -78,7 +89,7 @@ const DropZone = props => {
     }
 
     // Update the item on drop and propagate to host element
-    const dropItem = item => {
+    const moveItem = item => {
         
         // Get the time difference between  previously set startDate and the new one
         let diff = item.startDate ? timeDiff( props.dropDate, item.startDate ) : 0;
@@ -86,18 +97,20 @@ const DropZone = props => {
         // Set the updated date
         item.startDate = new Date( props.dropDate );
 
-        // Set the new end date by adding the difference or 0 - minimum of 1 day if not set
-        if ( !item.endDate )
-        {
-            item.endDate = new Date( props.dropDate );
-            diff = day;
-        }
-        else
-        {
-            item.endDate = new Date( item.endDate );
-        }
-
+        // Set the new end date by adding the difference or 0
+        item.endDate = new Date( item.endDate );
         item.endDate.setTime( item.endDate.getTime() + diff );
+
+        return item;
+    }
+
+    const initItem = item => {
+        item.startDate = new Date( props.dropDate );
+        item.endDate = new Date( props.dropDate );
+
+        // Set the intial end Date with minimum of 1 day 
+        item.endDate.setTime( item.endDate.getTime() + day );
+
         return item;
     }
 
