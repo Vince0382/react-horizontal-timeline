@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { DndProvider } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+//import HTML5Backend from 'react-dnd-html5-backend';
+import MouseBackEnd from 'react-dnd-mouse-backend'
 
 import classes from './App.module.css';
 
@@ -124,7 +125,7 @@ const App = () =>  {
 
 // console.log(test);
     return (
-        <DndProvider backend={HTML5Backend}>
+        <DndProvider backend={MouseBackEnd}>
             <div className={classes.Content}>
                 <p>Options</p>
                 <div className={classes.ScrollEnabler}>

@@ -12,7 +12,7 @@ const styles = {
         height: '100%',
         borderRight : '1px dashed #ccc',
         position: 'relative',
-        zIndex: '2',
+        zIndex: '3',
     },
     dropZoneOver : {
         background: 'rgba(176,196,222,1)'
@@ -36,11 +36,15 @@ const DropZone = props => {
     const [{ isOver }, drop] = useDrop({
         accept: ELEMENT,
         drop: item => {
-            if( !item.resizing ) dropItem( item );
+            let updatedItem = item
+            if ( !item.resizing )
+                updatedItem = dropItem( item );
+            props.onDrop( updatedItem, true );
         },
-        hover: item => {
+        hover: ( item, monitor ) => {
             if ( !hovered && item.resizing ) {
-                resizeItem( item );
+                const updatedItem = resizeItem( item );
+                if( item ) props.onDrop( updatedItem );
                 setHovered( true );
             }
         },
@@ -63,17 +67,17 @@ const DropZone = props => {
         if (item.resizing === 'right')
         {
             item.endDate = props.dropDate;
-            return props.onDrop( item );
+            return item;
         }
         if (item.resizing === 'left')
         {
             item.startDate = props.dropDate;
-            return props.onDrop( item );
+            return item;
         }
         return null // If the value of resizing is not left or right
     }
 
-    // Update the item on drop
+    // Update the item on drop and propagate to host element
     const dropItem = item => {
         
         // Get the time difference between  previously set startDate and the new one
@@ -82,7 +86,7 @@ const DropZone = props => {
         // Set the updated date
         item.startDate = new Date( props.dropDate );
 
-        // Set the new end date by adding the difference or 0 minimum of 1 day if not set
+        // Set the new end date by adding the difference or 0 - minimum of 1 day if not set
         if ( !item.endDate )
         {
             item.endDate = new Date( props.dropDate );
@@ -94,7 +98,7 @@ const DropZone = props => {
         }
 
         item.endDate.setTime( item.endDate.getTime() + diff );
-        return props.onDrop( item ); 
+        return item;
     }
 
     // Get the day of the week

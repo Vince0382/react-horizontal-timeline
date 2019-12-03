@@ -17,7 +17,7 @@ const styles = {
         height: 'fit-content',
         display: 'flex',
         margin: '10px 0',
-        overflow: 'hidden',
+        overflowX: 'hidden',
     },
     overlay : {
         position: 'absolute',
@@ -76,10 +76,11 @@ const styles = {
 // Internal Component
 const ResizeHandle = props => {
 
-    const [{isResizing}, resize ] = useDrag({
+    const [{isResizing, position}, resize ] = useDrag({
         item: { type: ELEMENT, ...props.item, resizing: props.orientation , },
         collect: monitor => ({
             isResizing: !!monitor.isDragging(),
+            position: monitor.getSourceClientOffset()
         }),
     })
 
@@ -103,8 +104,6 @@ const ElementWrapper = props => {
         }),
     });
 
-    const [isResizing, setIsResizing] = useState( false );
-
     const hoverStyle = {
         opacity: 1,
         border: `2px solid ${rgbaFromArray( props.bgColor )}`,
@@ -113,9 +112,9 @@ const ElementWrapper = props => {
 
     const [hoverStyleActive, setHoverStyleActive] = useState( null );
 
-    if (isDragging && props.innerElement || isResizing) {
-        return <div ref={drag} />
-    }
+    // if (isDragging && props.innerElement || isResizing) {
+    //     return <div ref={drag} />
+    // }
 
     return (
         <div 
@@ -147,12 +146,10 @@ const ElementWrapper = props => {
                             <ResizeHandle 
                                 orientation='left' 
                                 item={props.item}
-                                onResizing={setIsResizing}
                             />
                             <ResizeHandle 
                                 orientation='right' 
                                 item={props.item}
-                                onResizing={setIsResizing}
                             />
                         </div>
                     :   null

@@ -81,7 +81,7 @@ const Timeline = props => {
 
     }
 
-    const onDropHandler = ( item ) => {
+    const onDropHandler = ( item, propagate ) => {
 
         // Parsing data from dropped component
         //const item = JSON.parse(event.dataTransfer.getData("text"));
@@ -102,12 +102,12 @@ const Timeline = props => {
         if( existingId === -1 )
         {
             newItems.push( tmpItem );
-            if ( props.options.callBacks.onAdd ) props.options.callBacks.onAdd({item: {...tmpItem}, items: [...newItems]});
+            if ( props.options.callBacks.onAdd && propagate ) props.options.callBacks.onAdd({item: {...tmpItem}, items: [...newItems]});
         }
         else //Update item
         {
             newItems[existingId] = tmpItem;
-            if ( props.options.callBacks.onUpdate ) props.options.callBacks.onUpdate({item: {...tmpItem}, items: [...newItems]});
+            if ( props.options.callBacks.onUpdate && propagate ) props.options.callBacks.onUpdate({item: {...tmpItem}, items: [...newItems]});
         }
 
         // Update state with the updated items array
