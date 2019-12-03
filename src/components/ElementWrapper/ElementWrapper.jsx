@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { ELEMENT } from '../Constants';
 import { rgbaFromArray } from '../Helpers/Functions';
 import DefaultElement from '../DefaultElement/DefaultElement';
+import DragPreview from '../DragPreview/DragPreview';
 
 // Static style section 
 
@@ -112,7 +113,17 @@ const ElementWrapper = props => {
     //     return <div ref={drag} />
     // }
 
+    const element = (
+        <props.customElementType 
+            className={props.elementClassName}
+            item={props.item}
+            bgColor={props.bgColor}
+            innerElement={props.innerElement}
+        />
+    )
+
     return (
+        <>
         <div 
             onClick={props.onClick}
             ref={drag}
@@ -122,12 +133,7 @@ const ElementWrapper = props => {
                 cursor: props.move ? 'move' : 'grab',
             }}
         >
-            <props.customElementType 
-                className={props.elementClassName}
-                item={props.item}
-                bgColor={props.bgColor}
-                innerElement={props.innerElement}
-            />
+            { element }
             {
                 props.overlay
                     ?   <div 
@@ -151,6 +157,13 @@ const ElementWrapper = props => {
                     :   null
             }
         </div>
+        {
+            !props.innerElement
+                ?   <DragPreview innerElement={props.innerElement}/>
+                :   null
+        }
+       
+        </>
     )
 }
 
