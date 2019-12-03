@@ -13,6 +13,7 @@ const styles = {
         borderRight : '1px dashed #ccc',
         position: 'relative',
         zIndex: '3',
+        userSelect: 'none'
     },
     dropZoneOver : {
         background: 'rgba(176,196,222,1)'
@@ -24,6 +25,7 @@ const styles = {
         bottom: '0px',
         margin: '2px 0',
         fontSize: '12px',
+        userSelect: 'none'
     },
     weekendStyle : {
         background : '#ccc', 

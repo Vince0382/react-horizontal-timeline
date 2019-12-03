@@ -21,7 +21,8 @@ const ItemsGrid = props => {
         gridTemplateColumns: `repeat(${days() + 1}, 1fr)`, 
         position: 'relative',
         transition: 'all 0.3s ease-in-out',
-        marginBottom: '20px'
+        marginBottom: '20px',
+        userSelect: 'none'
     }
 
     useEffect(() => {

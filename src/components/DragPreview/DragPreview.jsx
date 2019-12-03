@@ -1,13 +1,23 @@
 import React from 'react'
 import { useDragLayer } from 'react-dnd'
 
-
-const layerStyles = {
-    position: 'fixed',
-    pointerEvents: 'none',
-    zIndex: 100,
-    left: 0,
-    top: 0,
+const styles = {
+    layerStyle : {
+        position: 'fixed',
+        pointerEvents: 'none',
+        zIndex: 100,
+        left: 0,
+        top: 0,
+    },
+    itemStyle : {
+        height: '40px',
+        borderRadius: '4px',
+        overflow : 'hidden',
+        boxShadow: '0px 0px 2px 0px rgba(146, 168, 209, 0.75)'
+    },
+    imageSytle : {
+        height: '100%',
+    }
 }
 
 
@@ -23,10 +33,6 @@ const getItemStyles = (initialOffset, currentOffset) => {
     return {
         transform,
         WebkitTransform: transform,
-        height: '40px',
-        borderRadius: '4px',
-        overflow : 'hidden',
-        boxShadow: '0px 0px 2px 0px rgba(146, 168, 209, 0.75)'
     }
 }
 
@@ -51,9 +57,9 @@ const DragPreview = props => {
     }
 
     return (
-        <div style={layerStyles}>
-            <div style={getItemStyles(initialOffset, currentOffset)}>
-                <img style={{height: '100%'}} src={item.logo} alt='' />
+        <div style={styles.layerStyle}>
+            <div style={{...styles.itemStyle, ...getItemStyles(initialOffset, currentOffset)}}>
+                <img style={styles.imageSytle} src={item.logo} alt=''/>
             </div>
         </div>
     )

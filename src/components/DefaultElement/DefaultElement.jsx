@@ -27,7 +27,7 @@ const styles = {
         overflow : 'hidden'
     },
     images : {
-        height: '100%'
+        height: '100%',
     }
 }
 
@@ -48,7 +48,7 @@ const DefaultElement = props => {
         >
             <div style={styles.itemFlex}>
                 <div style={styles.imagesWrapper}>
-                    <img style={styles.images} src={props.item.logo} alt='Logo' />
+                    <img style={styles.images} src={props.item.logo} alt='Logo' draggable='false' onMouseDown={event => event.preventDefault()}/>
                 </div>
                 <div style={styles.description}>
                     {

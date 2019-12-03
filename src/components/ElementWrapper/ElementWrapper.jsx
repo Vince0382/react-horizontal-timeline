@@ -19,6 +19,7 @@ const styles = {
         display: 'flex',
         margin: '10px 0',
         overflowX: 'hidden',
+        userSelect: 'none'
     },
     overlay : {
         position: 'absolute',
@@ -124,45 +125,40 @@ const ElementWrapper = props => {
 
     return (
         <>
-        <div 
-            onClick={props.onClick}
-            ref={drag}
-            style={{
-                ...styles.elementWrapper,
-                opacity: isDragging ? 0.5 : 1,
-                cursor: props.move ? 'move' : 'grab',
-            }}
-        >
-            { element }
-            {
-                props.overlay
-                    ?   <div 
-                            style={{...styles.overlay, ...hoverStyleActive}}
-                            onMouseOver={() => setHoverStyleActive( hoverStyle )}
-                            onMouseLeave={() => setHoverStyleActive( null )}
-                        >
-                            <div style={styles.removeButton} onClick={props.remove}>
-                                <div style={{...styles.removeButtonLines.shared, ...styles.removeButtonLines.first}}/>
-                                <div style={{...styles.removeButtonLines.shared, ...styles.removeButtonLines.second}}/>
+            <div 
+                onClick={props.onClick}
+                ref={drag}
+                style={{
+                    ...styles.elementWrapper,
+                    opacity: isDragging ? 0.5 : 1,
+                    cursor: props.move ? 'move' : 'grab',
+                }}
+            >
+                { element }
+                {
+                    props.overlay
+                        ?   <div 
+                                style={{...styles.overlay, ...hoverStyleActive}}
+                                onMouseOver={() => setHoverStyleActive( hoverStyle )}
+                                onMouseLeave={() => setHoverStyleActive( null )}
+                            >
+                                <div style={styles.removeButton} onClick={props.remove}>
+                                    <div style={{...styles.removeButtonLines.shared, ...styles.removeButtonLines.first}}/>
+                                    <div style={{...styles.removeButtonLines.shared, ...styles.removeButtonLines.second}}/>
+                                </div>
+                                <ResizeHandle 
+                                    orientation='left' 
+                                    item={props.item}
+                                />
+                                <ResizeHandle 
+                                    orientation='right' 
+                                    item={props.item}
+                                />
                             </div>
-                            <ResizeHandle 
-                                orientation='left' 
-                                item={props.item}
-                            />
-                            <ResizeHandle 
-                                orientation='right' 
-                                item={props.item}
-                            />
-                        </div>
-                    :   null
-            }
-        </div>
-        {
-            !props.innerElement
-                ?   <DragPreview innerElement={props.innerElement}/>
-                :   null
-        }
-       
+                        :   null
+                }
+            </div>
+            <DragPreview innerElement={props.innerElement}/>
         </>
     )
 }

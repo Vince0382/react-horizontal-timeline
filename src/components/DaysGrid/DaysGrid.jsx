@@ -21,6 +21,7 @@ const styles ={
         alignItems: 'stretch',
         flexWrap: 'nowrap',
         transition: 'all 0.3s ease-in-out',
+        userSelect: 'none'
     }
     
     
