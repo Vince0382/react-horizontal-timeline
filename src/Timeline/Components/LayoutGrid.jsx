@@ -28,7 +28,7 @@ const LayoutGrid = props => {
                 onDrop={props.onDrop}
                 month={month} 
                 width={offset ? width - offset : width}
-                style={{left: `${( 100 * index ) - ( 100 * props.currentMonth )}%`, marginLeft: offset ? offset : 0}}
+                style={{transform: `translateX(${( 100 * index ) - ( 100 * props.currentMonth )}%)`, marginLeft: offset ? offset : 0}}
             >
             </DaysGrid>
         ))
@@ -37,7 +37,7 @@ const LayoutGrid = props => {
     const inLineStyle = (
         <>
             {daysGridElements( props.width )}
-            <ItemsGrid {...props}/>
+            <ItemsGrid {...props} style={{transform: `translateX(-${( props.width * props.currentMonth )}px)`}}/>
         </>
     )
 
@@ -45,7 +45,7 @@ const LayoutGrid = props => {
         <>
             {daysGridElements( props.width, leftWidth )}
             <div style={styles.grouped}>
-                <GroupItemsGrid {...props} width={props.width - leftWidth} />
+                <GroupItemsGrid {...props} width={props.width - leftWidth} style={{transform: `translateX(-${(( props.width - leftWidth ) * props.currentMonth )}px)`}}/>
             </div>
         </>
     )

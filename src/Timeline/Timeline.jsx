@@ -172,7 +172,6 @@ const Timeline = props => {
         customElementType: props.customElementType,
         elementClassName: props.elementClassName,
         startDate: new Date( props.options.startDate ),
-        style: {left: `-${( 100 * currentMonth )}%`}
     }
 
     return (

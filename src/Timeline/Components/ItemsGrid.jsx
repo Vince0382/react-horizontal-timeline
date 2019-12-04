@@ -20,6 +20,8 @@ const ItemsGrid = props => {
         display: 'grid', 
         gridTemplateColumns: `repeat(${days() + 1}, 1fr)`, 
         position: 'relative',
+        top: 0,
+        left: 0,
         transition: 'all 1s ease-in-out',
         marginBottom: '20px',
         userSelect: 'none'
