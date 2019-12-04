@@ -26,9 +26,25 @@ const MonthSelector = props => {
 
     return (
         <div style={styles.main}>
-            <p style={styles.button} onClick={props.previousMonthHandler}>&#60;</p>
+            <p style={{
+                ...styles.button, 
+                color: props.currentMonth === 0 ? '#ccc' : 'black'
+                }} 
+                onClick={props.previousMonthHandler}
+            >
+                &#60;
+            </p>
+
             <p>{`${currentMonthStr} - ${currentYear}`}</p>
-            <p style={styles.button} onClick={props.nextMonthHandler}>&#62;</p>
+            
+            <p style={{
+                ...styles.button,
+                color: props.currentMonth === props.monthList.length -1 ? '#ccc' : 'black'
+                }} 
+                onClick={props.nextMonthHandler}
+            >
+                &#62;
+            </p>
         </div>
     );
 }

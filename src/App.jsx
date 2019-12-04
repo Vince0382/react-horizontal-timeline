@@ -5,8 +5,8 @@ import MouseBackEnd from 'react-dnd-mouse-backend'
 
 import classes from './App.module.css';
 
-import Timeline from './components/Timeline/Timeline';
-import ElementWrapper from './components/ElementWrapper/ElementWrapper';
+import Timeline from './Timeline/Timeline';
+import ElementWrapper from './Timeline/Components/ElementWrapper';
 
 //import logo
 import logo1 from './assets/images/logo1.png';
@@ -15,7 +15,8 @@ import logo3 from './assets/images/logo3.png';
 
 const App = () =>  {
 
-    const [checked, setChecked] = useState( false );
+    const [scrollEnabled, setScrollEnabled] = useState( false );
+    const [groupedEnabled, setGroupedEnabled] = useState( false );
 
     const items = [
         {
@@ -128,12 +129,21 @@ const App = () =>  {
         <DndProvider backend={MouseBackEnd}>
             <div className={classes.Content}>
                 <p>Options</p>
-                <div className={classes.ScrollEnabler}>
-                    <span style={{marginRight: '10px', fontSize: '14px'}}>Enable / Disable Scroll</span>
-                    <label className={classes.Switch}>
-                        <input type="checkbox" checked={checked} onChange={() => setChecked( !checked )}/>
-                        <span className={`${classes.Slider} ${classes.Round}`}></span>
-                    </label>
+                <div className={classes.Options}>
+                    <div className={classes.Option}>
+                        <span style={{marginRight: '10px', fontSize: '14px'}}>Enable Scroll</span>
+                        <label className={classes.Switch}>
+                            <input type="checkbox" checked={scrollEnabled} onChange={() => setScrollEnabled( !scrollEnabled )}/>
+                            <span className={`${classes.Slider} ${classes.Round}`}></span>
+                        </label>
+                    </div>
+                    <div className={classes.Option}>
+                        <span style={{marginRight: '10px', fontSize: '14px'}}>Grouped View</span>
+                        <label className={classes.Switch}>
+                            <input type="checkbox" checked={groupedEnabled} onChange={() => setGroupedEnabled( !groupedEnabled )}/>
+                            <span className={`${classes.Slider} ${classes.Round}`}></span>
+                        </label>
+                    </div>
                 </div>
                 <p>Droppable Items</p>
                 <div className={classes.Elements}>
@@ -146,7 +156,7 @@ const App = () =>  {
                     }
                 </div>
                 <div className={classes.Timeline}>
-                    <Timeline items={fixedItems} options={options} scroll={checked}/>
+                    <Timeline items={fixedItems} options={options} scroll={scrollEnabled} grouped={groupedEnabled}/>
                 </div>
 
             </div>

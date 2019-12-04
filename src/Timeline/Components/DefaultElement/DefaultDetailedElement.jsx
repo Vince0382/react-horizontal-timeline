@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { rgbaFromArray } from '../Helpers/Functions';
+import { rgbaFromArray } from '../../Helpers/Functions';
 
 // Static styles section 
 
 const styles = {
     itemDefault : {
-        width: '100%',
+        width: 'calc(100% - 10px)',
         padding: '5px',
         height: '40px',
         borderRadius: '4px',
@@ -15,7 +15,7 @@ const styles = {
     itemFlex : {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'left',
         alignItems: 'center',
     },
     description : {
@@ -37,7 +37,7 @@ const defaultColors = {
     innerElement : [70, 130, 180]
 }
 
-const DefaultElement = props => {
+const DefaultDetailedElement = props => {
 
     return (
         <div 
@@ -61,7 +61,7 @@ const DefaultElement = props => {
     )
 }
 
-Element.defaultProps = {
+DefaultDetailedElement.defaultProps = {
     item: {
         id: null,
         logo: '',
@@ -75,11 +75,11 @@ Element.defaultProps = {
     bgColor: defaultColors.innerElement
 }
 
-Element.propTypes = {
+DefaultDetailedElement.propTypes = {
     item: PropTypes.object.isRequired,
     style: PropTypes.object,
     innerElement: PropTypes.bool,
     bgColor: PropTypes.array
 }
 
-export default DefaultElement;
+export default DefaultDetailedElement;

@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import * as helpers from '../Helpers/Functions';
-import DaysGrid from '../DaysGrid/DaysGrid';
-import ItemsGrid from '../ItemsGrid/ItemsGrid';
-import MonthSelector from '../MonthSelector/MonthSelector';
+import * as helpers from './Helpers/Functions';
+import MonthSelector from './Components/MonthSelector';
+import LayoutGrid from './Components/LayoutGrid';
 
 // Static styles section
 
@@ -12,7 +11,6 @@ const styles = {
     timelineDefault : {
         position: 'relative',
         width: '100%',
-        minHeight: '300px',
         height: 'auto',
         transition: 'all .3s ease-in',
         boxSizing: 'border-box',
@@ -152,48 +150,41 @@ const Timeline = props => {
         if ( props.options.callBacks.onRemove ) props.options.callBacks.onRemove({item: {...item}, items: [...newItems]});
     }
 
-    // Creattin style object
+    // Dynamic style object
     
     let style = {
         ...props.style,
+        ...styles.timelineDefault,
         border: `${borderSize}px solid #ccc`, 
         overflowX: props.scroll ? 'scroll' : 'hidden'
     }
 
-    if (!props.className) style= {...style, ...styles.timelineDefault}
+    // Props list to pass to the Layout component
+
+    const propagatedProps = {
+        items: items,
+        width: timelineWidth,
+        monthList: monthList,
+        currentMonth: currentMonth,
+        onRemove: onRemoveItemHandler,
+        onDrop: onDropHandler,
+        grouped: props.grouped,
+        customElementType: props.customElementType,
+        elementClassName: props.elementClassName,
+        startDate: new Date( props.options.startDate ),
+        style: {left: `-${( 100 * currentMonth )}%`}
+    }
 
     return (
         <React.Fragment>
         <div
             className={`${props.className}`}
-            style={style}
+            style={!props.className ? style : null}
             ref={timelineRef}
         >
-            {
-                monthList.map(( month, index ) => (
-                    <DaysGrid 
-                        key={`daysGrid_${month.month}_${month.year}`}
-                        onDrop={onDropHandler}
-                        month={month} 
-                        width={timelineWidth}
-                        // items={items.filter( item => { 
-                        //         return item.startDate.getMonth() + 1 === month.month && item.startDate.getFullYear() === month.year;
-                        //     })}
-                        style={{left: `${( 100 * index ) - ( 100 * currentMonth )}%`}}
-                    >
-                    </DaysGrid>
-                ))
-            }
-            <ItemsGrid 
-                items={items}
-                width={timelineWidth}
-                monthList={monthList}
-                onRemove={onRemoveItemHandler}
-                customElementType={props.customElementType}
-                elementClassName={props.elementClassName}
-                startDate = {new Date( props.options.startDate )}
-                style={{left: `-${( 100 * currentMonth )}%`}}
-            />
+            
+            <LayoutGrid {...propagatedProps} />
+            
         </div>
         
         <MonthSelector 
@@ -219,7 +210,8 @@ Timeline.defaultProps = {
         startDate: new Date().toISOString(),
         endDate: new Date().setMonth( new Date().getMonth() + 1)
     },
-    scroll: false
+    scroll: false,
+    grouped: false,
 };
 
 Timeline.propTypes = {
@@ -237,7 +229,8 @@ Timeline.propTypes = {
         startDate: PropTypes.string.isRequired,
         endDate: PropTypes.string.isRequired
     }),
-    scroll: PropTypes.bool
+    scroll: PropTypes.bool,
+    grouped: PropTypes.bool,
 }
 
 export default Timeline;

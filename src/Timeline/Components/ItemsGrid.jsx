@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import ElementWrapper from '../ElementWrapper/ElementWrapper';
+import ElementWrapper from './ElementWrapper';
 import { dayDiff, getDaysInMonth } from '../Helpers/Functions';
 import { COLORS } from '../Constants';
 
@@ -20,7 +20,7 @@ const ItemsGrid = props => {
         display: 'grid', 
         gridTemplateColumns: `repeat(${days() + 1}, 1fr)`, 
         position: 'relative',
-        transition: 'all 0.3s ease-in-out',
+        transition: 'all 1s ease-in-out',
         marginBottom: '20px',
         userSelect: 'none'
     }
@@ -94,7 +94,7 @@ const ItemsGrid = props => {
 
 ItemsGrid.defaultProps = {
     items: [],
-    monthList: []
+    monthList: [],
 }
 
 ItemsGrid.propTypes = {

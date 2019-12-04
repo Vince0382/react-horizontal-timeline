@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 
 import { ELEMENT } from '../Constants';
 import { rgbaFromArray } from '../Helpers/Functions';
-import DefaultElement from '../DefaultElement/DefaultElement';
-import DragPreview from '../DragPreview/DragPreview';
+import DefaultDetailedElement from './DefaultElement/DefaultDetailedElement';
+import DragPreview from './DragPreview';
+import ResizeHandle from './ResizeHandle';
 
 // Static style section 
 
@@ -61,36 +62,9 @@ const styles = {
             transform: 'rotate(-45deg)',
           }
     },
-    resizeArea : {
-        position: 'absolute',
-        top: 0,
-        zIndex: 4,
-        height: 'calc(100% - 2px)',
-        width: '2px',
-        background: 'rgba(204, 204, 204, 0.5)',
-        cursor: 'ew-resize',
-        border: '1px solid #ccc',
-        borderRadius: '4px'
-    }
 }
 
 
-// Internal Component
-const ResizeHandle = props => {
-
-    const [, resize ] = useDrag({
-        item: { type: ELEMENT, ...props.item, resizing: props.orientation, moving: false },
-    })
-
-    const innerStyle = props.orientation === 'left' ? {left: 0} : {right: 0};
-
-    return (
-        <div 
-            style={{...styles.resizeArea, ...innerStyle}}
-            ref={resize}
-        />
-    )
-}
 
 // Main component
 const ElementWrapper = props => {
@@ -177,7 +151,7 @@ ElementWrapper.defaultProps = {
     innerElement: false,
     overlay: false,
     move: false,
-    customElementType: DefaultElement,
+    customElementType: DefaultDetailedElement,
 }
 
 ElementWrapper.propTypes = {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import * as helpers from '../Helpers/Functions';
-import DropZone from '../DropZone/DropZone';
+import DropZone from './DropZone';
 
 export const MARGIN = 20;
 
@@ -15,7 +15,6 @@ const styles ={
         top: '0',
         left: '0',
         height: '100%',
-        width: '100%',
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'stretch',
@@ -33,11 +32,13 @@ const DaysGrid = props => {
     const daysDropGrid = [];
     const days = helpers.getDaysInMonth( month.month, month.year);
 
+    let style = {
+        width: props.width / days + 1
+    };
+console.log(props.width);
+
     for( let i = 1; i <= days; i++ )
     {
-        let style = {
-            width: width / days + 1
-        };
         if ( i === days ) style = {...style, border: 'none'};
 
         daysDropGrid.push(
@@ -51,7 +52,7 @@ const DaysGrid = props => {
     }
     
     return (
-        <div style={{...styles.daysGrid, ...props.style}}>
+        <div style={{...styles.daysGrid, ...props.style, width: props.width}}>
             {daysDropGrid}
         </div>
     )

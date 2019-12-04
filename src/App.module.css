@@ -75,10 +75,14 @@ input:checked + .Slider:before {
   border-radius: 50%;
 }
 
-.ScrollEnabler{
+.Options{
   display: flex;
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 10px;
+}
+
+.Option {
+  margin-right: 40px;
 }
