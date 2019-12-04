@@ -43,8 +43,8 @@ const LayoutGrid = props => {
 
     const groupedStyle = (
         <>
+            {daysGridElements( props.width, leftWidth )}
             <div style={styles.grouped}>
-                <div style={styles.daysGridWrapper}>{daysGridElements( props.width, leftWidth )}</div>
                 <GroupItemsGrid {...props} width={props.width - leftWidth} />
             </div>
         </>

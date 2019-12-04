@@ -16,7 +16,7 @@ import logo3 from './assets/images/logo3.png';
 const App = () =>  {
 
     const [scrollEnabled, setScrollEnabled] = useState( false );
-    const [groupedEnabled, setGroupedEnabled] = useState( false );
+    const [groupedEnabled, setGroupedEnabled] = useState( true );
 
     const items = [
         {

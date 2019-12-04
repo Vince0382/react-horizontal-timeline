@@ -42,21 +42,30 @@ const ItemsGrid = props => {
 
             // Select color for the item. If itemId has already a color assigned pick it else create one
             
-            let searchItemId = gridColors.find(i => i.itemId === item.itemId);
             let color = null;
 
-            if ( searchItemId )
+            // If the colorIndex is provided use it
+            if ( props.colorIndex )
             {
-                color = searchItemId.color
+                color = COLORS[props.colorIndex]
             }
-            else
+            else    // Else we define it by parsing the array        
             {
-                color = COLORS[gridColors.length]
+                let searchItemId = gridColors.find(i => i.itemId === item.itemId);
 
-                gridColors.push({
-                    itemId: item.itemId,
-                    color: color
-                });
+                if ( searchItemId )
+                {
+                    color = searchItemId.color
+                }
+                else
+                {
+                    color = COLORS[gridColors.length]
+
+                    gridColors.push({
+                        itemId: item.itemId,
+                        color: color
+                    });
+                }
             }
     
             return (
@@ -86,7 +95,7 @@ const ItemsGrid = props => {
     }, [props.items, props.startDate]);
 
     return (
-        <div style={{...props.style, ...style}}>
+        <div style={{...style, ...props.style}}>
             {gridItems}
         </div>
     );
@@ -105,7 +114,8 @@ ItemsGrid.propTypes = {
     customElementType: PropTypes.elementType,
     style: PropTypes.object,
     monthList: PropTypes.array,
-    startDate: PropTypes.objectOf(Date)
+    startDate: PropTypes.objectOf(Date),
+    colorIndex: PropTypes.number
 }
 
 export default ItemsGrid;

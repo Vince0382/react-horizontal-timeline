@@ -43,8 +43,10 @@ const DefaultDetailedElement = props => {
         <div 
             style={{
                 ...styles.itemDefault, 
-                ...props.style, 
-                background: props.innerElement ? rgbaFromArray( props.bgColor, alpha ): rgbaFromArray(defaultColors.outerElement, alpha)}}
+                background: props.innerElement ? rgbaFromArray( props.bgColor, alpha ): rgbaFromArray(defaultColors.outerElement, alpha),
+                ...props.style,
+            }}
+                
         >
             <div style={styles.itemFlex}>
                 <div style={styles.imagesWrapper}>
