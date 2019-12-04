@@ -10,7 +10,8 @@ const styles = {
     groups : {
         gridColumn: 1,
         background: 'white',
-        position: 'relative',
+        position: 'sticky',
+        left: 0,
         zIndex: 300
     },
     items : {
@@ -52,11 +53,7 @@ const GroupItemsGrid = props => {
         ))
     )
 
-    return (
-        <div style={styles.LeftWrapper}>
-            {grouped}
-        </div>
-    )
+    return grouped
 }
 
 GroupItemsGrid.defaultProps = {
