@@ -7,15 +7,20 @@ import ItemsGrid from './ItemsGrid';
 
 // Static styles section
 const styles = {
+    line : {
+        display: 'flex',
+        flexDirection: 'row',
+    },
     groups : {
-        gridColumn: 1,
+        flexGrow: 0,
+        flexShrink: 0,
         background: 'white',
         position: 'sticky',
         left: 0,
         zIndex: 300
     },
     items : {
-        gridColumn: 2
+        
     },
     item : {
         height: '100%',
@@ -51,11 +56,13 @@ const GroupItemsGrid = props => {
 
     }, [props.items, props.startDate]);
 
+    const widthStyle = {flexBasis: `${props.leftWidth}px`};
+
     const grouped = (
         Object.keys(groupedItems).map(( items, index ) => (
-            <React.Fragment key={`groups_items_${items}${index}`}>
+            <div key={`groups_items_${items}${index}`} style={styles.line}>
                 <div 
-                    style={elementHovered === index ? {...styles.groups, ...styles.hover} : styles.groups} 
+                    style={elementHovered === index ? {...styles.groups, ...styles.hover, ...widthStyle} : {...styles.groups, ...widthStyle}} 
                     onMouseOver={() => setElementHovered( index )}
                     onMouseLeave={() => setElementHovered( null )}
                 >
@@ -72,7 +79,7 @@ const GroupItemsGrid = props => {
                         colorIndex={index}
                          />
                 </div>
-            </React.Fragment>
+            </div>
         ))
     )
 
@@ -81,13 +88,15 @@ const GroupItemsGrid = props => {
 
 GroupItemsGrid.defaultProps = {
     items: [],
-    customElementType: DefaultBasicElement
+    customElementType: DefaultBasicElement,
+    leftWidth: 220
 }
 
 GroupItemsGrid.propTypes = {
     items: PropTypes.array,
     customElementType: PropTypes.elementType,
-    startDate: PropTypes.objectOf(Date)
+    startDate: PropTypes.objectOf(Date),
+    leftWidth: PropTypes.number
 }
 
 export default GroupItemsGrid;

@@ -11,8 +11,8 @@ const leftWidth = 220;
 
 const styles = {
     grouped : {
-        display: 'grid',
-        gridTemplateColumns: `${leftWidth}px auto`,
+        // display: 'grid',
+        // gridTemplateColumns: `${leftWidth}px auto`,
     },
     daysGridWrapper : {
         gridColumn: 2
@@ -44,8 +44,13 @@ const LayoutGrid = props => {
     const groupedStyle = (
         <>
             {daysGridElements( props.width, leftWidth )}
-            <div style={styles.grouped}>
-                <GroupItemsGrid {...props} width={props.width - leftWidth} style={{transform: `translateX(-${(( props.width - leftWidth ) * props.currentMonth )}px)`}}/>
+            <div style={{width: (props.width - leftWidth) * props.monthList.length + leftWidth}}>
+                <GroupItemsGrid 
+                    {...props} 
+                    width={props.width - leftWidth}
+                    leftWidth={leftWidth}
+                    style={{transform: `translateX(-${(( props.width - leftWidth ) * props.currentMonth )}px)`}}
+                />
             </div>
         </>
     )
