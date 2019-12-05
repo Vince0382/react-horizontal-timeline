@@ -1,24 +1,28 @@
 {
   "files": {
     "main.css": "/react-horizontal-timeline/static/css/main.47eb7ccb.chunk.css",
-    "main.js": "/react-horizontal-timeline/static/js/main.5a073ee5.chunk.js",
-    "main.js.map": "/react-horizontal-timeline/static/js/main.5a073ee5.chunk.js.map",
+    "main.js": "/react-horizontal-timeline/static/js/main.f9d0b1db.chunk.js",
+    "main.js.map": "/react-horizontal-timeline/static/js/main.f9d0b1db.chunk.js.map",
     "runtime-main.js": "/react-horizontal-timeline/static/js/runtime-main.1350e5a9.js",
     "runtime-main.js.map": "/react-horizontal-timeline/static/js/runtime-main.1350e5a9.js.map",
-    "static/js/2.b0f1e317.chunk.js": "/react-horizontal-timeline/static/js/2.b0f1e317.chunk.js",
-    "static/js/2.b0f1e317.chunk.js.map": "/react-horizontal-timeline/static/js/2.b0f1e317.chunk.js.map",
+    "static/js/2.b9d9e5c1.chunk.js": "/react-horizontal-timeline/static/js/2.b9d9e5c1.chunk.js",
+    "static/js/2.b9d9e5c1.chunk.js.map": "/react-horizontal-timeline/static/js/2.b9d9e5c1.chunk.js.map",
     "index.html": "/react-horizontal-timeline/index.html",
-    "precache-manifest.ad4ff714557c3c86831228fe2739b4ae.js": "/react-horizontal-timeline/precache-manifest.ad4ff714557c3c86831228fe2739b4ae.js",
+    "precache-manifest.fb01093fdf0f1417326885b1a6f51a49.js": "/react-horizontal-timeline/precache-manifest.fb01093fdf0f1417326885b1a6f51a49.js",
     "service-worker.js": "/react-horizontal-timeline/service-worker.js",
     "static/css/main.47eb7ccb.chunk.css.map": "/react-horizontal-timeline/static/css/main.47eb7ccb.chunk.css.map",
     "static/media/logo1.png": "/react-horizontal-timeline/static/media/logo1.c2891fdd.png",
     "static/media/logo2.png": "/react-horizontal-timeline/static/media/logo2.8d314fc0.png",
-    "static/media/logo3.png": "/react-horizontal-timeline/static/media/logo3.7cae2123.png"
+    "static/media/logo3.png": "/react-horizontal-timeline/static/media/logo3.7cae2123.png",
+    "static/media/logo4.png": "/react-horizontal-timeline/static/media/logo4.f2ce6af0.png",
+    "static/media/logo5.png": "/react-horizontal-timeline/static/media/logo5.fb95f4c3.png",
+    "static/media/logo6.png": "/react-horizontal-timeline/static/media/logo6.e5e58d31.png",
+    "static/media/logo7.png": "/react-horizontal-timeline/static/media/logo7.6acd8367.png"
   },
   "entrypoints": [
     "static/js/runtime-main.1350e5a9.js",
-    "static/js/2.b0f1e317.chunk.js",
+    "static/js/2.b9d9e5c1.chunk.js",
     "static/css/main.47eb7ccb.chunk.css",
-    "static/js/main.5a073ee5.chunk.js"
+    "static/js/main.f9d0b1db.chunk.js"
   ]
 }

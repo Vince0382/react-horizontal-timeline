@@ -12,6 +12,10 @@ import ElementWrapper from './Timeline/Components/ElementWrapper';
 import logo1 from './assets/images/logo1.png';
 import logo2 from './assets/images/logo2.png';
 import logo3 from './assets/images/logo3.png';
+import logo4 from './assets/images/logo4.png';
+import logo5 from './assets/images/logo5.png';
+import logo6 from './assets/images/logo6.png';
+import logo7 from './assets/images/logo7.png';
 
 
 //Internal Component 
@@ -37,19 +41,43 @@ const App = () =>  {
         {
             itemId: 1,
             logo: logo1,
-            description: 'Test Element 1',
+            description: 'Caro Confort',
             elementType: 'range',
         },
         {
             itemId: 2,
             logo: logo2,
-            description: 'Test Element 2',
+            description: 'AB Menuiserie',
             elementType: 'range',
         },
         {
             itemId: 3,
             logo: logo3,
-            description: 'Test Element 3',
+            description: 'Fournier',
+            elementType: 'range',
+        },
+        {
+            itemId: 4,
+            logo: logo4,
+            description: 'Krëfel',
+            elementType: 'range',
+        },
+        {
+            itemId: 5,
+            logo: logo5,
+            description: 'MG Terrassements',
+            elementType: 'range',
+        },
+        {
+            itemId: 6,
+            logo: logo6,
+            description: 'Roosens Bétons',
+            elementType: 'range',
+        },
+        {
+            itemId: 7,
+            logo: logo7,
+            description: 'Sopi Façades',
             elementType: 'range',
         },
     ];
@@ -62,7 +90,13 @@ const App = () =>  {
             elementType: 'range',
         },
         {
-            ...items[0],
+            ...items[5],
+            startDate: '2019-10-08',
+            endDate: '2019-10-12',
+            elementType: 'range',
+        },
+        {
+            ...items[3],
             startDate: '2019-10-15',
             endDate: '2019-10-17',
             elementType: 'range',
@@ -77,6 +111,12 @@ const App = () =>  {
             ...items[2],
             startDate: '2019-11-15',
             endDate: '2019-11-18',
+            elementType: 'range',
+        },
+        {
+            ...items[6],
+            startDate: '2019-11-14',
+            endDate: '2019-11-21',
             elementType: 'range',
         },
         {

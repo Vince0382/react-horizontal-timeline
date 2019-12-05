@@ -25,9 +25,9 @@ const styles ={
     },
     daysString : {
         position: 'absolute',
-        top: '50%',
+        bottom: '14px',
         left: '50%',
-        transform: 'translate( -50%, -50% )',
+        transform: 'translateX( -50% )',
         fontWeight: 'bold',
         color: '#f1f1f1',
         fontSize: '42px',

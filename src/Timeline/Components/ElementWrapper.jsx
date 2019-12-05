@@ -148,7 +148,12 @@ const ElementWrapper = props => {
                         :   null
                 }
             </div>
-            <DragPreview innerElement={props.innerElement}/>
+            {
+                !props.innerElement
+                    ?   <DragPreview />
+                    :   null
+            }
+            
         </>
     )
 }

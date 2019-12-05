@@ -38,7 +38,7 @@ const ItemsGrid = props => {
         top: 0,
         left: 0,
         transition: 'all 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940)',
-        marginBottom: '20px',
+        marginBottom: '50px',
         userSelect: 'none'
     }
 

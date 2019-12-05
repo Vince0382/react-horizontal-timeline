@@ -23,12 +23,11 @@ const styles = {
         paddingLeft: '5px'
     },
     imagesWrapper : {
-        height: '40px',
-        borderRadius: '4px',
-        overflow : 'hidden'
+        width: '35px',
+
     },
     images : {
-        height: '100%',
+        width: '100%',
     }
 }
 

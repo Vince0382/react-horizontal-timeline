@@ -1,11 +1,13 @@
 import React from 'react'
-import { useDragLayer } from 'react-dnd'
+import { useDragLayer } from 'react-dnd';
+
+import { ELEMENT } from '../Constants';
 
 const styles = {
     layerStyle : {
         position: 'fixed',
         pointerEvents: 'none',
-        zIndex: 100,
+        zIndex: 400,
         left: 0,
         top: 0,
     },
@@ -24,11 +26,11 @@ const styles = {
 const getItemStyles = (initialOffset, currentOffset) => {
     if (!initialOffset || !currentOffset) {
         return {
-        display: 'none',
-        }
+            display: 'none',
+        };
     }
-    let { x, y } = currentOffset
-    const transform = `translate(${x}px, ${y}px)`
+    let { x, y } = currentOffset;
+    const transform = `translate(${x}px, ${y}px)`;
 
     return {
         transform,
@@ -38,6 +40,7 @@ const getItemStyles = (initialOffset, currentOffset) => {
 
 const DragPreview = props => {
     const {
+        itemType,
         isDragging,
         item,
         initialOffset,
@@ -51,6 +54,15 @@ const DragPreview = props => {
         isDragging: monitor.isDragging(),
     }))
 
+    const renderItem = () => {
+        switch (itemType) {
+          case ELEMENT:
+            return <img style={styles.imageSytle} src={item.logo} alt=''/>
+          default:
+            return null
+        }
+      }
+
     if (!isDragging || item.id) {
         return null
     }
@@ -58,7 +70,7 @@ const DragPreview = props => {
     return (
         <div style={styles.layerStyle}>
             <div style={{...styles.itemStyle, ...getItemStyles(initialOffset, currentOffset)}}>
-                <img style={styles.imageSytle} src={item.logo} alt=''/>
+                {renderItem()}
             </div>
         </div>
     )
