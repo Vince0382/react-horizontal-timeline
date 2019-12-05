@@ -27,7 +27,9 @@ const styles = {
         borderRadius: '0',
         border : '1px solid #ccc',
         borderStyle: 'none solid none none',
-        background: 'transparent'
+        background: 'transparent',
+        paddingTop: 0,
+        paddingBottom: 0,
     },
     hover : {
         background: '#f1f1f1',
