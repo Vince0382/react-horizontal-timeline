@@ -13,7 +13,8 @@ const styles = {
         borderRight : '1px dashed #ccc',
         position: 'relative',
         zIndex: '3',
-        userSelect: 'none'
+        userSelect: 'none',
+        boxSizing: 'border-box'
     },
     dropZoneOver : {
         background: 'rgba(176,196,222,1)'

@@ -9,16 +9,31 @@ const ItemsGrid = props => {
 
     const [gridItems, setGridItems] = useState();
 
-    const days = () =>{
-        let nbreDays = 0;
-        props.monthList.forEach( month => nbreDays += getDaysInMonth( month.month, month.year ));
-        return nbreDays;
-    }
+    // const days = () =>{
+    //     let nbreDays = 0;
+    //     props.monthList.forEach( month => nbreDays += getDaysInMonth( month.month, month.year ));
+    //     return nbreDays;
+    // }
     
+    const getGridTemplateColumns = () => {
+        const columnTemplate = [];
+        props.monthList.forEach( month => {
+            const days = getDaysInMonth( month.month, month.year );
+            const width = props.width / days;
+
+            for ( let i = 0; i < days ; i++ )
+            {
+                columnTemplate.push(`${width}px`);
+            }
+        });
+
+        return columnTemplate
+    }
+
     const style = {
         width: props.width * props.monthList.length,
         display: 'grid', 
-        gridTemplateColumns: `repeat(${days() + 1}, 1fr)`, 
+        gridTemplateColumns: getGridTemplateColumns().join(' '),
         position: 'relative',
         top: 0,
         left: 0,
@@ -26,6 +41,7 @@ const ItemsGrid = props => {
         marginBottom: '20px',
         userSelect: 'none'
     }
+
 
     useEffect(() => {
         const gridColors = [];

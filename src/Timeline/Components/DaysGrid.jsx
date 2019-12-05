@@ -33,9 +33,8 @@ const DaysGrid = props => {
     const days = helpers.getDaysInMonth( month.month, month.year);
 
     let style = {
-        width: props.width / days + 1
+        width: props.width / days
     };
-console.log(props.width);
 
     for( let i = 1; i <= days; i++ )
     {
