@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import * as helpers from '../Helpers/Functions';
 import DropZone from './DropZone';
+import { MONTHS } from '../Constants';
 
 export const MARGIN = 20;
 
@@ -21,8 +22,18 @@ const styles ={
         flexWrap: 'nowrap',
         transition: 'all 0.3s ease-in-out',
         userSelect: 'none'
+    },
+    daysString : {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate( -50%, -50% )',
+        fontWeight: 'bold',
+        color: '#f1f1f1',
+        fontSize: '42px',
+        zIndex: 5,
+        opacity: '0.5'
     }
-    
     
 }
 
@@ -53,6 +64,16 @@ const DaysGrid = props => {
     return (
         <div style={{...styles.daysGrid, ...props.style, width: props.width}}>
             {daysDropGrid}
+            {
+                props.scroll
+                    ?   <div style={styles.daysString}>
+                            {
+                                MONTHS[month.month]
+                            }
+                        </div>
+                    : null
+            }
+
         </div>
     )
 }
@@ -64,6 +85,7 @@ DaysGrid.defaultProps = {
 DaysGrid.propTypes = {
     width: PropTypes.number,
     onDrop: PropTypes.func,
+    scroll: PropTypes.bool
 }
 
 export default DaysGrid;

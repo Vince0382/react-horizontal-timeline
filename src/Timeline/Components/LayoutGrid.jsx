@@ -26,7 +26,8 @@ const LayoutGrid = props => {
             <DaysGrid 
                 key={`daysGrid_${month.month}_${month.year}`}
                 onDrop={props.onDrop}
-                month={month} 
+                month={month}
+                scroll={props.scroll}
                 width={offset ? width - offset : width}
                 style={{transform: `translateX(${( 100 * index ) - ( 100 * props.currentMonth )}%)`, marginLeft: offset ? offset : 0}}
             >
@@ -69,7 +70,8 @@ const LayoutGrid = props => {
 
 LayoutGrid.defaultProps = {
     monthList: [],
-    currentMonth: 0
+    currentMonth: 0,
+    scroll: false
 }
 
 LayoutGrid.propTypes = {
@@ -78,6 +80,7 @@ LayoutGrid.propTypes = {
     currentMonth: PropTypes.number,
     onDrop: PropTypes.func,
     width: PropTypes.number,
+    scroll: PropTypes.bool
 }
 
 export default LayoutGrid;

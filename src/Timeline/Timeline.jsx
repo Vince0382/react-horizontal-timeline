@@ -169,6 +169,7 @@ const Timeline = props => {
         onRemove: onRemoveItemHandler,
         onDrop: onDropHandler,
         grouped: props.grouped,
+        scroll: props.scroll,
         customElementType: props.customElementType,
         elementClassName: props.elementClassName,
         startDate: new Date( props.options.startDate ),
@@ -186,12 +187,17 @@ const Timeline = props => {
             
         </div>
         
-        <MonthSelector 
-            monthList={monthList}
-            currentMonth={currentMonth}
-            previousMonthHandler={() => setCurrentMonth( currentMonth - 1 <= 0 ? 0 : currentMonth - 1 )}
-            nextMonthHandler={() => setCurrentMonth( currentMonth + 1 >= monthList.length - 1 ? monthList.length - 1 : currentMonth + 1 )}
-        />
+        {
+            !props.scroll
+                ?   <MonthSelector 
+                        monthList={monthList}
+                        currentMonth={currentMonth}
+                        previousMonthHandler={() => setCurrentMonth( currentMonth - 1 <= 0 ? 0 : currentMonth - 1 )}
+                        nextMonthHandler={() => setCurrentMonth( currentMonth + 1 >= monthList.length - 1 ? monthList.length - 1 : currentMonth + 1 )}
+                    />
+                :   null
+        }
+
 
         </React.Fragment>
     )

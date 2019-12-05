@@ -17,7 +17,7 @@ const styles = {
         background: 'white',
         position: 'sticky',
         left: 0,
-        zIndex: 300
+        zIndex: 300,
     },
     items : {
         
