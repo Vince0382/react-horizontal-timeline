@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DndProvider } from 'react-dnd';
 //import HTML5Backend from 'react-dnd-html5-backend';
 import MouseBackEnd from 'react-dnd-mouse-backend'
@@ -13,10 +13,25 @@ import logo1 from './assets/images/logo1.png';
 import logo2 from './assets/images/logo2.png';
 import logo3 from './assets/images/logo3.png';
 
+
+//Internal Component 
+
+const Option = props => (
+    <div className={classes.Option}>
+        <span style={{marginRight: '10px', fontSize: '14px'}}>{props.children}</span>
+        <label className={classes.Switch}>
+            <input type="checkbox" checked={props.checked} onChange={props.onChange}/>
+            <span className={`${classes.Slider} ${classes.Round}`}></span>
+        </label>
+    </div>
+)
+
+
 const App = () =>  {
 
     const [scrollEnabled, setScrollEnabled] = useState( false );
-    const [groupedEnabled, setGroupedEnabled] = useState( true );
+    const [groupedEnabled, setGroupedEnabled] = useState( false );
+    const [showOccurences, setShowOccurences] = useState( true );
 
     const items = [
         {
@@ -84,6 +99,22 @@ const App = () =>  {
         }
     ]);
 
+    const [occurences, setOccurences] = useState({});
+
+    useEffect(() => {
+        if ( showOccurences )
+        {
+            let itemsOccurences = {}
+            fixedItems.forEach( item => {
+                itemsOccurences = {
+                    ...itemsOccurences,
+                    [item.itemId] : itemsOccurences[item.itemId] ? itemsOccurences[item.itemId]  + 1 : 1
+                }
+            });
+
+            setOccurences( itemsOccurences );
+        }
+    }, [fixedItems, showOccurences]);
 
     const startDate = '2019-10-01';
     const endDate = '2019-12-31';
@@ -114,43 +145,31 @@ const App = () =>  {
     }
 
 
-//     const [test, setTest] = React.useState([1, 2, 3]);
-
-//     const remove = index => {
-//         const tmp = test ;
-//         tmp.splice( index, 1);
-//         setTest(tmp);
-//         console.log('clicked');
-//     }
-
-
-// console.log(test);
     return (
         <DndProvider backend={MouseBackEnd}>
             <div className={classes.Content}>
                 <p>Options</p>
                 <div className={classes.Options}>
-                    <div className={classes.Option}>
-                        <span style={{marginRight: '10px', fontSize: '14px'}}>Enable Scroll</span>
-                        <label className={classes.Switch}>
-                            <input type="checkbox" checked={scrollEnabled} onChange={() => setScrollEnabled( !scrollEnabled )}/>
-                            <span className={`${classes.Slider} ${classes.Round}`}></span>
-                        </label>
-                    </div>
-                    <div className={classes.Option}>
-                        <span style={{marginRight: '10px', fontSize: '14px'}}>Grouped View</span>
-                        <label className={classes.Switch}>
-                            <input type="checkbox" checked={groupedEnabled} onChange={() => setGroupedEnabled( !groupedEnabled )}/>
-                            <span className={`${classes.Slider} ${classes.Round}`}></span>
-                        </label>
-                    </div>
+                    <Option checked={scrollEnabled} onChange={() => setScrollEnabled( !scrollEnabled )}>
+                        Enable Scroll
+                    </Option>
+                    <Option checked={groupedEnabled} onChange={() => setGroupedEnabled( !groupedEnabled )}>
+                        Grouped View
+                    </Option>
+                    <Option checked={showOccurences} onChange={() => setShowOccurences( !showOccurences )}>
+                        Show Occurences
+                    </Option>
                 </div>
                 <p>Droppable Items</p>
                 <div className={classes.Elements}>
                     {
                         items.map(( item, index ) => (
                             <div style={{marginRight: '10px'}} key={`main_item_${index}`}>
-                                <ElementWrapper item={item} />
+                                <ElementWrapper 
+                                    item={item}
+                                    showOccurences={showOccurences}
+                                    occurences={occurences[item.itemId]}
+                                />
                             </div>
                         ))
                     }

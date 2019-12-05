@@ -19,8 +19,19 @@ const styles = {
         height: 'fit-content',
         display: 'flex',
         margin: '10px 0',
-        overflowX: 'hidden',
         userSelect: 'none'
+    },
+    elementOccurences: {
+        position: 'absolute',
+        top: '-15px',
+        right: '10px',
+        width: 'auto',
+        height: '15px',
+        textAlign: 'center',
+        color: 'white',
+        background: 'rgba(146, 168, 209, 0.8)',
+        borderRadius: '4px',
+        padding: '5px'
     },
     overlay : {
         position: 'absolute',
@@ -110,6 +121,11 @@ const ElementWrapper = props => {
             >
                 { element }
                 {
+                    props.showOccurences
+                        ?   <div style={styles.elementOccurences}>{props.occurences}</div>
+                        :   null
+                }
+                {
                     props.overlay
                         ?   <div 
                                 style={{...styles.overlay, ...hoverStyleActive}}
@@ -152,6 +168,8 @@ ElementWrapper.defaultProps = {
     overlay: false,
     move: false,
     customElementType: DefaultDetailedElement,
+    occurences: 0,
+    showOccurences: false
 }
 
 ElementWrapper.propTypes = {
@@ -164,7 +182,9 @@ ElementWrapper.propTypes = {
     remove: PropTypes.func,
     customElementType: PropTypes.elementType,
     elementClassName: PropTypes.string,
-    bgColor: PropTypes.array
+    bgColor: PropTypes.array,
+    occurences: PropTypes.number,
+    showOccurences: PropTypes.bool
 }
 
 export default ElementWrapper;

@@ -7,18 +7,6 @@ import GroupItemsGrid from './GroupItemsGrid';
 
 const leftWidth = 220;
 
-// Static styles section
-
-const styles = {
-    grouped : {
-        // display: 'grid',
-        // gridTemplateColumns: `${leftWidth}px auto`,
-    },
-    daysGridWrapper : {
-        gridColumn: 2
-    }
-}
-
 const LayoutGrid = props => {
 
     const daysGridElements = ( width, offset ) => (

@@ -17,6 +17,7 @@ const styles = {
         flexDirection: 'row',
         justifyContent: 'left',
         alignItems: 'center',
+        height: '100%'
     },
     description : {
         paddingLeft: '5px'

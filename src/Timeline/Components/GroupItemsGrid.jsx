@@ -54,7 +54,6 @@ const GroupItemsGrid = props => {
         })
 
         setGroupItems( groupedItemsTmp );
-        console.log( groupedItemsTmp);
 
     }, [props.items, props.startDate]);
 

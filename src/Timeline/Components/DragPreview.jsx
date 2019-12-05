@@ -38,7 +38,6 @@ const getItemStyles = (initialOffset, currentOffset) => {
 
 const DragPreview = props => {
     const {
-        itemType,
         isDragging,
         item,
         initialOffset,
