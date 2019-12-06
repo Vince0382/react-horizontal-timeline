@@ -5,7 +5,7 @@
 
 .DropZones {
     position: absolute;
-    top: 50px;
+    top: 30px;
     left: 0;
     height: 100%;
     width: 100%;
@@ -27,5 +27,18 @@
     font-size: 42px;
     z-index: 5;
     opacity: 0.5
+}
+
+.Month {
+    position: absolute;
+    top: 0;
+    height: 30px;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #7787a8;
+    border: 1px solid #f1f1f1;
+    border-style: none solid solid none;
 }
 

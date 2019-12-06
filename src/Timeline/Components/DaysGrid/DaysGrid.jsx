@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import * as helpers from '../../Helpers/Functions';
 import DropZone from '../DropZone/DropZone';
 import classes from './DaysGrid.module.css';
+import { MONTHS } from '../../Constants';
 
 export const MARGIN = 20;
 
@@ -36,7 +37,10 @@ const DaysGrid = props => {
             className={classes.DaysGrid} 
             style={{width: props.width, borderLeft: props.grouped ? '1px solid #ccc' : null}}
         >
-            <div className={classes.DropZones} style={props.style}>
+            <div className={classes.Month} style={{...props.style, width: props.width, borderLeft: props.grouped ? '1px solid #ccc' : null}}>
+                {`${MONTHS[props.month.month]} ${props.month.year}`}
+            </div>
+            <div className={classes.DropZones} style={{...props.style, borderLeft: props.grouped ? '1px solid #ccc' : null}}>
                 {daysDropGrid}
             </div>
 

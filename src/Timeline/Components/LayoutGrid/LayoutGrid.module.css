@@ -1,3 +1,12 @@
 .GroupsArea {
 
 }
+
+.Spacer {
+    width: 220px;
+    background: white;
+    height: 63px;
+    position: sticky;
+    z-index: 500;
+    left: 0;
+}

@@ -38,8 +38,8 @@ const LayoutGrid = props => {
 
     const groupedStyle = (
         <>
-            <div style={{width: leftWidth, background: 'white', height: '33px'}} />
             {daysGridElements( props.width, leftWidth )}
+            <div className={classes.Spacer} />
             <div 
                 className={classes.GroupsArea}
                 style={{width: (props.width - leftWidth) * props.monthList.length + leftWidth}}
