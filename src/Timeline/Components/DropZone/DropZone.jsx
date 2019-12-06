@@ -2,37 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useDrop } from 'react-dnd';
 import PropTypes from 'prop-types';
 
-import { ELEMENT } from '../Constants';
-import { timeDiff, day } from '../Helpers/Functions';
-
-
-// Static styles section
-const styles = {
-    dropZone : {
-        height: '100%',
-        borderRight : '1px dashed #ccc',
-        position: 'relative',
-        zIndex: '3',
-        userSelect: 'none',
-        boxSizing: 'border-box'
-    },
-    dropZoneOver : {
-        background: 'rgba(176,196,222,1)'
-    },
-    day : {
-        width: '100%',
-        textAlign: 'center',
-        position: 'absolute',
-        bottom: '0px',
-        margin: '2px 0',
-        fontSize: '12px',
-        userSelect: 'none'
-    },
-    weekendStyle : {
-        background : '#ccc', 
-        borderColor: 'white'
-    }
-}
+import { ELEMENT, DAYS } from '../../Constants';
+import { timeDiff, day } from '../../Helpers/Functions';
+import classes from './DropZone.module.css';
 
 const DropZone = props => {
 
@@ -123,16 +95,24 @@ const DropZone = props => {
     // Detect if the day is a day off (weekend)
     const isWeekEnd = (dayOfWeek === 6) || (dayOfWeek === 0);
 
-    const overStyle = isOver ? styles.dropZoneOver : null
-    const weekendStyle = isWeekEnd && !props.includeWeekend ? styles.weekendStyle : null
+    const overClass = isOver ? classes.DropZoneOver : null
+    const weekendClass = isWeekEnd && !props.includeWeekend ? classes.WeekendStyle : null
 
     const dropActivated = !isWeekEnd || props.includeWeekend;
 
     return (
-        <div ref={dropActivated ? drop : null} style={{...styles.dropZone, ...props.style, ...overStyle, ...weekendStyle}} >
-            <p style={{...styles.day, color: isWeekEnd || isOver ? 'white' : '#ccc'}}>
-                {props.dropDate.getDate()}
-            </p>
+        <div 
+            ref={dropActivated ? drop : null}
+            className={[classes.DropZone, overClass, weekendClass].join(' ')}
+            style={props.style}
+        >
+            <div 
+                className={classes.Day} 
+                style={{color: isWeekEnd || isOver ? 'white' : '#7787a8'}}
+            >
+                <div>{DAYS[dayOfWeek].substr(0,3)}</div>
+                <div>{props.dropDate.getDate()}</div>
+            </div>
 
         </div>
     )

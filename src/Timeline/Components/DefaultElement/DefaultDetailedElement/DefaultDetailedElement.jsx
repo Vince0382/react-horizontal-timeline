@@ -1,35 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { rgbaFromArray } from '../../Helpers/Functions';
-
-// Static styles section 
-
-const styles = {
-    itemDefault : {
-        width: 'calc(100% - 10px)',
-        padding: '5px',
-        height: '40px',
-        borderRadius: '4px',
-    },
-    itemFlex : {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'left',
-        alignItems: 'center',
-        height: '100%'
-    },
-    description : {
-        paddingLeft: '5px'
-    },
-    imagesWrapper : {
-        width: '35px',
-
-    },
-    images : {
-        width: '100%',
-    }
-}
+import { rgbaFromArray } from '../../../Helpers/Functions';
+import classes from './DefaultDetailedElement.module.css';
 
 const alpha = 0.7;
 const defaultColors = {
@@ -41,18 +14,24 @@ const DefaultDetailedElement = props => {
 
     return (
         <div 
+            className={[classes.DefaultDetailedElement, props.className].join(' ')}
             style={{
-                ...styles.itemDefault, 
                 background: props.innerElement ? rgbaFromArray( props.bgColor, alpha ): rgbaFromArray(defaultColors.outerElement, alpha),
                 ...props.style,
             }}
                 
         >
-            <div style={styles.itemFlex}>
-                <div style={styles.imagesWrapper}>
-                    <img style={styles.images} src={props.item.logo} alt='Logo' draggable='false' onMouseDown={event => event.preventDefault()}/>
+            <div className={classes.ItemFlex}>
+                <div className={classes.ImagesWrapper}>
+                    <img 
+                        className={classes.Images} 
+                        src={props.item.logo} 
+                        alt='Logo' 
+                        draggable='false' 
+                        onMouseDown={event => event.preventDefault()}
+                    />
                 </div>
-                <div style={styles.description}>
+                <div className={classes.Description}>
                     {
                         props.item.description
                     }
@@ -80,6 +59,7 @@ DefaultDetailedElement.defaultProps = {
 DefaultDetailedElement.propTypes = {
     item: PropTypes.object.isRequired,
     style: PropTypes.object,
+    className: PropTypes.string,
     innerElement: PropTypes.bool,
     bgColor: PropTypes.array
 }

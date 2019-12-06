@@ -6,7 +6,7 @@ import MouseBackEnd from 'react-dnd-mouse-backend'
 import classes from './App.module.css';
 
 import Timeline from './Timeline/Timeline';
-import ElementWrapper from './Timeline/Components/ElementWrapper';
+import ElementWrapper from './Timeline/Components/ElementWrapper/ElementWrapper';
 
 //import logo
 import logo1 from './assets/images/logo1.png';

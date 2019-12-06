@@ -1,0 +1,18 @@
+.DragPreview {
+    position: fixed;
+    pointer-events: none;
+    z-index: 400;
+    left: 0;
+    top: 0;
+}
+
+.ItemStyle {
+    height: 40px;
+    border-radius: 4px;
+    overflow : hidden;
+    box-shadow: 0px 0px 2px 0px rgba(146 168 209 0.75);
+}
+
+.ImageSytle {
+    height: 100%;
+}

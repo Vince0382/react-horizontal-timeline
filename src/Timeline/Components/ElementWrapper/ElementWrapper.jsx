@@ -2,61 +2,17 @@ import React, { useState } from 'react';
 import { useDrag } from 'react-dnd';
 import PropTypes from 'prop-types';
 
-import { ELEMENT } from '../Constants';
-import { rgbaFromArray } from '../Helpers/Functions';
-import DefaultDetailedElement from './DefaultElement/DefaultDetailedElement';
-import DragPreview from './DragPreview';
-import ResizeHandle from './ResizeHandle';
+import { ELEMENT } from '../../Constants';
+import { rgbaFromArray } from '../../Helpers/Functions';
+import DefaultDetailedElement from '../DefaultElement/DefaultDetailedElement/DefaultDetailedElement';
+import DragPreview from '../DragPreview/DragPreview';
+import ResizeHandle from '../ResizeHandle/ResizeHandle';
+import classes from './ElementWrapper.module.css';
 
 // Static style section 
 
 const styles = {
-    elementWrapper : {
-        position: 'relative',
-        width: '100%',
-        zIndex: 3,
-        fontSize: '12px',
-        height: 'fit-content',
-        display: 'flex',
-        margin: '10px 0',
-        userSelect: 'none'
-    },
-    elementOccurences: {
-        position: 'absolute',
-        top: '-15px',
-        right: '10px',
-        width: 'auto',
-        height: '15px',
-        textAlign: 'center',
-        color: 'white',
-        background: 'rgba(146, 168, 209, 0.8)',
-        borderRadius: '4px',
-        padding: '5px'
-    },
-    overlay : {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        opacity: 0,
-        border: '2px solid transparent',
-        transition: 'opacity 0.2s ease-in',
-        borderRadius: '4px',
-        boxSizing: 'border-box',
-    },
-    removeButton : {
-        position: 'absolute',
-        top: '50%',
-        right: '7px',
-        transform: 'translateY(-50%)',
-        background: 'rgba(204,204,204, 0.8)',
-        fontSize: '14px',
-        cursor: 'pointer',
-        width: '30px',
-        height: '30px',
-        borderRadius: '50%',
-    },
+
     removeButtonLines: {
         shared: {
             position: 'absolute',
@@ -88,9 +44,7 @@ const ElementWrapper = props => {
     });
 
     const hoverStyle = {
-        opacity: 1,
         border: `2px solid ${rgbaFromArray( props.bgColor )}`,
-        transition: 'opacity 0.2s ease-in',
     }
 
     const [hoverStyleActive, setHoverStyleActive] = useState( null );
@@ -113,8 +67,8 @@ const ElementWrapper = props => {
             <div 
                 onClick={props.onClick}
                 ref={drag}
+                className={classes.ElementWrapper}
                 style={{
-                    ...styles.elementWrapper,
                     opacity: isDragging ? 0.5 : 1,
                     cursor: props.move ? 'move' : 'grab',
                 }}
@@ -122,26 +76,30 @@ const ElementWrapper = props => {
                 { element }
                 {
                     props.showOccurences
-                        ?   <div style={styles.elementOccurences}>{props.occurences}</div>
+                        ?   <div className={classes.ElementOccurences}>{props.occurences}</div>
                         :   null
                 }
                 {
                     props.overlay
-                        ?   <div 
-                                style={{...styles.overlay, ...hoverStyleActive}}
+                        ?   <div
+                                className={classes.Overlay}
+                                style={hoverStyleActive}
                                 onMouseOver={() => setHoverStyleActive( hoverStyle )}
                                 onMouseLeave={() => setHoverStyleActive( null )}
                             >
-                                <div style={styles.removeButton} onClick={props.remove}>
+                                <div 
+                                    className={classes.RemoveButton} 
+                                    onClick={props.remove}
+                                >
                                     <div style={{...styles.removeButtonLines.shared, ...styles.removeButtonLines.first}}/>
                                     <div style={{...styles.removeButtonLines.shared, ...styles.removeButtonLines.second}}/>
                                 </div>
                                 <ResizeHandle 
-                                    orientation='left' 
+                                    orientation='left'
                                     item={props.item}
                                 />
                                 <ResizeHandle 
-                                    orientation='right' 
+                                    orientation='right'
                                     item={props.item}
                                 />
                             </div>

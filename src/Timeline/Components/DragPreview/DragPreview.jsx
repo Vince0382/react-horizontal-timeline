@@ -1,26 +1,8 @@
 import React from 'react'
 import { useDragLayer } from 'react-dnd';
 
-import { ELEMENT } from '../Constants';
-
-const styles = {
-    layerStyle : {
-        position: 'fixed',
-        pointerEvents: 'none',
-        zIndex: 400,
-        left: 0,
-        top: 0,
-    },
-    itemStyle : {
-        height: '40px',
-        borderRadius: '4px',
-        overflow : 'hidden',
-        boxShadow: '0px 0px 2px 0px rgba(146, 168, 209, 0.75)'
-    },
-    imageSytle : {
-        height: '100%',
-    }
-}
+import { ELEMENT } from '../../Constants';
+import classes from './DragPreview.module.css';
 
 
 const getItemStyles = (initialOffset, currentOffset) => {
@@ -57,7 +39,7 @@ const DragPreview = props => {
     const renderItem = () => {
         switch (itemType) {
           case ELEMENT:
-            return <img style={styles.imageSytle} src={item.logo} alt=''/>
+            return <img className={classes.ImageSytle} src={item.logo} alt=''/>
           default:
             return null
         }
@@ -68,8 +50,11 @@ const DragPreview = props => {
     }
 
     return (
-        <div style={styles.layerStyle}>
-            <div style={{...styles.itemStyle, ...getItemStyles(initialOffset, currentOffset)}}>
+        <div className={classes.DragPreview}>
+            <div 
+                className={classes.ItemStyle} 
+                style={getItemStyles(initialOffset, currentOffset)}
+            >
                 {renderItem()}
             </div>
         </div>

@@ -1,0 +1,11 @@
+.ResizeHandle {
+    position: absolute;
+    top: 0;
+    z-index: 4;
+    height: calc(100% - 2px);
+    width: 2px;
+    background: rgba(204, 204, 204, 0.5);
+    cursor: ew-resize;
+    border: 1px solid #ccc;
+    border-radius: 4px
+}

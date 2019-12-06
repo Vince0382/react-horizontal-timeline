@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import ElementWrapper from './ElementWrapper';
-import { dayDiff, getDaysInMonth } from '../Helpers/Functions';
-import { COLORS } from '../Constants';
+import ElementWrapper from '../ElementWrapper/ElementWrapper';
+import { dayDiff, getDaysInMonth } from '../../Helpers/Functions';
+import { COLORS } from '../../Constants';
+import classes from './ItemsGrid.module.css';
 
 const ItemsGrid = props => {
 
@@ -32,14 +33,7 @@ const ItemsGrid = props => {
 
     const style = {
         width: props.width * props.monthList.length,
-        display: 'grid', 
         gridTemplateColumns: getGridTemplateColumns().join(' '),
-        position: 'relative',
-        top: 0,
-        left: 0,
-        transition: 'all 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940)',
-        marginBottom: '50px',
-        userSelect: 'none'
     }
 
 
@@ -113,7 +107,10 @@ const ItemsGrid = props => {
     }, [props.items, props.startDate]);
 
     return (
-        <div style={{...style, ...props.style}}>
+        <div
+            className={classes.ItemsGrid} 
+            style={{...style, ...props.style}}
+        >
             {gridItems}
         </div>
     );

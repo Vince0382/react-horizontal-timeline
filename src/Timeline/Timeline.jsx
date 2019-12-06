@@ -2,20 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import * as helpers from './Helpers/Functions';
-import MonthSelector from './Components/MonthSelector';
-import LayoutGrid from './Components/LayoutGrid';
+import MonthSelector from './Components/MonthSelector/MonthSelector';
+import LayoutGrid from './Components/LayoutGrid/LayoutGrid';
 
-// Static styles section
+import classes from './Timeline.module.css';
 
-const styles = {
-    timelineDefault : {
-        position: 'relative',
-        width: '100%',
-        height: 'auto',
-        transition: 'all .3s ease-in',
-        boxSizing: 'border-box',
-    },
-}
 
 // Component
 const Timeline = props => {
@@ -150,15 +141,6 @@ const Timeline = props => {
         if ( props.options.callBacks.onRemove ) props.options.callBacks.onRemove({item: {...item}, items: [...newItems]});
     }
 
-    // Dynamic style object
-    
-    let style = {
-        ...props.style,
-        ...styles.timelineDefault,
-        border: `${borderSize}px solid #ccc`, 
-        overflowX: props.scroll ? 'scroll' : 'hidden'
-    }
-
     // Props list to pass to the Layout component
 
     const propagatedProps = {
@@ -179,7 +161,11 @@ const Timeline = props => {
         <React.Fragment>
         <div
             className={`${props.className}`}
-            style={!props.className ? style : null}
+            style={{
+                border: `${borderSize}px solid #ccc`, 
+                overflowX: props.scroll ? 'scroll' : 'hidden',
+                ...props.style
+            }}
             ref={timelineRef}
         >
             
@@ -217,10 +203,12 @@ Timeline.defaultProps = {
     },
     scroll: false,
     grouped: false,
+    className: classes.TimelineDefault
 };
 
 Timeline.propTypes = {
     className: PropTypes.string,
+    style: PropTypes.object,
     onDragClass: PropTypes.string,
     elementClassName: PropTypes.string,
     items: PropTypes.array,

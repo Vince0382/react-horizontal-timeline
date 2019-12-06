@@ -1,41 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import DefaultBasicElement from './DefaultElement/DefaultBasicElement';
-import DefaultDetailedElement from './DefaultElement/DefaultDetailedElement';
-import ItemsGrid from './ItemsGrid';
-
-// Static styles section
-const styles = {
-    line : {
-        display: 'flex',
-        flexDirection: 'row',
-    },
-    groups : {
-        flexGrow: 0,
-        flexShrink: 0,
-        background: 'white',
-        position: 'sticky',
-        left: 0,
-        zIndex: 300,
-    },
-    items : {
-        
-    },
-    item : {
-        height: '100%',
-        borderRadius: '0',
-        border : '1px solid #ccc',
-        borderStyle: 'none solid none none',
-        background: 'transparent',
-        paddingTop: 0,
-        paddingBottom: 0,
-    },
-    hover : {
-        background: '#f1f1f1',
-    }
-}
-
+import DefaultBasicElement from '../DefaultElement/DefaultBasicElement/DefaultBasicElement';
+import DefaultDetailedElement from '../DefaultElement/DefaultDetailedElement/DefaultDetailedElement';
+import ItemsGrid from '../ItemsGrid/ItemsGrid';
+import classes from './GroupItemsGrid.module.css';
 
 const GroupItemsGrid = props => {
 
@@ -58,27 +27,37 @@ const GroupItemsGrid = props => {
     }, [props.items, props.startDate]);
 
     const widthStyle = {flexBasis: `${props.leftWidth}px`};
+    const hoverStyle = {background: '#f1f1f1'}
 
     const grouped = (
         Object.keys(groupedItems).map(( items, index ) => (
-            <div key={`groups_items_${items}${index}`} style={styles.line}>
+            <div 
+                key={`groups_items_${items}${index}`} 
+                className={classes.GroupItemsGrid}
+            >
                 <div 
-                    style={elementHovered === index ? {...styles.groups, ...styles.hover, ...widthStyle} : {...styles.groups, ...widthStyle}} 
+                    className={classes.Groups}
+                    style={elementHovered === index ? {...hoverStyle, ...widthStyle} : widthStyle} 
                     onMouseOver={() => setElementHovered( index )}
                     onMouseLeave={() => setElementHovered( null )}
                 >
-                    <DefaultDetailedElement item={groupedItems[items][0]} style={styles.item}/>
+                    <DefaultDetailedElement 
+                        item={groupedItems[items][0]} 
+                        className={classes.Item}
+                        style={{background: 'transparent'}}
+                    />
                 </div>
                 <div 
-                    style={elementHovered === index ? {...styles.items, ...styles.hover} : styles.items}
+                    style={elementHovered === index ? hoverStyle : null}
                     onMouseOver={() => setElementHovered( index )}
                     onMouseLeave={() => setElementHovered( null )}
                 >
                     <ItemsGrid 
-                        {...props} 
+                        {...props}
+                        style={{borderBottom: '1px solid #f1f1f1', marginTop: 0}}
                         items={groupedItems[items]}
                         colorIndex={index}
-                         />
+                    />
                 </div>
             </div>
         ))

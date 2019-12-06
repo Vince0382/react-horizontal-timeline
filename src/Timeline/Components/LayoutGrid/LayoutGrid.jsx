@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import DaysGrid from './DaysGrid';
-import ItemsGrid from './ItemsGrid';
-import GroupItemsGrid from './GroupItemsGrid';
+import DaysGrid from '../DaysGrid/DaysGrid';
+import ItemsGrid from '../ItemsGrid/ItemsGrid';
+import GroupItemsGrid from '../GroupItemsGrid/GroupItemsGrid';
+import classes from './LayoutGrid.module.css';
 
 const leftWidth = 220;
 
@@ -16,6 +17,11 @@ const LayoutGrid = props => {
                 onDrop={props.onDrop}
                 month={month}
                 scroll={props.scroll}
+                grouped={props.grouped}
+                prevMonth ={props.prevMonth}
+                nextMonth={props.nextMonth}
+                monthList={props.monthList}
+                currentMonth={props.currentMonth}
                 width={offset ? width - offset : width}
                 style={{transform: `translateX(${( 100 * index ) - ( 100 * props.currentMonth )}%)`, marginLeft: offset ? offset : 0}}
             >
@@ -32,8 +38,12 @@ const LayoutGrid = props => {
 
     const groupedStyle = (
         <>
+            <div style={{width: leftWidth, background: 'white', height: '33px'}} />
             {daysGridElements( props.width, leftWidth )}
-            <div style={{width: (props.width - leftWidth) * props.monthList.length + leftWidth}}>
+            <div 
+                className={classes.GroupsArea}
+                style={{width: (props.width - leftWidth) * props.monthList.length + leftWidth}}
+            >
                 <GroupItemsGrid 
                     {...props} 
                     width={props.width - leftWidth}

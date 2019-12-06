@@ -1,23 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDrag } from 'react-dnd';
-import { ELEMENT } from '../Constants';
-
-//Static styles section
-
-const styles = {
-    resizeArea : {
-        position: 'absolute',
-        top: 0,
-        zIndex: 4,
-        height: 'calc(100% - 2px)',
-        width: '2px',
-        background: 'rgba(204, 204, 204, 0.5)',
-        cursor: 'ew-resize',
-        border: '1px solid #ccc',
-        borderRadius: '4px'
-    }
-}
+import { ELEMENT } from '../../Constants';
+import classes from './ResizeHandle.module.css';
 
 const ResizeHandle = props => {
 
@@ -28,8 +13,9 @@ const ResizeHandle = props => {
     const innerStyle = props.orientation === 'left' ? {left: 0} : {right: 0};
 
     return (
-        <div 
-            style={{...styles.resizeArea, ...innerStyle}}
+        <div
+            className={classes.ResizeHandle}
+            style={innerStyle}
             ref={resize}
         />
     )
