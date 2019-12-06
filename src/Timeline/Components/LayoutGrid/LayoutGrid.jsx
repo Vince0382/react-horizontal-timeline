@@ -22,6 +22,7 @@ const LayoutGrid = props => {
                 nextMonth={props.nextMonth}
                 monthList={props.monthList}
                 currentMonth={props.currentMonth}
+                offset={offset}
                 width={offset ? width - offset : width}
                 style={{transform: `translateX(${( 100 * index ) - ( 100 * props.currentMonth )}%)`, marginLeft: offset ? offset : 0}}
             >

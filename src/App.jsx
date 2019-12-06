@@ -33,8 +33,8 @@ const Option = props => (
 
 const App = () =>  {
 
-    const [scrollEnabled, setScrollEnabled] = useState( false );
-    const [groupedEnabled, setGroupedEnabled] = useState( false );
+    const [scrollEnabled, setScrollEnabled] = useState( true );
+    const [groupedEnabled, setGroupedEnabled] = useState( true );
     const [showOccurences, setShowOccurences] = useState( true );
 
     const items = [

@@ -8,7 +8,6 @@
     top: 30px;
     left: 0;
     height: 100%;
-    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: stretch;
@@ -17,17 +16,6 @@
     user-select: none;
 }
 
-.DaysString {
-    position: absolute;
-    top: 14px;
-    left: 50%;
-    transform: translateX( -50% );
-    font-weight: bold;
-    color: #f1f1f1;
-    font-size: 42px;
-    z-index: 5;
-    opacity: 0.5
-}
 
 .Month {
     position: absolute;
