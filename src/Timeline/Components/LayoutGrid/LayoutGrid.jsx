@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import DaysGrid from '../DaysGrid/DaysGrid';
 import ItemsGrid from '../ItemsGrid/ItemsGrid';
 import GroupItemsGrid from '../GroupItemsGrid/GroupItemsGrid';
-import classes from './LayoutGrid.module.css';
 
 const leftWidth = 220;
 
