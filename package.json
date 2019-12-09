@@ -2,7 +2,7 @@
   "name": "react-horizontal-timeline",
   "homepage": "https://vince0382.github.io/react-horizontal-timeline",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@babel/core": "7.6.0",
     "@svgr/webpack": "4.3.2",
@@ -57,6 +57,7 @@
     "resolve-url-loader": "3.1.0",
     "sass-loader": "7.2.0",
     "semver": "6.3.0",
+    "serialize-javascript": "^2.1.1",
     "style-loader": "1.0.0",
     "terser-webpack-plugin": "1.4.1",
     "ts-pnp": "1.1.4",

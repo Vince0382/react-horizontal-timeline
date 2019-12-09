@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/react-horizontal-timeline/static/css/main.6ffbc48f.chunk.css",
-    "main.js": "/react-horizontal-timeline/static/js/main.0ca30370.chunk.js",
-    "main.js.map": "/react-horizontal-timeline/static/js/main.0ca30370.chunk.js.map",
+    "main.css": "/react-horizontal-timeline/static/css/main.3603da4f.chunk.css",
+    "main.js": "/react-horizontal-timeline/static/js/main.e70b5400.chunk.js",
+    "main.js.map": "/react-horizontal-timeline/static/js/main.e70b5400.chunk.js.map",
     "runtime-main.js": "/react-horizontal-timeline/static/js/runtime-main.1350e5a9.js",
     "runtime-main.js.map": "/react-horizontal-timeline/static/js/runtime-main.1350e5a9.js.map",
-    "static/js/2.44ce0acd.chunk.js": "/react-horizontal-timeline/static/js/2.44ce0acd.chunk.js",
-    "static/js/2.44ce0acd.chunk.js.map": "/react-horizontal-timeline/static/js/2.44ce0acd.chunk.js.map",
+    "static/js/2.1f508739.chunk.js": "/react-horizontal-timeline/static/js/2.1f508739.chunk.js",
+    "static/js/2.1f508739.chunk.js.map": "/react-horizontal-timeline/static/js/2.1f508739.chunk.js.map",
     "index.html": "/react-horizontal-timeline/index.html",
-    "precache-manifest.1eca1e6051c7e9572e7f1d4749405f7c.js": "/react-horizontal-timeline/precache-manifest.1eca1e6051c7e9572e7f1d4749405f7c.js",
+    "precache-manifest.7c5593d1a6c3bfe8d7c6b7f764c29ac4.js": "/react-horizontal-timeline/precache-manifest.7c5593d1a6c3bfe8d7c6b7f764c29ac4.js",
     "service-worker.js": "/react-horizontal-timeline/service-worker.js",
-    "static/css/main.6ffbc48f.chunk.css.map": "/react-horizontal-timeline/static/css/main.6ffbc48f.chunk.css.map",
+    "static/css/main.3603da4f.chunk.css.map": "/react-horizontal-timeline/static/css/main.3603da4f.chunk.css.map",
     "static/media/logo1.png": "/react-horizontal-timeline/static/media/logo1.c2891fdd.png",
     "static/media/logo2.png": "/react-horizontal-timeline/static/media/logo2.8d314fc0.png",
     "static/media/logo3.png": "/react-horizontal-timeline/static/media/logo3.7cae2123.png",
@@ -21,8 +21,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.1350e5a9.js",
-    "static/js/2.44ce0acd.chunk.js",
-    "static/css/main.6ffbc48f.chunk.css",
-    "static/js/main.0ca30370.chunk.js"
+    "static/js/2.1f508739.chunk.js",
+    "static/css/main.3603da4f.chunk.css",
+    "static/js/main.e70b5400.chunk.js"
   ]
 }
