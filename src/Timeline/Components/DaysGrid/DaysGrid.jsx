@@ -31,16 +31,36 @@ const DaysGrid = props => {
             />
         ) 
     }
+
+    const borderSytle = {
+        borderLeftStyle: !props.grouped && props.index === 0 ? 'none' : 'solid'
+    }
     
     return (
         <div 
             className={classes.DaysGrid} 
-            style={{width: props.width, borderLeft: props.grouped ? '1px solid #ccc' : null}}
+            style={{
+                width: props.width,
+            }}
         >
-            <div className={classes.Month} style={{...props.style, width: props.width, borderLeft: props.grouped ? '1px solid #ccc' : null}}>
+            <div 
+                className={classes.Month} 
+                style={{
+                    ...props.style,
+                    width: props.width,
+                    ...borderSytle
+                    }}
+            >
                 {`${MONTHS[props.month.month]} ${props.month.year}`}
             </div>
-            <div className={classes.DropZones} style={{...props.style, borderLeft: props.grouped ? '1px solid #ccc' : null}}>
+            <div 
+                className={classes.DropZones} 
+                style={{
+                    ...props.style,
+                    ...borderSytle,
+                    width: props.width
+                    }}
+                >
                 {daysDropGrid}
             </div>
 
@@ -50,13 +70,16 @@ const DaysGrid = props => {
 
 DaysGrid.defaultProps = {
     width: 0,
-    grouped: false
+    grouped: false,
+    index: 0
 };
 
 DaysGrid.propTypes = {
     width: PropTypes.number,
     onDrop: PropTypes.func,
-    grouped: PropTypes.bool
+    grouped: PropTypes.bool,
+    month: PropTypes.object,
+    index: PropTypes.number
 }
 
 export default DaysGrid;

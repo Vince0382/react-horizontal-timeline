@@ -1,19 +1,39 @@
-.GroupItemsGrid {
-    display: flex;
-    flex-direction: row;
+.GroupViewGrid {
+    display: grid;
+}
+
+.SpacerLeft,
+.SpacerRight {
+    height: 57px;
+    width: 100%;
+}
+
+.SpacerLeft {
+    position: sticky;
+    z-index: 500;
+    left: 0;
+    background: white;
+    grid-column: 1;
+}
+
+.SpacerRight {
+    grid-column: 2;
 }
 
 .Groups {
-    flex-grow: 0;
-    flex-shrink: 0;
     background: white;
     position: sticky;
     left: 0;
     z-index: 300;
     border-bottom: 1px solid #f1f1f1;
+    grid-column: 1;
 }
 
-.Item {
+.Items {
+    grid-column: 2;
+}
+
+.CustomItem {
     height: 100%;
     border-radius: 0;
     padding-top: 0;

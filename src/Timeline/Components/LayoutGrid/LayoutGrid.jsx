@@ -16,6 +16,7 @@ const LayoutGrid = props => {
                 key={`daysGrid_${month.month}_${month.year}`}
                 onDrop={props.onDrop}
                 month={month}
+                index={index}
                 scroll={props.scroll}
                 grouped={props.grouped}
                 prevMonth ={props.prevMonth}
@@ -30,6 +31,8 @@ const LayoutGrid = props => {
         ))
     );
 
+
+    //Inline view without groups 
     const inLineStyle = (
         <>
             {daysGridElements( props.width )}
@@ -37,21 +40,16 @@ const LayoutGrid = props => {
         </>
     )
 
+    // Groups view
     const groupedStyle = (
         <>
             {daysGridElements( props.width, leftWidth )}
-            <div className={classes.Spacer} />
-            <div 
-                className={classes.GroupsArea}
-                style={{width: (props.width - leftWidth) * props.monthList.length + leftWidth}}
-            >
-                <GroupItemsGrid 
-                    {...props} 
-                    width={props.width - leftWidth}
-                    leftWidth={leftWidth}
-                    style={{transform: `translateX(-${(( props.width - leftWidth ) * props.currentMonth )}px)`}}
-                />
-            </div>
+            <GroupItemsGrid
+                {...props} 
+                width={props.width}
+                leftWidth={leftWidth}
+                style={{transform: `translateX(-${(( props.width - leftWidth ) * props.currentMonth )}px)`}}
+            />
         </>
     )
 

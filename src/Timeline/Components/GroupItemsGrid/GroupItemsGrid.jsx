@@ -26,44 +26,54 @@ const GroupItemsGrid = props => {
 
     }, [props.items, props.startDate]);
 
-    const widthStyle = {flexBasis: `${props.leftWidth}px`};
     const hoverStyle = {background: '#f1f1f1'}
 
     const grouped = (
         Object.keys(groupedItems).map(( items, index ) => (
-            <div 
-                key={`groups_items_${items}${index}`} 
-                className={classes.GroupItemsGrid}
-            >
+            <React.Fragment key={`groups_items_${items}${index}`}>
                 <div 
                     className={classes.Groups}
-                    style={elementHovered === index ? {...hoverStyle, ...widthStyle} : widthStyle} 
+                    style={elementHovered === index ? {...hoverStyle} : null} 
                     onMouseOver={() => setElementHovered( index )}
                     onMouseLeave={() => setElementHovered( null )}
                 >
                     <DefaultDetailedElement 
                         item={groupedItems[items][0]} 
-                        className={classes.Item}
+                        className={classes.CustomItem}
                         style={{background: 'transparent'}}
                     />
                 </div>
                 <div 
+                    className={classes.Items}
                     style={elementHovered === index ? hoverStyle : null}
                     onMouseOver={() => setElementHovered( index )}
                     onMouseLeave={() => setElementHovered( null )}
                 >
                     <ItemsGrid 
                         {...props}
-                        style={{borderBottom: '1px solid #f1f1f1', marginTop: 0}}
+                        width={props.width - props.leftWidth} /* Set the width of the itemGrid to fit inside the grid defined*/
+                        style={{...props.style, borderBottom: '1px solid #f1f1f1', marginTop: 0}}
                         items={groupedItems[items]}
                         colorIndex={index}
                     />
                 </div>
-            </div>
+            </React.Fragment>
         ))
     )
 
-    return grouped
+    return (
+        <div 
+            className={classes.GroupViewGrid} 
+            style={{
+                width: `${(props.width - props.leftWidth) * props.monthList.length + props.leftWidth}px`,
+                gridTemplateColumns: `${props.leftWidth}px ${(props.width - props.leftWidth) * props.monthList.length}px`
+            }}
+        >
+            <div className={classes.SpacerLeft} />
+            <div className={classes.SpacerRight} />
+            {grouped}
+        </div>
+    )
 }
 
 GroupItemsGrid.defaultProps = {
