@@ -1,0 +1,9 @@
+.ItemsGrid {
+    display: grid;
+    position: relative;
+    top: 0;
+    left: 0;
+    transition: all 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    margin-top: 70px;
+    user-select: none;
+}
