@@ -75,7 +75,7 @@ const ElementWrapper = props => {
             >
                 { element }
                 {
-                    props.showOccurences
+                    props.showOccurences && props.occurences > 0
                         ?   <div className={classes.ElementOccurences}>{props.occurences}</div>
                         :   null
                 }
