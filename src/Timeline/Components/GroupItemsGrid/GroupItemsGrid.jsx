@@ -14,51 +14,65 @@ const GroupItemsGrid = props => {
     useEffect(() => {
         const groupedItemsTmp = {};
         props.items.forEach( item => {
-            if ( !groupedItemsTmp[item.itemId] ) 
+            // Set a string ID to the group to avoid key sorting
+            const groupId = `group_${item.itemId}`
+
+            if ( !groupedItemsTmp[groupId] ) 
             {
-                groupedItemsTmp[item.itemId] = []
+                groupedItemsTmp[groupId] = []
             }
 
-            groupedItemsTmp[item.itemId].push( item );
+            groupedItemsTmp[groupId].push( item );
         })
 
         setGroupItems( groupedItemsTmp );
 
     }, [props.items, props.startDate]);
 
-    const hoverStyle = {background: 'rgba(241, 241, 241, 0.5'}
+    const hoverStyle = {background: 'rgba(250, 250, 250, 1'} 
 
     const grouped = (
-        Object.keys(groupedItems).map(( items, index ) => (
-            <React.Fragment key={`groups_items_${items}${index}`}>
-                <div 
-                    className={classes.Groups}
-                    style={elementHovered === index ? {...hoverStyle} : null} 
-                    onMouseOver={() => setElementHovered( index )}
-                    onMouseLeave={() => setElementHovered( null )}
-                >
-                    <DefaultDetailedElement 
-                        item={groupedItems[items][0]} 
-                        className={classes.CustomItem}
-                        style={{background: 'transparent'}}
-                    />
-                </div>
-                <div 
-                    className={classes.Items}
-                    style={elementHovered === index ? hoverStyle : null}
-                    onMouseOver={() => setElementHovered( index )}
-                    onMouseLeave={() => setElementHovered( null )}
-                >
-                    <ItemsGrid 
-                        {...props}
-                        width={props.width - props.leftWidth} /* Set the width of the itemGrid to fit inside the grid defined*/
-                        style={{...props.style, borderBottom: '1px solid #f1f1f1', marginTop: 0}}
-                        items={groupedItems[items]}
-                        colorIndex={index}
-                    />
-                </div>
-            </React.Fragment>
-        ))
+        Object.keys(groupedItems).map(( items, index ) => {
+            const borderStyle = 
+                index < Object.keys(groupedItems).length - 1
+                    ?   {borderBottom:  '1px solid #f1f1f1'}
+                    :   null
+
+            return (
+                <React.Fragment key={`groups_items_${items}${index}`}>
+                    <div 
+                        className={classes.Groups}
+                        style={elementHovered === index ? {...hoverStyle, ...borderStyle} : borderStyle} 
+                        onMouseOver={() => setElementHovered( index )}
+                        onMouseLeave={() => setElementHovered( null )}
+                    >
+                        <DefaultDetailedElement 
+                            item={groupedItems[items][0]} 
+                            className={classes.CustomItem}
+                            style={{background: 'transparent'}}
+                        />
+                    </div>
+                    <div 
+                        className={classes.Items}
+                        style={elementHovered === index ? hoverStyle : null}
+                        onMouseOver={() => setElementHovered( index )}
+                        onMouseLeave={() => setElementHovered( null )}
+                    >
+                        <ItemsGrid 
+                            {...props}
+                            width={props.width - props.leftWidth} /* Set the width of the itemGrid to fit inside the grid defined*/
+                            style={{
+                                ...props.style,
+                                ...borderStyle,
+                                marginTop: 0
+                            }}
+                            items={groupedItems[items]}
+                            colorIndex={index}
+                        />
+                    </div>
+                </React.Fragment>
+            )
+        })
     )
 
     return (

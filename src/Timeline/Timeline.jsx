@@ -48,6 +48,12 @@ const Timeline = props => {
             }
         });
 
+        verifiedItems.sort((a, b) => {
+            a = a.startDate;
+            b = b.startDate;
+            return a<b ? -1 : a>b ? 1 : 0;
+        });
+
         setItems( verifiedItems );
 
     }, [props.items]);
