@@ -45,6 +45,7 @@ const ElementWrapper = props => {
 
     const hoverStyle = {
         border: `2px solid ${rgbaFromArray( props.bgColor )}`,
+        borderStyle: 'solid none solid none'
     }
 
     const [hoverStyleActive, setHoverStyleActive] = useState( null );
@@ -69,7 +70,6 @@ const ElementWrapper = props => {
                 ref={drag}
                 className={classes.ElementWrapper}
                 style={{
-                    opacity: isDragging ? 0.5 : 1,
                     cursor: props.move ? 'move' : 'grab',
                 }}
             >
@@ -97,10 +97,12 @@ const ElementWrapper = props => {
                                 <ResizeHandle 
                                     orientation='left'
                                     item={props.item}
+                                    bgColor={rgbaFromArray( props.bgColor )}
                                 />
                                 <ResizeHandle 
                                     orientation='right'
                                     item={props.item}
+                                    bgColor={rgbaFromArray( props.bgColor )}
                                 />
                             </div>
                         :   null

@@ -26,7 +26,7 @@ const GroupItemsGrid = props => {
 
     }, [props.items, props.startDate]);
 
-    const hoverStyle = {background: '#f1f1f1'}
+    const hoverStyle = {background: 'rgba(241, 241, 241, 0.5'}
 
     const grouped = (
         Object.keys(groupedItems).map(( items, index ) => (

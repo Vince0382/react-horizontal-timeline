@@ -30,6 +30,7 @@
     height: 100%;
     opacity: 0;
     border: 2px solid transparent;
+    border-style: solid none solid none;
     transition: opacity 0.2s ease-in;
     border-radius: 4px;
     box-sizing: border-box;

@@ -15,7 +15,7 @@ const ResizeHandle = props => {
     return (
         <div
             className={classes.ResizeHandle}
-            style={innerStyle}
+            style={{...innerStyle, backgroundColor: props.bgColor}}
             ref={resize}
         />
     )
