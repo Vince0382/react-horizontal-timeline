@@ -1,11 +1,16 @@
 {
   "name": "react-planning",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React Horizontal Timeline Component",
   "main": "index.js",
   "repository": "https://github.com/Vince0382/react-horizontal-timeline",
   "homepage": "https://vince0382.github.io/react-horizontal-timeline",
   "author": "PETRINI Vincent",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-app-polyfill": "^1.0.4"
+  }
 }
