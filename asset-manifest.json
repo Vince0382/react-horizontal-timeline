@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/react-horizontal-timeline/static/css/main.48a718e0.chunk.css",
-    "main.js": "/react-horizontal-timeline/static/js/main.ad821455.chunk.js",
-    "main.js.map": "/react-horizontal-timeline/static/js/main.ad821455.chunk.js.map",
-    "runtime-main.js": "/react-horizontal-timeline/static/js/runtime-main.1350e5a9.js",
-    "runtime-main.js.map": "/react-horizontal-timeline/static/js/runtime-main.1350e5a9.js.map",
-    "static/js/2.7f597eaf.chunk.js": "/react-horizontal-timeline/static/js/2.7f597eaf.chunk.js",
-    "static/js/2.7f597eaf.chunk.js.map": "/react-horizontal-timeline/static/js/2.7f597eaf.chunk.js.map",
+    "main.css": "/react-horizontal-timeline/static/css/main.1014cd6a.chunk.css",
+    "main.js": "/react-horizontal-timeline/static/js/main.86387440.chunk.js",
+    "main.js.map": "/react-horizontal-timeline/static/js/main.86387440.chunk.js.map",
+    "runtime-main.js": "/react-horizontal-timeline/static/js/runtime-main.850f110a.js",
+    "runtime-main.js.map": "/react-horizontal-timeline/static/js/runtime-main.850f110a.js.map",
+    "static/js/2.d176c636.chunk.js": "/react-horizontal-timeline/static/js/2.d176c636.chunk.js",
+    "static/js/2.d176c636.chunk.js.map": "/react-horizontal-timeline/static/js/2.d176c636.chunk.js.map",
     "index.html": "/react-horizontal-timeline/index.html",
-    "precache-manifest.b5226692a6cb289d571a91a01127f061.js": "/react-horizontal-timeline/precache-manifest.b5226692a6cb289d571a91a01127f061.js",
+    "precache-manifest.92f14c95140cbaf9e0e422c02fd93c0d.js": "/react-horizontal-timeline/precache-manifest.92f14c95140cbaf9e0e422c02fd93c0d.js",
     "service-worker.js": "/react-horizontal-timeline/service-worker.js",
-    "static/css/main.48a718e0.chunk.css.map": "/react-horizontal-timeline/static/css/main.48a718e0.chunk.css.map",
+    "static/css/main.1014cd6a.chunk.css.map": "/react-horizontal-timeline/static/css/main.1014cd6a.chunk.css.map",
     "static/media/logo1.png": "/react-horizontal-timeline/static/media/logo1.c2891fdd.png",
     "static/media/logo2.png": "/react-horizontal-timeline/static/media/logo2.8d314fc0.png",
     "static/media/logo3.png": "/react-horizontal-timeline/static/media/logo3.7cae2123.png",
@@ -20,9 +20,9 @@
     "static/media/logo7.png": "/react-horizontal-timeline/static/media/logo7.6acd8367.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.1350e5a9.js",
-    "static/js/2.7f597eaf.chunk.js",
-    "static/css/main.48a718e0.chunk.css",
-    "static/js/main.ad821455.chunk.js"
+    "static/js/runtime-main.850f110a.js",
+    "static/js/2.d176c636.chunk.js",
+    "static/css/main.1014cd6a.chunk.css",
+    "static/js/main.86387440.chunk.js"
   ]
 }
