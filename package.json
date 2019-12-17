@@ -7,7 +7,7 @@
     "README.md"
   ],
   "repository": "https://github.com/Vince0382/react-horizontal-timeline",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "author": "PETRINI Vincent",
   "license": "MIT",
   "private": false,
@@ -62,7 +62,7 @@
     "react-dnd-html5-backend": "^9.4.0",
     "react-dnd-mouse-backend": "^1.0.0-rc.2",
     "react-dom": "^16.12.0",
-    "react-planning": "^1.0.9",
+    "react-planning": "^1.0.10",
     "resolve": "1.12.0",
     "resolve-url-loader": "3.1.0",
     "sass-loader": "7.2.0",
