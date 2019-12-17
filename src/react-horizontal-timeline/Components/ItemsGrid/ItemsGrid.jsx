@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import ElementWrapper from '../ElementWrapper/ElementWrapper';
+import { ElementWrapper } from '../ElementWrapper/ElementWrapper';
 import { dayDiff, getDaysInMonth } from '../../Helpers/Functions';
-import { COLORS } from '../../Constants';
+import { COLORS } from '../../Constants/Constants';
 import classes from './ItemsGrid.module.css';
 
 const ItemsGrid = props => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { MONTHS } from '../../Constants';
+import { MONTHS } from '../../Constants/Constants';
 import classes from './MonthSelector.module.css';
 
 const MonthSelector = props => {

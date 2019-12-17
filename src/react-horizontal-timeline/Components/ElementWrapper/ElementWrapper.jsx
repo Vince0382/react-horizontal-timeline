@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDrag } from 'react-dnd';
 import PropTypes from 'prop-types';
 
-import { ELEMENT } from '../../Constants';
+import { ELEMENT } from '../../Constants/Constants';
 import { rgbaFromArray } from '../../Helpers/Functions';
 import DefaultDetailedElement from '../DefaultElement/DefaultDetailedElement/DefaultDetailedElement';
 import DragPreview from '../DragPreview/DragPreview';
@@ -34,7 +34,7 @@ const styles = {
 
 
 // Main component
-const ElementWrapper = props => {
+export const ElementWrapper = props => {
 
     const [{isDragging}, drag ] = useDrag({
         item: { type: ELEMENT, ...props.item, resizing: null, moving: props.innerElement },
@@ -140,5 +140,3 @@ ElementWrapper.propTypes = {
     occurences: PropTypes.number,
     showOccurences: PropTypes.bool
 }
-
-export default ElementWrapper;

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import * as helpers from '../../Helpers/Functions';
 import DropZone from '../DropZone/DropZone';
 import classes from './DaysGrid.module.css';
-import { MONTHS } from '../../Constants';
+import { MONTHS } from '../../Constants/Constants';
 
 export const MARGIN = 20;
 

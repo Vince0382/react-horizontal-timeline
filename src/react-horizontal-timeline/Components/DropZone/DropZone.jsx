@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDrop } from 'react-dnd';
 import PropTypes from 'prop-types';
 
-import { ELEMENT, DAYS } from '../../Constants';
+import { ELEMENT, DAYS } from '../../Constants/Constants';
 import { timeDiff, day } from '../../Helpers/Functions';
 import classes from './DropZone.module.css';
 

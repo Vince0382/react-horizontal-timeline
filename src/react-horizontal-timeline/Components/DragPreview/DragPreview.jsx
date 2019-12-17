@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDragLayer } from 'react-dnd';
 
-import { ELEMENT } from '../../Constants';
+import { ELEMENT } from '../../Constants/Constants';
 import classes from './DragPreview.module.css';
 
 

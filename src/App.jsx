@@ -5,8 +5,7 @@ import MouseBackEnd from 'react-dnd-mouse-backend'
 
 import classes from './App.module.css';
 
-import Timeline from './Timeline/Timeline';
-import ElementWrapper from './Timeline/Components/ElementWrapper/ElementWrapper';
+import { Timeline, ElementWrapper} from './react-horizontal-timeline';
 
 //import logo
 import logo1 from './assets/images/logo1.png';

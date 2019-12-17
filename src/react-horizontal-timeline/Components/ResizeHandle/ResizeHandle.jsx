@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDrag } from 'react-dnd';
-import { ELEMENT } from '../../Constants';
+import { ELEMENT } from '../../Constants/Constants';
 import classes from './ResizeHandle.module.css';
 
 const ResizeHandle = props => {

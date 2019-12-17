@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import * as helpers from './Helpers/Functions';
-import MonthSelector from './Components/MonthSelector/MonthSelector';
-import LayoutGrid from './Components/LayoutGrid/LayoutGrid';
+import * as helpers from '../Helpers/Functions';
+import MonthSelector from '../Components/MonthSelector/MonthSelector';
+import LayoutGrid from '../Components/LayoutGrid/LayoutGrid';
 
 import classes from './Timeline.module.css';
 
 
 // Component
-const Timeline = props => {
+export const Timeline = props => {
 
     const baseIndex = 100000000;
     const timelineRef = useRef();
@@ -231,5 +231,3 @@ Timeline.propTypes = {
     scroll: PropTypes.bool,
     grouped: PropTypes.bool,
 }
-
-export default Timeline;
