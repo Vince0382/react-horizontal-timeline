@@ -54,15 +54,6 @@ const ElementWrapper = props => {
     //     return <div ref={drag} />
     // }
 
-    const element = (
-        <props.customElementType 
-            className={props.elementClassName}
-            item={props.item}
-            bgColor={props.bgColor}
-            innerElement={props.innerElement}
-        />
-    )
-
     return (
         <>
             <div 
@@ -73,7 +64,8 @@ const ElementWrapper = props => {
                     cursor: props.move ? 'move' : 'grab',
                 }}
             >
-                { element }
+                <props.customElementType {...props} />
+
                 {
                     props.showOccurences && props.occurences > 0
                         ?   <div className={classes.ElementOccurences}>{props.occurences}</div>
@@ -129,7 +121,6 @@ ElementWrapper.defaultProps = {
         endDate: '',
         elementType: 'range',
     },
-    innerElement: false,
     overlay: false,
     move: false,
     customElementType: DefaultDetailedElement,
@@ -140,13 +131,11 @@ ElementWrapper.defaultProps = {
 ElementWrapper.propTypes = {
     item: PropTypes.object.isRequired,
     width: PropTypes.number,
-    innerElement: PropTypes.bool,
     overlay: PropTypes.bool,
     move: PropTypes.bool,
     onClick: PropTypes.func,
     remove: PropTypes.func,
     customElementType: PropTypes.elementType,
-    elementClassName: PropTypes.string,
     bgColor: PropTypes.array,
     occurences: PropTypes.number,
     showOccurences: PropTypes.bool

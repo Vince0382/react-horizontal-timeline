@@ -94,7 +94,7 @@ const ItemsGrid = props => {
                         bgColor={color}
                         elementClassName={props.elementClassName} 
                         innerElement
-                        customElementType={props.customElementType}
+                        customElementType={props.customInnerElementType}
                         style={{marginLeft: 0}}
                         onClick={() => console.log(item)}
                         remove={() => props.onRemove( item.id )}
@@ -126,7 +126,7 @@ ItemsGrid.propTypes = {
     width: PropTypes.number,
     onRemove: PropTypes.func,
     elementClassName: PropTypes.string,
-    customElementType: PropTypes.elementType,
+    customInnerElementType: PropTypes.elementType,
     style: PropTypes.object,
     monthList: PropTypes.array,
     startDate: PropTypes.objectOf(Date),

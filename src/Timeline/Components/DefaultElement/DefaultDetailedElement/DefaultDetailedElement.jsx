@@ -17,6 +17,7 @@ const DefaultDetailedElement = props => {
             className={[classes.DefaultDetailedElement, props.className].join(' ')}
             style={{
                 background: props.innerElement ? rgbaFromArray( props.bgColor, alpha ): rgbaFromArray(defaultColors.outerElement, alpha),
+                boxShadow: props.shadowed ?'4px 4px 6px -6px rgba(0,0,0,0.75)' :  'none',
                 ...props.style,
             }}
                 
@@ -53,6 +54,7 @@ DefaultDetailedElement.defaultProps = {
     },
     randomColor: false,
     innerElement: false,
+    shadowed: false,
     bgColor: defaultColors.innerElement
 }
 
@@ -61,7 +63,8 @@ DefaultDetailedElement.propTypes = {
     style: PropTypes.object,
     className: PropTypes.string,
     innerElement: PropTypes.bool,
-    bgColor: PropTypes.array
+    bgColor: PropTypes.array,
+    shadowed: PropTypes.bool
 }
 
 export default DefaultDetailedElement;

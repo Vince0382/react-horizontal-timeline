@@ -18,13 +18,9 @@ const LayoutGrid = props => {
                 index={index}
                 scroll={props.scroll}
                 grouped={props.grouped}
-                prevMonth ={props.prevMonth}
-                nextMonth={props.nextMonth}
-                monthList={props.monthList}
-                currentMonth={props.currentMonth}
                 offset={offset}
-                width={offset ? width - offset : width}
-                style={{transform: `translateX(${( 100 * index ) - ( 100 * props.currentMonth )}%)`, marginLeft: offset ? offset : 0}}
+                width={width}
+                style={{transform: `translateX(${( 100 * index ) - ( 100 * props.currentMonth )}%)`}}
             >
             </DaysGrid>
         ))

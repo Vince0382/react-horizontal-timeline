@@ -39,3 +39,7 @@
     padding-bottom: 0;
     color: #7787a8;
 }
+
+.Shadowed {
+    /* box-shadow: 3px 0px 6px -6px rgba(0,0,0,0.75); */
+}

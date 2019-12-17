@@ -1,10 +1,12 @@
 .DaysGrid {
     height: 100%;
+    position: absolute;
+    top: 0;
 }
 
 .DropZones {
-    position: absolute;
-    top: 30px;
+    position: relative;
+    top: 0;
     left: 0;
     height: calc(100% - 30px);
     display: flex;
@@ -18,8 +20,8 @@
 }
 
 
-.Month {
-    position: absolute;
+.MonthWrapper {
+    position: relative;
     top: 0;
     height: 30px;
     left: 0;
@@ -31,5 +33,9 @@
     border-bottom-style: solid;
     border-left-style: solid;
     box-sizing: border-box;
+    box-shadow: 0 4px 6px -6px rgba(0,0,0,0.75);
+}
+
+.Month {
 }
 

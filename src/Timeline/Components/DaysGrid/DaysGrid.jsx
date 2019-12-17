@@ -10,12 +10,14 @@ export const MARGIN = 20;
 
 const DaysGrid = props => {
 
-    const { month, width, ...rest} = props;
+    const { month, width, offset, ...rest} = props;
     const daysDropGrid = [];
     const days = helpers.getDaysInMonth( month.month, month.year);
 
+    const effectiveWidth = width - offset;
+
     let style = {
-        width: props.width / days
+        width: effectiveWidth / days
     };
 
     for( let i = 1; i <= days; i++ )
@@ -33,32 +35,35 @@ const DaysGrid = props => {
     }
 
     const borderSytle = {
-        borderLeftStyle: !props.grouped && props.index === 0 ? 'none' : 'solid'
+        borderLeftStyle: !props.grouped && props.index === 0 ? 'none' : 'solid',
     }
     
     return (
         <div 
             className={classes.DaysGrid} 
             style={{
-                width: props.width,
+                width: effectiveWidth,
+                left: offset,
             }}
         >
             <div 
-                className={classes.Month} 
+                className={classes.MonthWrapper} 
                 style={{
                     ...props.style,
-                    width: props.width,
+                    width: effectiveWidth,
                     ...borderSytle
                     }}
             >
-                {`${MONTHS[props.month.month]} ${props.month.year}`}
+                <div className={classes.Month}>
+                    {`${MONTHS[props.month.month]} ${props.month.year}`}
+                </div>
             </div>
             <div 
                 className={classes.DropZones} 
                 style={{
                     ...props.style,
                     ...borderSytle,
-                    width: props.width
+                    width: effectiveWidth
                     }}
                 >
                 {daysDropGrid}
@@ -71,7 +76,8 @@ const DaysGrid = props => {
 DaysGrid.defaultProps = {
     width: 0,
     grouped: false,
-    index: 0
+    index: 0,
+    offset: 0,
 };
 
 DaysGrid.propTypes = {
@@ -79,7 +85,8 @@ DaysGrid.propTypes = {
     onDrop: PropTypes.func,
     grouped: PropTypes.bool,
     month: PropTypes.object,
-    index: PropTypes.number
+    index: PropTypes.number,
+    offset: PropTypes.number,
 }
 
 export default DaysGrid;

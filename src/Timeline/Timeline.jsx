@@ -158,7 +158,7 @@ const Timeline = props => {
         onDrop: onDropHandler,
         grouped: props.grouped,
         scroll: props.scroll,
-        customElementType: props.customElementType,
+        customInnerElementType: props.customInnerElementType,
         elementClassName: props.elementClassName,
         startDate: new Date( props.options.startDate ),
     }
@@ -218,7 +218,7 @@ Timeline.propTypes = {
     onDragClass: PropTypes.string,
     elementClassName: PropTypes.string,
     items: PropTypes.array,
-    customElementType: PropTypes.elementType,
+    customInnerElementType: PropTypes.elementType,
     options: PropTypes.shape({
         callBacks: PropTypes.shape({
             onAdd: PropTypes.func,

@@ -207,6 +207,7 @@ const App = () =>  {
                             <div style={{marginRight: '10px'}} key={`main_item_${index}`}>
                                 <ElementWrapper 
                                     item={item}
+                                    shadowed
                                     showOccurences={showOccurences}
                                     occurences={occurences[item.itemId]}
                                 />
