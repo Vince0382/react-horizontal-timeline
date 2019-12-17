@@ -1,13 +1,13 @@
 {
   "name": "react-planning",
   "homepage": "https://vince0382.github.io/react-horizontal-timeline",
-  "main": "react-planning/index.js",
+  "main": "dist/index.js",
   "files": [
-    "react-planning/*",
+    "dist",
     "README.md"
   ],
   "repository": "https://github.com/Vince0382/react-horizontal-timeline",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "author": "PETRINI Vincent",
   "license": "MIT",
   "private": false,
@@ -62,7 +62,6 @@
     "react-dnd-html5-backend": "^9.4.0",
     "react-dnd-mouse-backend": "^1.0.0-rc.2",
     "react-dom": "^16.12.0",
-    "react-planning": "^1.0.7",
     "resolve": "1.12.0",
     "resolve-url-loader": "3.1.0",
     "sass-loader": "7.2.0",
@@ -153,5 +152,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "dependencies": {
+    "react-planning": "^1.0.8"
   }
 }
