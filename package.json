@@ -1,9 +1,13 @@
 {
   "name": "react-horizontal-timeline",
   "homepage": "https://vince0382.github.io/react-horizontal-timeline",
+  "main": "index.js",
+  "repository": "https://github.com/Vince0382/react-horizontal-timeline",
   "version": "0.1.0",
+  "author": "PETRINI Vincent",
+  "license": "MIT",
   "private": false,
-  "dependencies": {
+  "devDependencies": {
     "@babel/core": "7.6.0",
     "@svgr/webpack": "4.3.2",
     "@typescript-eslint/eslint-plugin": "^2.2.0",

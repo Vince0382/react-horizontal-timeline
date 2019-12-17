@@ -164,34 +164,33 @@ export const Timeline = props => {
     }
 
     return (
-        <React.Fragment>
-        <div
-            className={`${props.className}`}
-            style={{
-                border: `${borderSize}px solid #ccc`, 
-                overflowX: props.scroll ? 'scroll' : 'hidden',
-                ...props.style
-            }}
-            ref={timelineRef}
-        >
+        <>
+            <div
+                className={`${props.className}`}
+                style={{
+                    border: `${borderSize}px solid #ccc`, 
+                    overflowX: props.scroll ? 'scroll' : 'hidden',
+                    ...props.style
+                }}
+                ref={timelineRef}
+            >
+                
+                <LayoutGrid {...propagatedProps} />
+                
+            </div>
             
-            <LayoutGrid {...propagatedProps} />
-            
-        </div>
-        
-        {
-            !props.scroll
-                ?   <MonthSelector 
-                        monthList={monthList}
-                        currentMonth={currentMonth}
-                        previousMonthHandler={() => setCurrentMonth( currentMonth - 1 <= 0 ? 0 : currentMonth - 1 )}
-                        nextMonthHandler={() => setCurrentMonth( currentMonth + 1 >= monthList.length - 1 ? monthList.length - 1 : currentMonth + 1 )}
-                    />
-                :   null
-        }
+            {
+                !props.scroll
+                    ?   <MonthSelector 
+                            monthList={monthList}
+                            currentMonth={currentMonth}
+                            previousMonthHandler={() => setCurrentMonth( currentMonth - 1 <= 0 ? 0 : currentMonth - 1 )}
+                            nextMonthHandler={() => setCurrentMonth( currentMonth + 1 >= monthList.length - 1 ? monthList.length - 1 : currentMonth + 1 )}
+                        />
+                    :   null
+            }
 
-
-        </React.Fragment>
+        </>
     )
 }
 
