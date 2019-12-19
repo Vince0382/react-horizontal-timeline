@@ -39,7 +39,7 @@ const DragPreview = props => {
     const renderItem = () => {
         switch (itemType) {
           case ELEMENT:
-            return <img className={classes.ImageSytle} src={item.logo} alt=''/>
+            return <img className={classes.ImageSytle} src={item.content.logo} alt=''/>
           default:
             return null
         }

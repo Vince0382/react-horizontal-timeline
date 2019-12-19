@@ -1,0 +1,11 @@
+.ResizeHandle {
+    position: absolute;
+    top: 0;
+    z-index: 4;
+    height: 100%;
+    width: 5px;
+    background-image: radial-gradient(white 15%, transparent 16%);
+    background-size: 5px 5px;
+    background-position: 0 0, 2.5px 2.5px;
+    cursor: ew-resize;
+}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { ElementWrapper } from '../ElementWrapper/ElementWrapper';
+import DefaultBasicElement from '../DefaultElement/DefaultBasicElement/DefaultBasicElement';
 import { dayDiff, getDaysInMonth } from '../../Helpers/Functions';
 import { COLORS } from '../../Constants/Constants';
 import classes from './ItemsGrid.module.css';
@@ -79,7 +80,7 @@ const ItemsGrid = props => {
                     });
                 }
             }
-    
+    console.log(props.grouped, 'test')
             return (
                 <div 
                     style={{
@@ -88,13 +89,13 @@ const ItemsGrid = props => {
                     key={`item_${item.id}_${index}`}
                 >
                     <ElementWrapper
-                        item={item} 
+                        item={item}
                         overlay
                         move
                         bgColor={color}
-                        elementClassName={props.elementClassName} 
+                        elementClassName={props.elementClassName}
                         innerElement
-                        customElementType={props.customInnerElementType}
+                        customElementType={props.grouped ? DefaultBasicElement : props.customInnerElementType}
                         style={{marginLeft: 0}}
                         onClick={() => console.log(item)}
                         remove={() => props.onRemove( item.id )}
@@ -119,6 +120,7 @@ const ItemsGrid = props => {
 ItemsGrid.defaultProps = {
     items: [],
     monthList: [],
+    grouped: false
 }
 
 ItemsGrid.propTypes = {
@@ -130,7 +132,8 @@ ItemsGrid.propTypes = {
     style: PropTypes.object,
     monthList: PropTypes.array,
     startDate: PropTypes.objectOf(Date),
-    colorIndex: PropTypes.number
+    colorIndex: PropTypes.number,
+    grouped: PropTypes.bool
 }
 
 export default ItemsGrid;

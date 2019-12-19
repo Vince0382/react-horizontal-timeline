@@ -1,0 +1,45 @@
+.GroupViewGrid {
+    display: grid;
+}
+
+.SpacerLeft,
+.SpacerRight {
+    height: 56px;
+    width: 100%;
+}
+
+.SpacerLeft {
+    position: sticky;
+    z-index: 500;
+    left: 0;
+    background: white;
+    grid-column: 1;
+}
+
+.SpacerRight {
+    grid-column: 2;
+}
+
+.Groups {
+    background: white;
+    position: sticky;
+    left: 0;
+    z-index: 200;
+    grid-column: 1;
+}
+
+.Items {
+    grid-column: 2;
+}
+
+.CustomItem {
+    height: 100%;
+    border-radius: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: #7787a8;
+}
+
+.Shadowed {
+    /* box-shadow: 3px 0px 6px -6px rgba(0,0,0,0.75); */
+}

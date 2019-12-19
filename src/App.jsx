@@ -5,7 +5,7 @@ import MouseBackEnd from 'react-dnd-mouse-backend'
 
 import classes from './App.module.css';
 
-import { Timeline, ElementWrapper} from './react-planning';
+import { Planner, ElementWrapper} from './react-planning';
 
 //import logo
 import logo1 from './assets/images/logo1.png';
@@ -39,46 +39,60 @@ const App = () =>  {
     const items = [
         {
             itemId: 1,
-            logo: logo1,
-            description: 'Caro Confort',
-            elementType: 'range',
+            content: {
+                logo: logo1,
+                line1: 'Caro Confort',
+                line2: 'Carrelage'
+            }
         },
         {
             itemId: 2,
-            logo: logo2,
-            description: 'AB Menuiserie',
-            elementType: 'range',
+            content: {
+                logo: logo2,
+                line1: 'AB Menuiserie',
+                line2: 'Menuiserie'
+            }
         },
         {
             itemId: 3,
-            logo: logo3,
-            description: 'Fournier',
-            elementType: 'range',
+            content: {
+                logo: logo3,
+                line1: 'Fournier',
+                line2: 'Electricité'
+            }
         },
         {
             itemId: 4,
-            logo: logo4,
-            description: 'Krëfel',
-            elementType: 'range',
+            content: {
+                logo: logo4,
+                line1: 'Krëfel',
+                line2: 'Cuisine'
+            }
         },
         {
             itemId: 5,
-            logo: logo5,
-            description: 'MG Terrassements',
-            elementType: 'range',
+            content: {
+                logo: logo5,
+                line1: 'MG Terrassements',
+                line2: 'Terrassement'
+            }
         },
         {
             itemId: 6,
-            logo: logo6,
-            description: 'Roosens Bétons',
-            elementType: 'range',
+            content: {
+                logo: logo6,
+                line1: 'Roosens Bétons',
+                line2: 'Maçon'
+            },
         },
         {
             itemId: 7,
-            logo: logo7,
-            description: 'Sopi Façades',
-            elementType: 'range',
-        },
+            content: {
+                logo: logo7,
+                line1: 'Sopi Façades',
+                line2: 'Façade'
+            }
+        }
     ];
 
     const [fixedItems, setFixedItems] = useState([
@@ -215,7 +229,7 @@ const App = () =>  {
                     }
                 </div>
                 <div className={classes.Timeline}>
-                    <Timeline items={fixedItems} options={options} scroll={scrollEnabled} grouped={groupedEnabled}/>
+                    <Planner items={fixedItems} options={options} scroll={scrollEnabled} grouped={groupedEnabled}/>
                 </div>
 
             </div>

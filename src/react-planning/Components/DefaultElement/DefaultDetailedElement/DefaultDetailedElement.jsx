@@ -26,16 +26,19 @@ const DefaultDetailedElement = props => {
                 <div className={classes.ImagesWrapper}>
                     <img 
                         className={classes.Images} 
-                        src={props.item.logo} 
+                        src={props.item.content.logo}
                         alt='Logo' 
                         draggable='false' 
                         onMouseDown={event => event.preventDefault()}
                     />
                 </div>
-                <div className={classes.Description}>
-                    {
-                        props.item.description
-                    }
+                <div className={classes.Content}>
+                    <div className={classes.Line1}>
+                        {props.item.content.line1}
+                    </div>
+                    <div className={classes.Line2}>
+                        {props.item.content.line2}
+                    </div>
                 </div>
             </div>
             
@@ -46,7 +49,7 @@ const DefaultDetailedElement = props => {
 DefaultDetailedElement.defaultProps = {
     item: {
         id: null,
-        logo: '',
+        content: {},
         description: '',
         startDate: '',
         endDate: '',

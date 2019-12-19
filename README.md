@@ -26,7 +26,7 @@ npm install --save react-planning
 ## Usage
 
 ```
-import { Timeline } from 'react-planning';
+import { Planner } from 'react-planning';
 ```
 
 ## Example
@@ -42,7 +42,7 @@ import MouseBackEnd from 'react-dnd-mouse-backend'
 
 import classes from './App.module.css';
 
-import { Timeline, ElementWrapper} from './react-planning';
+import { Timeline, ElementWrapper} from 'react-planning';
 
 //import logo
 import logo1 from './assets/images/logo1.png';
@@ -221,7 +221,7 @@ const App = () =>  {
                     }
                 </div>
                 <div>
-                    <Timeline items={fixedItems} options={options} scroll={scrollEnabled} grouped={groupedEnabled}/>
+                    <Planner items={fixedItems} options={options} scroll={scrollEnabled} grouped={groupedEnabled}/>
                 </div>
             </>
         </DndProvider>

@@ -5,18 +5,18 @@ import * as helpers from '../Helpers/Functions';
 import MonthSelector from '../Components/MonthSelector/MonthSelector';
 import LayoutGrid from '../Components/LayoutGrid/LayoutGrid';
 
-import classes from './Timeline.module.css';
+import classes from './Planner.module.css';
 
 
 // Component
-export const Timeline = props => {
+export const Planner = props => {
 
     const baseIndex = 100000000;
-    const timelineRef = useRef();
+    const PlannerRef = useRef();
     const borderSize = 1;
 
     const [items, setItems] = useState( [] );
-    const [timelineWidth, setTimelineWidth] = useState( 0 );
+    const [PlannerWidth, setPlannerWidth] = useState( 0 );
     const [monthList, setMonthList] = useState( [] );
     const [currentMonth, setCurrentMonth] = useState( 0 );
 
@@ -82,11 +82,11 @@ export const Timeline = props => {
 
 
     const updateScreenSizeHandler = () => {
-        // Get the timeline element size 
-        const timelineElement = timelineRef.current.getBoundingClientRect();
+        // Get the Planner element size 
+        const PlannerElement = PlannerRef.current.getBoundingClientRect();
 
         // Update the state with the width of the timneline width
-        setTimelineWidth( timelineElement.width - ( borderSize * 2 ));
+        setPlannerWidth( PlannerElement.width - ( borderSize * 2 ));
 
     }
 
@@ -151,7 +151,7 @@ export const Timeline = props => {
 
     const propagatedProps = {
         items: items,
-        width: timelineWidth,
+        width: PlannerWidth,
         monthList: monthList,
         currentMonth: currentMonth,
         onRemove: onRemoveItemHandler,
@@ -172,7 +172,7 @@ export const Timeline = props => {
                     overflowX: props.scroll ? 'scroll' : 'hidden',
                     ...props.style
                 }}
-                ref={timelineRef}
+                ref={PlannerRef}
             >
                 
                 <LayoutGrid {...propagatedProps} />
@@ -195,7 +195,7 @@ export const Timeline = props => {
 }
 
 
-Timeline.defaultProps = {
+Planner.defaultProps = {
     items: [],
     options: {
         callBacks: {
@@ -208,10 +208,10 @@ Timeline.defaultProps = {
     },
     scroll: false,
     grouped: false,
-    className: classes.TimelineDefault
+    className: classes.PlannerDefault
 };
 
-Timeline.propTypes = {
+Planner.propTypes = {
     className: PropTypes.string,
     style: PropTypes.object,
     onDragClass: PropTypes.string,

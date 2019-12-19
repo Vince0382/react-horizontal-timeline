@@ -1,0 +1,55 @@
+.ElementWrapper {
+    position: relative;
+    width: 100%;
+    z-index: 3;
+    font-size: 12px;
+    height: fit-content;
+    display: flex;
+    margin: 10px 0;
+    user-select: none
+}
+
+.ElementOccurences {
+    position: absolute;
+    top: -15px;
+    right: 10px;
+    width: auto;
+    height: 15px;
+    text-align: center;
+    color: white;
+    background: rgba(146, 168, 209, 0.8);
+    border-radius: 4px;
+    padding: 5px
+}
+
+.Overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    border: 2px solid transparent;
+    border-style: solid none solid none;
+    transition: opacity 0.2s ease-in;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.Overlay:hover {
+    opacity: 1;
+    transition: opacity 0.2s ease-in;
+}
+
+.RemoveButton {
+    position: absolute;
+    top: 50%;
+    right: 7px;
+    transform: translateY(-50%);
+    background: rgba(204, 204, 204, 0.8);
+    font-size: 14px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}

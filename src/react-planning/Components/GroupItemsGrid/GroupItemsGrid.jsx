@@ -68,6 +68,7 @@ const GroupItemsGrid = props => {
                             }}
                             items={groupedItems[items]}
                             colorIndex={index}
+                            grouped
                         />
                     </div>
                 </React.Fragment>

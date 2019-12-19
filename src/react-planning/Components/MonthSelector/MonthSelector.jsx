@@ -37,7 +37,7 @@ const MonthSelector = props => {
                     :   null   
             }
 
-            <p>{`${currentMonthStr} - ${currentYear}`}</p>
+            <p style={{margin: 0}}>{`${currentMonthStr} - ${currentYear}`}</p>
             
             {
                 !props.scroll
